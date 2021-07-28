@@ -9,10 +9,6 @@
   --neon-green: #00E2B4; */
 }
 
-
-
-
-
 body {
   background: #fef6e4;
 }
@@ -25,16 +21,19 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: "Fraunces", serif;
-  color: #001858
+  color: #001858;
+  margin: 0;
 }
 
-h4, p {
-  font-family: "Inter var", sans-serif; 
-  color: #001858
+h4,
+p {
+  font-family: "Inter var", sans-serif;
+  color: #001858;
 }
-
 
 a {
   color: inherit;
