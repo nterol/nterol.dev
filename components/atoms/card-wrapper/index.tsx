@@ -1,9 +1,16 @@
-import { FC } from "react";
+import classes from "./card-wrapper.module.css";
 
-import classes from './CardWrapper.module.css';
+type Props = { children: React.ReactNode; color: string };
 
-const CardWrapper: FC = ({ children }) => {
-  return <article className={classes.wrapper}>{children}</article>;
+const CardWrapper = ({ children, color }: Props) => {
+  return (
+    <article
+      style={{ "--card-background": color } as React.CSSProperties}
+      className={classes.wrapper}
+    >
+      {children}
+    </article>
+  );
 };
 
 export default CardWrapper;
