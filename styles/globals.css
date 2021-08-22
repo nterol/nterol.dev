@@ -2,37 +2,57 @@
 @import url("https://rsms.me/inter/inter.css");
 
 :root {
+  --card-border-radius: 8px;
+
+  --header-height: 80px;
+
   --blue: #001858;
+  --sand-background: #fef6e4;
   /* --orange: #FFB253;
   --sanguine: #EC715A;
   --berry: #BA3C67;
   --neon-green: #00E2B4; */
 }
 
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
-  background: #fef6e4;
+  background: var(--sand-background);
 }
 
 html,
 body {
   padding: 0;
   margin: 0;
+  position: fixed;
+  overflow: hidden;
   /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
 }
 
 h1,
 h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
 h3 {
   font-family: "Fraunces", serif;
-  color: #001858;
+  color: var(--blue);
   margin: 0;
 }
 
 h4,
 p {
   font-family: "Inter var", sans-serif;
-  color: #001858;
+  color: var(--blue);
 }
 
 a {

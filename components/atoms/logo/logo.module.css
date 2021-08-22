@@ -1,0 +1,17 @@
+.container {
+  position: relative;
+  height: 3rem;
+  width: 3rem;
+}
+
+.logo {
+  display: block;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  background-image: linear-gradient(
+    -180deg,
+    var(--blue),
+    var(--sand-background)
+  );
+}

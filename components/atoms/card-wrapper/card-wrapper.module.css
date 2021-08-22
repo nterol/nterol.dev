@@ -1,0 +1,13 @@
+.wrapper {
+  border-radius: var(--card-border-radius);
+  padding: 2rem;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-template-areas: "title title button";
+  background: linear-gradient(0.25turn, var(--card-background), #e295b9);
+  /* radial-gradient(300px at 50% 120%, #ffdf73 30%, #f6afb5 , #e9caf7, #cfeeff);
+   linear-gradient(0.25turn, $bg, pink); */
+  box-shadow: 10px 10px 10px #c1c1c1;
+}

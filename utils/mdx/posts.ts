@@ -4,14 +4,6 @@ import matter from "gray-matter";
 
 import type { Items, Post } from "@custom-types/posts";
 
-
-// type Items = Record<string, string>;
-
-// type Post = {
-//   data: Record<string, string>;
-//   content: string;
-// };
-
 const POSTS_PATH = join(process.cwd(), "_posts");
 
 function getPostFilePaths(): string[] {
