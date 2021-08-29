@@ -1,10 +1,16 @@
-.container {
+.header {
   width: 100%;
   top: 0;
   position: fixed;
   height: var(--header-height);
-  padding: 1rem;
   background: var(--sand-background);
+}
+
+.container {
+  width: 75%;
+  margin: 0 auto;
+  height: 100%;
+  padding: 1rem;
 }
 
 .container nav {
