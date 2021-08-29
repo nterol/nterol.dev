@@ -6,16 +6,18 @@ import classes from "./header.module.css";
 
 export default function Header() {
   return (
-    <header className={`${classes.container} ${e.line_grid}`}>
-      <Logo />
-      <nav className={e.line_grid}>
-        <Link href="/about">
-          <h3>A propos</h3>
-        </Link>
-        <Link href="/contact">
-          <h3>Me contacter</h3>
-        </Link>
-      </nav>
+    <header className={classes.header}>
+      <div className={`${classes.container} ${e.line_grid}`}>
+        <Logo />
+        <nav className={e.line_grid}>
+          <Link href="/about">
+            <h3>A propos</h3>
+          </Link>
+          <Link href="/contact">
+            <h3>Me contacter</h3>
+          </Link>
+        </nav>
+      </div>
     </header>
   );
 }
