@@ -11,6 +11,7 @@ export interface IPost {
   thumbnail: string;
   title: string;
   description: string;
-  yields: string;
   directions: string[];
 }
+
+export type Locale = "fr" | "en-US";

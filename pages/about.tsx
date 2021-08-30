@@ -35,9 +35,21 @@ export default function About() {
 
   const all = stacks[index].map((tech) =>
     useTransition(tech, {
-      from: { opacity: 0, transform: `translate3d(-30px, -30px, 0)`, x: 30 },
-      enter: { opacity: 1, transform: `translate3d(0px, 0px, 0)`, x: 30 },
-      leave: { transform: `translate3d(30px, 30px, -10px)`, x: 30, opacity: 0 },
+      from: {
+        opacity: 0,
+        transform: `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 100, 1)`,
+      },
+      enter: {
+        opacity: 1,
+        transform: `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)`,
+      },
+      leave: {
+        transform: `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, -100, 1)`,
+        opacity: 0,
+      },
+      onStart: () => ({
+        transform: `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 100, 1)`,
+      }),
     })
   );
 
@@ -56,15 +68,21 @@ export default function About() {
         <div className={classes.grid}>
           {all.map((transitions) => (
             <div className={classes.cell}>
-              {transitions((style, tech) => (
-                <animated.div
-                  style={style}
-                  key={tech}
-                  className={classes.tech_element}
-                >
-                  {tech}
-                </animated.div>
-              ))}
+              <div className={classes.tech_element}>
+                {transitions((style, tech, ...rest) => {
+                  console.log(rest)
+                  return (
+                    <animated.div
+                      // onMouseEnter={}
+                      style={style}
+                      key={tech}
+                      className={classes.tech}
+                    >
+                      {tech}
+                    </animated.div>
+                  );
+                })}
+              </div>
             </div>
           ))}
         </div>
