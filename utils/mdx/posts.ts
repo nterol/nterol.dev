@@ -2,12 +2,17 @@ import fs from "fs";
 import { join } from "path";
 import matter from "gray-matter";
 
-import type { Items, Post } from "@custom-types/posts";
+import type { IPost, Items, Locale, Post } from "@custom-types/posts";
 
-const POSTS_PATH = join(process.cwd(), "_posts");
+const POSTS_PATH_LOCALE = (locale: Locale) =>
+  join(process.cwd(), `_posts/${locale}`);
 
-function getPostFilePaths(): string[] {
-  return fs.readdirSync(POSTS_PATH).filter((path) => /\.mdx?$/.test(path));
+const POSTS_PATH = join(process.cwd(), `_posts`);
+
+function getPostFilePaths(locale: Locale): string[] {
+  return fs
+    .readdirSync(POSTS_PATH_LOCALE(locale))
+    .filter((path) => /\.mdx?$/.test(path));
 }
 
 export function getPost(slug: string): Post {
@@ -18,13 +23,15 @@ export function getPost(slug: string): Post {
   return { data, content };
 }
 
-export function getPostItems(filePath: string, fields: string[] = []): Items {
+export function getPostItems(filePath: string, fields: string[] = []): IPost {
   const slug = filePath.replace(/\.mdx?$/, "");
   const { data, content } = getPost(slug);
+
+  /* This sucks */
   const items: Items = {};
   fields.forEach((field) => {
     if (field === "slug") {
-      items[field] = "slug";
+      items[field] = "slug"; 
     }
 
     if (field === "content") {
@@ -34,14 +41,20 @@ export function getPostItems(filePath: string, fields: string[] = []): Items {
     if (data[field]) {
       items[field] = data[field];
     }
-  });
+  });  
 
   return items;
 }
 
-export function getAllPosts(fields: string[] = []): Items[] {
-  const filePaths = getPostFilePaths();
-  const posts = filePaths.map((filePath) => getPostItems(filePath, fields));
+export function getAllPosts(
+  locale: Locale = "fr",
+  fields: string[] = []
+): IPost[] {
+  const filePaths = getPostFilePaths(locale);
+
+  const posts = filePaths.map((filePath) =>
+    getPostItems(`${locale}/${filePath}`, fields)
+  );
 
   return posts;
 }

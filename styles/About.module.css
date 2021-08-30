@@ -8,27 +8,38 @@
   padding: 2rem;
 }
 
+.container > * {
+  transform-style: preserve-3d;
+}
+
 .grid {
   margin-top: 3rem;
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: repeat(3, 100px);
   grid-template-rows: repeat(3, 100px);
-  transform: rotate3d(1, -1, -1, 320deg);
+  transform: rotateX(45deg) rotateZ(45deg);
   height: fit-content;
 }
 
 .cell {
-  transform-style: preserve-3d;
   height: 100px;
   width: 100px;
-  border: 1.5px solid;
-  position: relative;
-  background: white;
 }
 
 .tech_element {
-  top: 30px;
-  position: absolute;
+  position: relative;
+}
+
+.tech { 
   border: 1px solid;
+  position: absolute;
+  top: 0px;
+  height: 100px;
+  width: 100px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.493);
 }

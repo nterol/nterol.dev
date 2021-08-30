@@ -18,8 +18,8 @@ export async function getStaticProps({ params: { slug } }) {
   // };
 }
 
-export async function getStaticPaths() {
-  const allPosts = getAllPosts(["slug"]);
+export async function getStaticPaths({locale}) {
+  const allPosts = getAllPosts(locale, ["slug"]);
 
   const allSlugs = allPosts.map(({ slug }) => `/${slug}`);
   return {
