@@ -20,6 +20,7 @@ const Waving = () => {
       role="img"
       aria-label="Salut !"
       className={s.wave}
+      onMouseEnter={() => set(!waving)}
       onClick={() => set(!waving)}
       style={{
         rotate: x.to({

@@ -1,35 +1,55 @@
-import { getAllPosts } from "@utils/mdx/posts";
+import Link from "next/link";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { serialize } from "next-mdx-remote/serialize";
 
-export async function getStaticProps({ params: { slug } }) {
-  // const posts = await getAllPosts();
-  // const articles = posts.filter((post) => post.type === "article");
-  // console.log("🎟🎟🎟🎟", articles);
-  // const post = articles.find((p) => p.slug === slug);
-  // console.log("🎟", post);
-  // const blocks = await fetch(
-  //   `https://lambda-notion.grimmoire.workers.dev/v1/page/${post.id}`
-  // ).then((res) => res.json());
-  // console.log(blocks);
-  // return {
-  //   props: {
-  //     post,
-  //     blocks,
-  //   },
-  // };
-}
+import PageLayout from "@components/templates/page-layout";
+import { getAllPosts, getPost } from "@utils/mdx/posts";
+import classes from "../styles/About.module.css";
 
-export async function getStaticPaths({locale}) {
-  const allPosts = getAllPosts(locale, ["slug"]);
+export type PageProps = {
+  frontmatter: any;
+  source: MDXRemoteSerializeResult;
+};
+
+export const getStaticProps: GetStaticProps<PageProps> = async ({
+  params: { slug },
+  locale,
+}) => {
+  const { content, data } = getPost(`${locale}/${slug}`);
+
+  const mdxSource = await serialize(content, { scope: data });
+
+  return {
+    props: { source: mdxSource, frontMatter: data },
+  };
+};
+
+export async function getStaticPaths({ locales }) {
+  const allPosts = locales
+    .map((locale) => getAllPosts(locale, ["slug"]))
+    .flat();
 
   const allSlugs = allPosts.map(({ slug }) => `/${slug}`);
+
   return {
     paths: allSlugs,
     fallback: false,
   };
 }
 
-const PostPage = ({ blocks, post }) => {
-  return <div>Needs Layout</div>;
+const PostPage = ({
+  source,
+  frontMatter,
+}: InferGetStaticPropsType<typeof getSDtaticProps>) => {
+  console.log(frontMatter);
+  return (
+    <PageLayout header={<div>coucou</div>}>
+      <section className={classes.container}>
+        <MDXRemote {...source} components={[Link]} />
+      </section>
+    </PageLayout>
+  );
 };
 
 export default PostPage;
