@@ -49,6 +49,8 @@ export default function Home({
   posts,
   bioSource,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+
+  console.log(posts);
   return (
     <PageLayout
       header={

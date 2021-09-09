@@ -11,7 +11,7 @@ const POSTS_PATH = join(process.cwd(), `_posts`);
 
 function getPostFilePaths(locale: Locale): string[] {
   return fs
-    .readdirSync(POSTS_PATH_LOCALE(locale))
+    .readdirSync(locale ? POSTS_PATH_LOCALE(locale) : POSTS_PATH)
     .filter((path) => /\.mdx?$/.test(path));
 }
 
@@ -25,31 +25,25 @@ export function getPost(slug: string): Post {
 
 export function getPostItems(filePath: string, fields: string[] = []): IPost {
   const slug = filePath.replace(/\.mdx?$/, "");
+
   const { data, content } = getPost(slug);
 
-  /* This sucks */
   const items: Items = {};
+
   fields.forEach((field) => {
     if (field === "slug") {
-      items[field] = "slug"; 
-    }
-
-    if (field === "content") {
+      items[field] = slug;
+    } else if (field === "content") {
       items[field] = content;
-    }
-
-    if (data[field]) {
+    } else if (data[field]) {
       items[field] = data[field];
     }
-  });  
+  });
 
   return items;
 }
 
-export function getAllPosts(
-  locale: Locale = "fr",
-  fields: string[] = []
-): IPost[] {
+export function getAllPosts(locale: Locale, fields: string[] = []): IPost[] {
   const filePaths = getPostFilePaths(locale);
 
   const posts = filePaths.map((filePath) =>

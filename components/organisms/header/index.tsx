@@ -8,7 +8,11 @@ export default function Header() {
   return (
     <header className={classes.header}>
       <div className={`${classes.container} ${e.line_grid}`}>
-        <Logo />
+        <Link href="/">
+          <a>
+            <Logo />
+          </a>
+        </Link>
         <nav className={e.line_grid}>
           <Link href="/about">
             <h3>A propos</h3>
