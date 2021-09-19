@@ -17,7 +17,7 @@ export default function Header() {
           <Link href="/about">
             <h3>A propos</h3>
           </Link>
-          <Link href="/contact">
+          <Link href="/experiences">
             <h3>Me contacter</h3>
           </Link>
         </nav>
