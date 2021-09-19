@@ -4,8 +4,18 @@ import PageLayout from "@components/templates/page-layout";
 import classes from "../styles/About.module.css";
 import { useState } from "react";
 import { animated, useTransition } from "@react-spring/web";
+import { getExperiences } from "@utils/mdx/experiences";
 
-export default function About() {
+export const getStaticProps = async ({ locale }) => {
+  const experiences = getExperiences(locale);
+
+  console.log(experiences[0].data.stack);
+
+  return { props: { experiences } };
+};
+
+export default function About({ experiences }) {
+  console.log(experiences);
   const [index, setIndex] = useState(0);
   const stacks = [
     [
@@ -35,6 +45,7 @@ export default function About() {
 
   const all = stacks[index].map((tech) =>
     useTransition(tech, {
+      trail: 1000 / tech.length,
       from: {
         opacity: 0,
         transform: `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 100, 1)`,
@@ -69,19 +80,16 @@ export default function About() {
           {all.map((transitions) => (
             <div className={classes.cell}>
               <div className={classes.tech_element}>
-                {transitions((style, tech, ...rest) => {
-                  console.log(rest)
-                  return (
-                    <animated.div
-                      // onMouseEnter={}
-                      style={style}
-                      key={tech}
-                      className={classes.tech}
-                    >
-                      {tech}
-                    </animated.div>
-                  );
-                })}
+                {transitions((style, tech, ...rest) => (
+                  <animated.div
+                    // onMouseEnter={}
+                    style={style}
+                    key={tech}
+                    className={classes.tech}
+                  >
+                    {tech}
+                  </animated.div>
+                ))}
               </div>
             </div>
           ))}
