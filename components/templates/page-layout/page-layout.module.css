@@ -5,11 +5,10 @@
   align-items: center;
   height: 100vh;
   width: 100vw;
-  overflow: scroll; 
+  overflow: scroll;
 }
 
 .wrapper {
-  /* text-align: center; */
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -18,11 +17,9 @@
 }
 
 .main {
-  width: 100%;
-  margin: 0 auto; 
+  width: 90%;
+  margin: 3rem auto;
 }
-
-
 
 .wrapper > :first-child {
   margin-top: var(--header-height);
@@ -31,9 +28,5 @@
 @media screen and (min-width: 720px) {
   .main {
     width: 75%;
-  }
-
-  .main > :first-child {
-    height: calc(100vh - var(--header-height));
   }
 }

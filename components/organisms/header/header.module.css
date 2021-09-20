@@ -7,7 +7,7 @@
 }
 
 .container {
-  width: 75%;
+  width: var(--spacer);
   margin: 0 auto;
   height: 100%;
   padding: 1rem;
