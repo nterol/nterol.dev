@@ -4,7 +4,7 @@
 :root {
   --card-border-radius: 8px;
 
-  --header-height: 80px;
+  --header-height: 64px;
 
   --blue: #001858;
   --sand-background: #fef6e4;
@@ -12,6 +12,14 @@
   --sanguine: #EC715A;
   --berry: #BA3C67;
   --neon-green: #00E2B4; */
+
+  --spacer: 90%;
+}
+
+@media screen and (min-width: 720px) {
+  :root {
+    --spacer: 75%;
+  }
 }
 
 * {
@@ -27,6 +35,7 @@ html,
 body {
   padding: 0;
   margin: 0;
+  width: 100vw;
   position: fixed;
   overflow: hidden;
   /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -51,7 +60,7 @@ h3 {
 
 h4,
 p {
-  font-family: "Inter var", sans-serif;
+  /* font-family: "Inter var", sans-serif; */
   color: var(--blue);
 }
 

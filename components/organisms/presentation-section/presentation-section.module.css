@@ -3,18 +3,23 @@
   align-items: flex-start;
   align-content: center;
   flex-wrap: wrap;
-  padding: 2rem;
-}
 
-.container * + * {
-  margin-top: 1rem;
+  height: calc(100vh - var(--header-height));
 }
 
 .hero_container {
+  padding: 2rem;
+  border-radius: 16px;
+  background: var(--sand-background);
+  background-image: url(https://picsum.photos/500/600);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 60vh;
   display: flex;
-  text-align: center;
   flex-direction: column;
-  text-align: left;
+  justify-content: flex-end;
+  box-shadow: 0 13px 27px -5px hsl(240deg 30% 28% / 25%),
+    0 8px 16px -8px hsl(0deg 0% 0% / 30%), 0 -6px 16px -6px hsl(0deg 0% 0% / 3%);
 }
 
 .hero_container h2 {
@@ -22,7 +27,7 @@
 }
 
 .hero_container h3 {
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .bio_container {
@@ -31,13 +36,11 @@
 }
 
 .bio_container p {
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 
 @media screen and (min-width: 720px) {
   .container {
-    padding: 1rem;
-    
     margin-bottom: 2rem;
   }
 
@@ -46,7 +49,7 @@
   }
 
   .hero_container h2 {
-    font-size: 3.75rem;
+    font-size: 3.5rem;
   }
 
   .hero_container h3 {
