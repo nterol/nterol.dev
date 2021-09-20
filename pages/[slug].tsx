@@ -70,7 +70,6 @@ const PostPage = ({
     >
       <section
         style={{
-          width: "70%",
           margin: "3rem auto",
         }}
       >
