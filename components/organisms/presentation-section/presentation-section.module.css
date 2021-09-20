@@ -27,7 +27,7 @@
 }
 
 .hero_container h3 {
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 .bio_container {
@@ -49,7 +49,8 @@
   }
 
   .hero_container h2 {
-    font-size: 3.5rem;
+    font-size: 4rem;
+
   }
 
   .hero_container h3 {

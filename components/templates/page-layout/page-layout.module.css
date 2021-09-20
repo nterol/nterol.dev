@@ -17,16 +17,10 @@
 }
 
 .main {
-  width: 90%;
+  width: var(--spacer);
   margin: 3rem auto;
 }
 
 .wrapper > :first-child {
   margin-top: var(--header-height);
-}
-
-@media screen and (min-width: 720px) {
-  .main {
-    width: 75%;
-  }
 }
