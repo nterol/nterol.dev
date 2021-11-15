@@ -18,14 +18,17 @@ export default function PresentationSection({ bioSource }: Props): JSX.Element {
   return (
     <section className={s.container}>
       <div className={s.hero_container}>
+        {/* <div className={s.hero_container}> */}
         <h2 className={s.hero}>
-          <Waving /> Salut ! Je suis <GlowingText>Nicolas Terol</GlowingText>
+          <GlowingText>Nicolas Terol</GlowingText>
         </h2>{" "}
         <h3>
-          Développeur <GlowingText color="#f72585">Front-End</GlowingText>,
-          spécialisé <GlowingText color="#f0db4f">Javascript</GlowingText>,{" "}
+          <Waving /> Développeur{" "}
+          <GlowingText color="#f72585">Front-End</GlowingText>, je fais du{" "}
+          <GlowingText color="#f0db4f">Javascript</GlowingText>, et surtout du{" "}
           <GlowingText color="#61dafb">React</GlowingText>
         </h3>
+        {/* </div> */}
       </div>
       <MDXRemote {...bioSource} components={{ Bio: Bio }} />
     </section>
