@@ -2,14 +2,14 @@ import fs from "fs";
 import { join } from "path";
 import matter from "gray-matter";
 
-import type { IPost, Items, Locale, Post } from "@custom-types/posts";
+import type { IPost, Post } from "@custom-types/posts";
 
-const POSTS_PATH_LOCALE = (locale: Locale) =>
+const POSTS_PATH_LOCALE = (locale: string) =>
   join(process.cwd(), `_posts/${locale}`);
 
 const POSTS_PATH = join(process.cwd(), `_posts`);
 
-function getPostFilePaths(locale: Locale): string[] {
+function getPostFilePaths(locale: string): string[] {
   return fs
     .readdirSync(locale ? POSTS_PATH_LOCALE(locale) : POSTS_PATH)
     .filter((path) => /\.mdx?$/.test(path));
@@ -20,15 +20,18 @@ export function getPost(slug: string): Post {
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  return { data, content };
+  return { data, content } as Post;
 }
 
-export function getPostItems(filePath: string, fields: string[] = []): IPost {
+export function getPostItems(
+  filePath: string,
+  fields: Array<keyof IPost>
+): IPost {
   const slug = filePath.replace(/\.mdx?$/, "");
 
   const { data, content } = getPost(slug);
 
-  const items: Items = {};
+  const items: IPost = {};
 
   fields.forEach((field) => {
     if (field === "slug") {
@@ -43,12 +46,17 @@ export function getPostItems(filePath: string, fields: string[] = []): IPost {
   return items;
 }
 
-export function getAllPosts(locale: Locale, fields: string[] = []): IPost[] {
+export function getAllPosts(
+  locale: string,
+  fields: Array<keyof IPost>
+): IPost[] {
   const filePaths = getPostFilePaths(locale);
 
   const posts = filePaths.map((filePath) =>
     getPostItems(`${locale}/${filePath}`, fields)
   );
+
+  console.log("COMPLETE 🧩", posts);
 
   return posts;
 }

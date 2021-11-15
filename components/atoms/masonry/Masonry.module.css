@@ -1,9 +1,7 @@
 .wrapper {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(var(--child-size, 300px), 1fr)
-  );
-  grid-template-rows: masonry;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* this only work on firefox now */
+  /* grid-template-rows: masonry; */
   grid-gap: 1em;
 }
