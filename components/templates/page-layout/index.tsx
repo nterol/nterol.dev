@@ -16,7 +16,7 @@ export default function PageLayout({ meta, children }: Props) {
       <div className={styles.page_container}>
         <Header />
         <div className={styles.wrapper}>
-          <main className={styles.main}>{children}</main>
+          {children}
           <Footer />
         </div>
       </div>

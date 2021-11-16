@@ -5,6 +5,7 @@ import classes from "../styles/About.module.css";
 import { useState } from "react";
 import { animated, useTransition } from "@react-spring/web";
 import { getExperiences } from "@utils/mdx/experiences";
+import styles from "../components/templates/page-layout/page-layout.module.css";
 
 export const getStaticProps = async ({ locale }) => {
   const experiences = getExperiences(locale);
@@ -74,30 +75,32 @@ export default function About({ experiences }) {
         </Head>
       }
     >
-      <section className={classes.container}>
-        <h1>{companies[index]}</h1>
-        <div className={classes.grid}>
-          {all.map((transitions) => (
-            <div className={classes.cell}>
-              <div className={classes.tech_element}>
-                {transitions((style, tech, ...rest) => (
-                  <animated.div
-                    // onMouseEnter={}
-                    style={style}
-                    key={tech}
-                    className={classes.tech}
-                  >
-                    {tech}
-                  </animated.div>
-                ))}
+      <main className={styles.main}>
+        <section className={classes.container}>
+          <h1>{companies[index]}</h1>
+          <div className={classes.grid}>
+            {all.map((transitions) => (
+              <div className={classes.cell}>
+                <div className={classes.tech_element}>
+                  {transitions((style, tech, ...rest) => (
+                    <animated.div
+                      // onMouseEnter={}
+                      style={style}
+                      key={tech}
+                      className={classes.tech}
+                    >
+                      {tech}
+                    </animated.div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-        <button onClick={() => setIndex((i) => ++i % stacks.length)}>
-          &rarr;
-        </button>
-      </section>
+            ))}
+          </div>
+          <button onClick={() => setIndex((i) => ++i % stacks.length)}>
+            &rarr;
+          </button>
+        </section>
+      </main>
     </PageLayout>
   );
 }

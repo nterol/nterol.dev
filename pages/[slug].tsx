@@ -5,7 +5,8 @@ import { serialize } from "next-mdx-remote/serialize";
 
 import PageLayout from "@components/templates/page-layout";
 import { getAllPosts, getPost } from "@utils/mdx/posts";
-import classes from "../styles/About.module.css";
+// import classes from "../styles/About.module.css";
+import c from "../styles/Article.module.css";
 import { Matter } from "@custom-types/posts";
 
 export type Props = {
@@ -30,8 +31,6 @@ export const getStaticProps: GetStaticProps<Props, PageParams> = async ({
       remarkPlugins: [require("remark-prism"), require("remark-footnotes")],
     },
   });
-
-  console.log(data);
 
   return {
     props: { source: mdxSource, frontMatter: data },
@@ -68,13 +67,12 @@ const PostPage = ({
         imagePath: frontMatter.thumbnail,
       }}
     >
-      <section
-        style={{
-          margin: "3rem auto",
-        }}
-      >
-        <MDXRemote {...source} components={components} />
-      </section>
+      <div className={c.article_container}>
+        <section className={c.content_wrapper}>
+          <MDXRemote {...source} components={components} />
+        </section>
+        <aside className={c.aside_wrapper}>aside</aside>
+      </div>
     </PageLayout>
   );
 };
