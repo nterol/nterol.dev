@@ -9,6 +9,7 @@ import { getBio } from "@utils/mdx/about";
 import PresentationSection from "@components/organisms/presentation-section";
 import PostCard from "@components/organisms/post-card";
 import PageLayout from "@components/templates/page-layout";
+
 import styles from "../styles/Home.module.css";
 
 export const getStaticProps: GetStaticProps<HomeProps> = async ({
