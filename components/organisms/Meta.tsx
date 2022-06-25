@@ -27,7 +27,7 @@ const Meta = ({
         rel="stylesheet"
         href="https://unpkg.com/dracula-prism/dist/css/dracula-prism.css"
       ></link>
-      <link
+      {/* <link
         rel="apple-touch-icon"
         sizes="180x180"
         href="/favicon/apple-touch-icon.png"
@@ -43,7 +43,7 @@ const Meta = ({
         type="image/png"
         sizes="16x16"
         href="/favicon/favicon-16x16.png"
-      />
+      /> */}
       <link rel="manifest" href="/favicon/site.webmanifest" />
       <link
         rel="mask-icon"

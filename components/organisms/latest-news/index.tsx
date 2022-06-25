@@ -1,7 +1,10 @@
-import styles from "./latest-nexs.module.css";
+import Grid from "./grid";
+import c from "./latest-news.module.css";
+
+const PlusButton = () => <button className={c.plus_button}>+</button>;
 
 export const LatestNews = () => (
-  <div className={styles.page}>
+  <div className={c.page}>
     <div>
       <h1>Latest news</h1>
       <PlusButton />

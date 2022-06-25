@@ -18,3 +18,5 @@ export type IPost = {
   title?: string;
   description?: string;
 };
+
+export type Locale = string | undefined;

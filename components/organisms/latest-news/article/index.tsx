@@ -10,7 +10,11 @@ type SkullProps = {
 const ImgWithSkeleton = ({ loaded, currentRef }: SkullProps) =>
   loaded ? (
     <div className={styles.coverContainer}>
-      <img className={styles.cover} src={currentRef.src} alt="article cover" />
+      <img
+        className={styles.cover}
+        src={currentRef.current.src}
+        alt="article cover"
+      />
     </div>
   ) : (
     <hr className={styles.image} />

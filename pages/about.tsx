@@ -5,8 +5,14 @@ import classes from "../styles/About.module.css";
 import { useState } from "react";
 import { animated, useTransition } from "@react-spring/web";
 import { getExperiences } from "@utils/mdx/experiences";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
+import type { Experience } from "@custom-types/about";
 
-export const getStaticProps = async ({ locale }) => {
+type P = {
+  experiences: Experience[];
+};
+
+export const getStaticProps: GetStaticProps<P> = async ({ locale }) => {
   const experiences = getExperiences(locale);
 
   console.log(experiences[0].data.stack);
@@ -14,7 +20,9 @@ export const getStaticProps = async ({ locale }) => {
   return { props: { experiences } };
 };
 
-export default function About({ experiences }) {
+export default function About({
+  experiences,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   console.log(experiences);
   const [index, setIndex] = useState(0);
   const stacks = [
@@ -66,13 +74,11 @@ export default function About({ experiences }) {
 
   return (
     <PageLayout
-      header={
-        <Head>
-          <title>About</title>
-          <meta name="description" content="nterol personal website" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-      }
+      meta={{
+        pageTitle: "About",
+        description: "nterol personal website",
+        imagePath: "",
+      }}
     >
       <section className={classes.container}>
         <h1>{companies[index]}</h1>

@@ -1,8 +1,12 @@
 import Head from "next/head";
-import {useRouter} from 'next/router';
-import { SITE_NAME, SITE_URL } from "@utils/constants";F
+import { useRouter } from "next/router";
+import { SITE_NAME, SITE_URL } from "@utils/constants";
 
-const Meta = ({ pageTitle }) => {
+type MetaProps = {
+  pageTitle: string;
+};
+
+export const Meta = ({ pageTitle }: MetaProps) => {
   const router = useRouter();
 
   const ogUrl = `${SITE_URL}${router.asPath}`;

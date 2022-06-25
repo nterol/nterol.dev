@@ -13,8 +13,8 @@ export default function PageLayout({ meta, children }: Props) {
   return (
     <>
       <Meta {...meta} />
+      <Header />
       <div className={styles.page_container}>
-        <Header />
         <div className={styles.wrapper}>
           <main className={styles.main}>{children}</main>
           <Footer />
