@@ -9,9 +9,7 @@ type Props = {
 };
 
 const Bio = ({ children }: { children: React.ReactNode }) => (
-  <div className={s.bio_container}>
-    <p>{children}</p>
-  </div>
+  <div className={s.bio_container}>{children}</div>
 );
 
 export default function PresentationSection({ bioSource }: Props): JSX.Element {

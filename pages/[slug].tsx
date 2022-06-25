@@ -7,6 +7,7 @@ import PageLayout from "@components/templates/page-layout";
 import { getAllPosts, getPost } from "@utils/mdx/posts";
 // import classes from "../styles/About.module.css";
 import c from "../styles/Article.module.css";
+
 import { Matter } from "@custom-types/posts";
 
 export type Props = {
@@ -27,9 +28,9 @@ export const getStaticProps: GetStaticProps<Props, PageParams> = async ({
 
   const mdxSource = await serialize(content, {
     scope: data,
-    mdxOptions: {
-      remarkPlugins: [require("remark-prism"), require("remark-footnotes")],
-    },
+    // mdxOptions: {
+    //   remarkPlugins: [require("remark-prism"), footnotes],
+    // },
   });
 
   return {
