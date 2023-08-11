@@ -1,4 +1,4 @@
-import e from "@components/quarks/line-grid.module.css";
+import e from "@/components/quarks/line-grid.module.css";
 
 import classes from "./page-footer.module.css";
 

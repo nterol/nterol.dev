@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { SITE_NAME, SITE_URL } from "@utils/constants";
+import { SITE_NAME, SITE_URL } from "@/utils/constants";
 
 type MetaProps = {
   pageTitle: string;

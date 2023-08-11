@@ -22,7 +22,6 @@ input ArticleModelFilter {
   categories: LinksFilter
   content: TextFilter
   id: ItemIdFilter
-  locale: LatLonFilter
   notes: LinksFilter
   slug: SlugFilter
   title: StringFilter
@@ -57,12 +56,6 @@ type ArticleRecord implements RecordInterface {
     """Process content as markdown"""
     markdown: Boolean
   ): [StringMultiLocaleField!]
-  _allLocaleLocales(
-    """
-    If you want to fallback to a default translation when a translation has not been found
-    """
-    fallbackLocales: [SiteLocale!]
-  ): [LatLonFieldMultiLocaleField!]
   _allSlugLocales(
     """
     If you want to fallback to a default translation when a translation has not been found
@@ -102,15 +95,6 @@ type ArticleRecord implements RecordInterface {
     markdown: Boolean
   ): String
   id: ItemId!
-  locale(
-    """
-    If you want to fallback to a default translation when a translation has not been found
-    """
-    fallbackLocales: [SiteLocale!]
-
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-  ): LatLonField
   notes: [NoteRecord!]!
   slug(
     """
@@ -155,7 +139,7 @@ input CategorieModelFilter {
   couleurDuLogo: ColorFilter
   description: TextFilter
   id: ItemIdFilter
-  nom: StringFilter
+  name: StringFilter
   slug: SlugFilter
 }
 
@@ -178,8 +162,8 @@ enum CategorieModelOrderBy {
   _updatedAt_DESC
   id_ASC
   id_DESC
-  nom_ASC
-  nom_DESC
+  name_ASC
+  name_DESC
 }
 
 """Record of type Catégorie (categorie)"""
@@ -239,7 +223,7 @@ type CategorieRecord implements RecordInterface {
     markdown: Boolean
   ): String
   id: ItemId!
-  nom: String
+  name: String
   slug: String
 }
 
@@ -2194,33 +2178,6 @@ enum ItemStatus {
   draft
   published
   updated
-}
-
-type LatLonField {
-  latitude: FloatType!
-  longitude: FloatType!
-}
-
-type LatLonFieldMultiLocaleField {
-  locale: SiteLocale
-  value: LatLonField
-}
-
-"""Specifies how to filter Geolocation fields"""
-input LatLonFilter {
-  """
-  Filter records with the specified field defined (i.e. with any value) or not
-  """
-  exists: BooleanType
-
-  """Filter records within the specified radius in meters"""
-  near: LatLonNearFilter
-}
-
-input LatLonNearFilter {
-  latitude: FloatType!
-  longitude: FloatType!
-  radius: FloatType!
 }
 
 """Linking locales"""

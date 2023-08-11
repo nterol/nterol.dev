@@ -3,10 +3,9 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 
-import PageLayout from "@components/templates/page-layout";
-import { getAllPosts, getPost } from "@utils/mdx/posts";
-
-import { Matter } from "@custom-types/posts";
+import PageLayout from "@/components/templates/page-layout";
+import { getAllPosts, getPost } from "@/utils/mdx/posts";
+import type { Matter } from "@/types/posts";
 
 export type Props = {
   frontMatter: Matter;

@@ -8,7 +8,7 @@ const httpLink = new HttpLink({
 const authLink = setContext((_, { headers }) => ({
   headers: {
     ...headers,
-    Authorization: `Bearer ${process.env.CS_ENDPOINT}`,
+    Authorization: `Bearer ${process.env.CMS_AUTHORIZATION_TOKEN}`,
   },
 }));
 

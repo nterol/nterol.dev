@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import { SITE_URL, SITE_NAME, TWITTER_USERNAME } from "@utils/constants";
+import { SITE_URL, SITE_NAME, TWITTER_USERNAME } from "@/utils/constants";
 
 export type MetaProps = {
   pageTitle: string;

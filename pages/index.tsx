@@ -2,15 +2,16 @@ import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 
-import { getAllPosts } from "@utils/mdx/posts";
-import type { IPost } from "@custom-types/posts";
-import Masonry from "@components/atoms/masonry";
-import { getBio } from "@utils/mdx/about";
-import PresentationSection from "@components/organisms/presentation-section";
-import PostCard from "@components/organisms/post-card";
-import PageLayout from "@components/templates/page-layout";
+import { getAllPosts } from "@/utils/mdx/posts";
+
+import Masonry from "@/components/atoms/masonry";
+import { getBio } from "@/utils/mdx/about";
+import PresentationSection from "@/components/organisms/presentation-section";
+import PostCard from "@/components/organisms/post-card";
+import PageLayout from "@/components/templates/page-layout";
 
 import styles from "../styles/Home.module.css";
+import { IPost } from "@/types/posts";
 
 export const getStaticProps: GetStaticProps<HomeProps> = async ({
   locale = "fr",
@@ -44,7 +45,6 @@ export default function Home({
   posts,
   bioSource,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  
   return (
     <PageLayout
       meta={{

@@ -48,7 +48,6 @@ export type ArticleModelFilter = {
   categories?: InputMaybe<LinksFilter>;
   content?: InputMaybe<TextFilter>;
   id?: InputMaybe<ItemIdFilter>;
-  locale?: InputMaybe<LatLonFilter>;
   notes?: InputMaybe<LinksFilter>;
   slug?: InputMaybe<SlugFilter>;
   title?: InputMaybe<StringFilter>;
@@ -82,7 +81,6 @@ export type ArticleModelOrderBy = typeof ArticleModelOrderBy[keyof typeof Articl
 export type ArticleRecord = RecordInterface & {
   __typename: 'ArticleRecord';
   _allContentLocales?: Maybe<Array<StringMultiLocaleField>>;
-  _allLocaleLocales?: Maybe<Array<LatLonFieldMultiLocaleField>>;
   _allSlugLocales?: Maybe<Array<StringMultiLocaleField>>;
   _allTitleLocales?: Maybe<Array<StringMultiLocaleField>>;
   _createdAt: Scalars['DateTime']['output'];
@@ -101,7 +99,6 @@ export type ArticleRecord = RecordInterface & {
   categories: Array<CategorieRecord>;
   content?: Maybe<Scalars['String']['output']>;
   id: Scalars['ItemId']['output'];
-  locale?: Maybe<LatLonField>;
   notes: Array<NoteRecord>;
   slug?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
@@ -111,12 +108,6 @@ export type ArticleRecord = RecordInterface & {
 /** Record of type Article (article) */
 export type ArticleRecord_AllContentLocalesArgs = {
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-/** Record of type Article (article) */
-export type ArticleRecord_AllLocaleLocalesArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
 };
 
 
@@ -142,13 +133,6 @@ export type ArticleRecord_SeoMetaTagsArgs = {
 export type ArticleRecordContentArgs = {
   locale?: InputMaybe<SiteLocale>;
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-/** Record of type Article (article) */
-export type ArticleRecordLocaleArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  locale?: InputMaybe<SiteLocale>;
 };
 
 
@@ -185,7 +169,7 @@ export type CategorieModelFilter = {
   couleurDuLogo?: InputMaybe<ColorFilter>;
   description?: InputMaybe<TextFilter>;
   id?: InputMaybe<ItemIdFilter>;
-  nom?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
   slug?: InputMaybe<SlugFilter>;
 };
 
@@ -208,8 +192,8 @@ export const CategorieModelOrderBy = {
   UpdatedAtDesc: '_updatedAt_DESC',
   IdAsc: 'id_ASC',
   IdDesc: 'id_DESC',
-  NomAsc: 'nom_ASC',
-  NomDesc: 'nom_DESC'
+  NameAsc: 'name_ASC',
+  NameDesc: 'name_DESC'
 } as const;
 
 export type CategorieModelOrderBy = typeof CategorieModelOrderBy[keyof typeof CategorieModelOrderBy];
@@ -235,7 +219,7 @@ export type CategorieRecord = RecordInterface & {
   couleurDuLogo?: Maybe<ColorField>;
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ItemId']['output'];
-  nom?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
   slug?: Maybe<Scalars['String']['output']>;
 };
 
@@ -2011,32 +1995,6 @@ export const ItemStatus = {
 } as const;
 
 export type ItemStatus = typeof ItemStatus[keyof typeof ItemStatus];
-export type LatLonField = {
-  __typename: 'LatLonField';
-  latitude: Scalars['FloatType']['output'];
-  longitude: Scalars['FloatType']['output'];
-};
-
-export type LatLonFieldMultiLocaleField = {
-  __typename: 'LatLonFieldMultiLocaleField';
-  locale?: Maybe<SiteLocale>;
-  value?: Maybe<LatLonField>;
-};
-
-/** Specifies how to filter Geolocation fields */
-export type LatLonFilter = {
-  /** Filter records with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']['input']>;
-  /** Filter records within the specified radius in meters */
-  near?: InputMaybe<LatLonNearFilter>;
-};
-
-export type LatLonNearFilter = {
-  latitude: Scalars['FloatType']['input'];
-  longitude: Scalars['FloatType']['input'];
-  radius: Scalars['FloatType']['input'];
-};
-
 /** Linking locales */
 export const LinkingLocale = {
   NonLocalized: '_nonLocalized',
@@ -2895,6 +2853,11 @@ export type FrontPageArticleQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type FrontPageArticleQuery = { __typename: 'Query', allArticles: Array<{ __typename: 'ArticleRecord', id: any, title?: string | null, slug?: string | null }> };
+
+export type GetArticlePathsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetArticlePathsQuery = { __typename: 'Query', allArticles: Array<{ __typename: 'ArticleRecord', _allSlugLocales?: Array<{ __typename: 'StringMultiLocaleField', value?: string | null, locale?: SiteLocale | null }> | null }> };
 
 export type ArticleContentQueryVariables = Exact<{
   slug: Scalars['String']['input'];

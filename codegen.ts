@@ -8,7 +8,6 @@ const codegenConfig: CodegenConfig = {
       },
     },
   },
-
   documents: ["./graphql/**/*.ts"],
   ignoreNoDocuments: true,
   generates: {

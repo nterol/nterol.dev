@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-import CardWrapper from "@components/atoms/card-wrapper";
-import { IPost } from "@custom-types/posts";
+import CardWrapper from "@/components/atoms/card-wrapper";
 
 import classes from "./post-card.module.css";
+import { IPost } from "@/types/posts";
 
 type Props = {
   post: IPost;

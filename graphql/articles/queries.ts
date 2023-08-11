@@ -10,6 +10,17 @@ export const frontPageArticlesQ = gql`
   }
 `;
 
+export const getArticlePaths = gql`
+  query getArticlePaths {
+    allArticles {
+      _allSlugLocales {
+        value
+        locale
+      }
+    }
+  }
+`;
+
 export const articleContent = gql`
   query articleContent($slug: String!) {
     article(filter: { slug: { eq: $slug } }) {

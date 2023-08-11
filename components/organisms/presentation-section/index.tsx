@@ -1,5 +1,5 @@
-import GlowingText from "@components/atoms/glowing-text";
-import Waving from "@components/molecules/animations/waving";
+import GlowingText from "@/components/atoms/glowing-text";
+import Waving from "@/components/molecules/animations/waving";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 
 import s from "./presentation-section.module.css";

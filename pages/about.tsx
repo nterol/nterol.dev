@@ -1,12 +1,12 @@
 import Head from "next/head";
-import PageLayout from "@components/templates/page-layout";
+import PageLayout from "@/components/templates/page-layout";
 
 import classes from "../styles/About.module.css";
 import { useState } from "react";
 import { animated, useTransition } from "@react-spring/web";
-import { getExperiences } from "@utils/mdx/experiences";
+import { getExperiences } from "@/utils/mdx/experiences";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import type { Experience } from "@custom-types/about";
+import { Experience } from "@/types/about";
 
 type P = {
   experiences: Experience[];
