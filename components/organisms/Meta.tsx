@@ -23,10 +23,7 @@ const Meta = ({
   return (
     <Head>
       <title>{`${SITE_NAME} - ${pageTitle}`}</title>
-      <link
-        rel="stylesheet"
-        href="https://unpkg.com/dracula-prism/dist/css/dracula-prism.css"
-      ></link>
+
       {/* <link
         rel="apple-touch-icon"
         sizes="180x180"
