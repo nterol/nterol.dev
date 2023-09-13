@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import { SITE_URL, SITE_NAME, TWITTER_USERNAME } from "@/utils/constants";
+import { SITE_URL, SITE_NAME } from "@/utils/constants";
 
 export type MetaProps = {
   pageTitle: string;
@@ -66,10 +66,10 @@ const Meta = ({
         key="ogDescription"
       />
       <meta property="og:image" content={ogImage} key="ogImage" />
-      <meta name="twitter:card" content="summary_large_image" />
+      {/* <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content={TWITTER_USERNAME} />
       <meta name="twitter:creator" content={TWITTER_USERNAME} />
-      <meta name="twitter:title" content="nterol" />
+      <meta name="twitter:title" content="nterol" /> */}
     </Head>
   );
 };

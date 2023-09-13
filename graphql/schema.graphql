@@ -3,17 +3,13 @@ enum ArticleModelFieldsReferencingCategorieModel {
   article_categories
 }
 
-"""Linking fields"""
-enum ArticleModelFieldsReferencingNoteModel {
-  article_notes
-}
-
 input ArticleModelFilter {
   AND: [ArticleModelFilter]
   OR: [ArticleModelFilter]
   _createdAt: CreatedAtFilter
   _firstPublishedAt: PublishedAtFilter
   _isValid: BooleanFilter
+  _locales: LocalesFilter
   _publicationScheduledAt: PublishedAtFilter
   _publishedAt: PublishedAtFilter
   _status: StatusFilter
@@ -22,7 +18,6 @@ input ArticleModelFilter {
   categories: LinksFilter
   content: TextFilter
   id: ItemIdFilter
-  notes: LinksFilter
   slug: SlugFilter
   title: StringFilter
 }
@@ -74,6 +69,7 @@ type ArticleRecord implements RecordInterface {
   _editingUrl: String
   _firstPublishedAt: DateTime
   _isValid: BooleanType!
+  _locales: [SiteLocale!]!
   _modelApiKey: String!
   _publicationScheduledAt: DateTime
   _publishedAt: DateTime
@@ -95,7 +91,6 @@ type ArticleRecord implements RecordInterface {
     markdown: Boolean
   ): String
   id: ItemId!
-  notes: [NoteRecord!]!
   slug(
     """
     If you want to fallback to a default translation when a translation has not been found
@@ -2081,38 +2076,6 @@ Represents non-fractional signed whole numeric values. Int can represent values 
 """
 scalar IntType
 
-"""Specifies how to filter Integer fields"""
-input IntegerFilter {
-  """Search for records with an exact match"""
-  eq: IntType
-
-  """
-  Filter records with the specified field defined (i.e. with any value) or not
-  """
-  exists: BooleanType
-
-  """
-  Filter records with a value that's strictly greater than the one specified
-  """
-  gt: IntType
-
-  """
-  Filter records with a value that's greater than or equal to the one specified
-  """
-  gte: IntType
-
-  """Filter records with a value that's less than the one specified"""
-  lt: IntType
-
-  """
-  Filter records with a value that's less or equal than the one specified
-  """
-  lte: IntType
-
-  """Exclude records with an exact match"""
-  neq: IntType
-}
-
 """Specifies how to filter by linking fields"""
 input InverseRelationshipFieldFilterBetweenArticleAndCategorie {
   """
@@ -2126,32 +2089,10 @@ input InverseRelationshipFieldFilterBetweenArticleAndCategorie {
   notIn: [ArticleModelFieldsReferencingCategorieModel!]
 }
 
-"""Specifies how to filter by linking fields"""
-input InverseRelationshipFieldFilterBetweenArticleAndNote {
-  """
-  Filter linking records that reference current record in at least one of the specified fields
-  """
-  anyIn: [ArticleModelFieldsReferencingNoteModel!]
-
-  """
-  Filter linking records that do not reference current record in any of the specified fields
-  """
-  notIn: [ArticleModelFieldsReferencingNoteModel!]
-}
-
 """Specifies how to filter linking records"""
 input InverseRelationshipFilterBetweenArticleAndCategorie {
   """Specifies how to filter by linking fields"""
   fields: InverseRelationshipFieldFilterBetweenArticleAndCategorie
-
-  """Specifies how to filter by linking locales"""
-  locales: LinkingLocalesFilter
-}
-
-"""Specifies how to filter linking records"""
-input InverseRelationshipFilterBetweenArticleAndNote {
-  """Specifies how to filter by linking fields"""
-  fields: InverseRelationshipFieldFilterBetweenArticleAndNote
 
   """Specifies how to filter by linking locales"""
   locales: LinkingLocalesFilter
@@ -2184,7 +2125,7 @@ enum ItemStatus {
 enum LinkingLocale {
   _nonLocalized
   en
-  fr_FR
+  fr
 }
 
 """Specifies how to filter by linking locales"""
@@ -2228,114 +2169,26 @@ input LinksFilter {
   notIn: [ItemId]
 }
 
+"""Specifies how to filter by locale"""
+input LocalesFilter {
+  """Filter records that are localized in all the specified locales"""
+  allIn: [SiteLocale!]
+
+  """
+  Filter records that are localized in at least one of the specified locales
+  """
+  anyIn: [SiteLocale!]
+
+  """Filter records that are not localized in any of the specified locales"""
+  notIn: [SiteLocale!]
+}
+
 scalar MetaTagAttributes
 
 enum MuxThumbnailFormatType {
   gif
   jpg
   png
-}
-
-input NoteModelFilter {
-  AND: [NoteModelFilter]
-  OR: [NoteModelFilter]
-  _createdAt: CreatedAtFilter
-  _firstPublishedAt: PublishedAtFilter
-  _isValid: BooleanFilter
-  _publicationScheduledAt: PublishedAtFilter
-  _publishedAt: PublishedAtFilter
-  _status: StatusFilter
-  _unpublishingScheduledAt: PublishedAtFilter
-  _updatedAt: UpdatedAtFilter
-  contenu: TextFilter
-  id: ItemIdFilter
-  noteNb: IntegerFilter
-  reference: StringFilter
-}
-
-enum NoteModelOrderBy {
-  _createdAt_ASC
-  _createdAt_DESC
-  _firstPublishedAt_ASC
-  _firstPublishedAt_DESC
-  _isValid_ASC
-  _isValid_DESC
-  _publicationScheduledAt_ASC
-  _publicationScheduledAt_DESC
-  _publishedAt_ASC
-  _publishedAt_DESC
-  _status_ASC
-  _status_DESC
-  _unpublishingScheduledAt_ASC
-  _unpublishingScheduledAt_DESC
-  _updatedAt_ASC
-  _updatedAt_DESC
-  id_ASC
-  id_DESC
-  noteNb_ASC
-  noteNb_DESC
-  reference_ASC
-  reference_DESC
-}
-
-"""Record of type Note (note)"""
-type NoteRecord implements RecordInterface {
-  _allReferencingArticles(
-    """
-    If you want to fallback to a default translation when a translation has not been found
-    """
-    fallbackLocales: [SiteLocale!]
-    filter: ArticleModelFilter
-
-    """Limit the number of results"""
-    first: IntType = 20
-
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-    orderBy: [ArticleModelOrderBy] = [_updatedAt_DESC]
-
-    """Skip the first results"""
-    skip: IntType
-
-    """Specifies how to filter linking records"""
-    through: InverseRelationshipFilterBetweenArticleAndNote
-  ): [ArticleRecord!]!
-
-  """Returns meta information regarding a record collection"""
-  _allReferencingArticlesMeta(
-    filter: ArticleModelFilter
-
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-
-    """Specifies how to filter linking records"""
-    through: InverseRelationshipFilterBetweenArticleAndNote
-  ): CollectionMetadata!
-  _createdAt: DateTime!
-
-  """Editing URL"""
-  _editingUrl: String
-  _firstPublishedAt: DateTime
-  _isValid: BooleanType!
-  _modelApiKey: String!
-  _publicationScheduledAt: DateTime
-  _publishedAt: DateTime
-
-  """SEO meta tags"""
-  _seoMetaTags(
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-  ): [Tag!]!
-  _status: ItemStatus!
-  _unpublishingScheduledAt: DateTime
-  _updatedAt: DateTime!
-  contenu(
-    """Process content as markdown"""
-    markdown: Boolean
-  ): String
-  id: ItemId!
-  noteNb: IntType
-  reference: String
 }
 
 """Specifies how to filter by image orientation"""
@@ -2403,14 +2256,6 @@ type Query {
     locale: SiteLocale
   ): CollectionMetadata!
 
-  """Returns meta information regarding a record collection"""
-  _allNotesMeta(
-    filter: NoteModelFilter
-
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-  ): CollectionMetadata!
-
   """Returns meta information regarding an assets collection"""
   _allUploadsMeta(
     filter: UploadFilter
@@ -2468,25 +2313,6 @@ type Query {
     skip: IntType
   ): [CategorieRecord!]!
 
-  """Returns a collection of records"""
-  allNotes(
-    """
-    If you want to fallback to a default translation when a translation has not been found
-    """
-    fallbackLocales: [SiteLocale!]
-    filter: NoteModelFilter
-
-    """Limit the number of results"""
-    first: IntType = 20
-
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-    orderBy: [NoteModelOrderBy] = [_updatedAt_DESC]
-
-    """Skip the first results"""
-    skip: IntType
-  ): [NoteRecord!]!
-
   """Returns a collection of assets"""
   allUploads(
     """
@@ -2531,19 +2357,6 @@ type Query {
     locale: SiteLocale
     orderBy: [CategorieModelOrderBy] = [_updatedAt_DESC]
   ): CategorieRecord
-
-  """Returns a specific record"""
-  note(
-    """
-    If you want to fallback to a default translation when a translation has not been found
-    """
-    fallbackLocales: [SiteLocale!]
-    filter: NoteModelFilter
-
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-    orderBy: [NoteModelOrderBy] = [_updatedAt_DESC]
-  ): NoteRecord
 
   """Returns a specific asset"""
   upload(
@@ -2644,7 +2457,7 @@ type Site {
 
 enum SiteLocale {
   en
-  fr_FR
+  fr
 }
 
 """Specifies how to filter Slug fields"""

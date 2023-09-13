@@ -17,10 +17,10 @@ export default function PresentationSection({ bioSource }: Props): JSX.Element {
     <section className={s.container}>
       <div className={s.hero_container}>
         {/* <div className={s.hero_container}> */}
-        <h2 className={s.hero}>
+        <h2 className="text-6xl font-extrabold">
           <GlowingText>Nicolas Terol</GlowingText>
         </h2>{" "}
-        <h3>
+        <h3 className="text-4xl font-extrabold leading-1">
           <Waving /> Développeur{" "}
           <GlowingText color="#f72585">Front-End</GlowingText>, je fais du{" "}
           <GlowingText color="#f0db4f">Javascript</GlowingText>, et surtout du{" "}

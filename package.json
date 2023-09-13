@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "generate": "DOTENV_CONFIG_PATH=./.env graphql-codegen -r dotenv/config",
+    "dev": "npm run generate; next dev",
     "build": "next build",
     "start": "next start"
   },

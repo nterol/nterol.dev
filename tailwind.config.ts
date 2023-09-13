@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Bricolage Grotesque", "sans serif"],
+      },
       color: {
         fancy: {
           blue: "#8bd3dd",

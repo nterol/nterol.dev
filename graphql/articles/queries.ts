@@ -21,6 +21,15 @@ export const getArticlePaths = gql`
   }
 `;
 
+export const getArticlePathsByLocale = gql`
+  query getArticlePathsByLocale($locale: SiteLocale!) {
+    allArticles(locale: $locale) {
+      slug
+      title
+    }
+  }
+`;
+
 export const articleContent = gql`
   query articleContent($slug: String!) {
     article(filter: { slug: { eq: $slug } }) {
@@ -28,11 +37,6 @@ export const articleContent = gql`
       _updatedAt
       title
       content
-      notes {
-        contenu
-        reference
-        noteNb
-      }
     }
   }
 `;

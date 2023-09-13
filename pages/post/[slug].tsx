@@ -1,14 +1,13 @@
-import ReactMarkdown from "react-markdown";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import type {
   GetStaticPaths,
   GetStaticPathsResult,
   GetStaticProps,
   InferGetStaticPropsType,
 } from "next";
-import remarkGFM from "remark-gfm";
-
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { serialize } from "next-mdx-remote/serialize";
 import client from "apollo-client";
+
 import { articleContent, getArticlePaths } from "graphql/articles/queries";
 import type {
   ArticleContentQuery,
@@ -18,9 +17,13 @@ import type {
   SiteLocale,
 } from "graphql/types";
 import PageLayout from "@/components/templates/page-layout";
-import { nightOwl } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { CustomCompo } from "@/components/mdx/CustomCompo";
+import { Aside, AsideContainer } from "@/components/mdx/Aside";
+import { Def } from "@/components/mdx/Def";
+import s from "@/components/templates/page-layout/page-layout.module.css";
 
-type Props = { content: string };
+type Props = { content: MDXRemoteSerializeResult };
+
 type PageParams = {
   slug: string;
 };
@@ -41,19 +44,14 @@ export const getStaticProps: GetStaticProps<Props, PageParams> = async ({
     return { notFound: true };
   }
 
-  // const processedContent = await remark()
-  //   .use(html)
-  //   .use(prism)
-  //   .use(footnotes)
-  //   .process(data.article?.content);
-  // const contentHTML = processedContent.toString();
+  const content = await serialize(data.article.content);
 
-  return { props: { content: data.article.content } };
+  return { props: { content } };
 };
 
-export const getStaticPaths: GetStaticPaths = async ({}): Promise<
-  GetStaticPathsResult<PageParams>
-> => {
+export const getStaticPaths: GetStaticPaths = async (
+  q
+): Promise<GetStaticPathsResult<PageParams>> => {
   const { data } = await client.query<
     GetArticlePathsQuery,
     GetArticlePathsQueryVariables
@@ -68,7 +66,7 @@ export const getStaticPaths: GetStaticPaths = async ({}): Promise<
               params: {
                 slug: a?.value ?? "",
               },
-              locale: a?.locale ?? "fr_FR",
+              locale: a?.locale ?? "fr",
             }
           : undefined
       )
@@ -90,9 +88,12 @@ export default function PostPage({
         imagePath: "",
       }}
     >
-      <article className="prose lg:prose-xl">
-        <ReactMarkdown remarkPlugins={[remarkGFM]}>{content}</ReactMarkdown>
-      </article>
+      <main className={`${s.main} flex gap-1`}>
+        <article className="prose lg:prose-xl">
+          <MDXRemote {...content} components={{ CustomCompo, Aside, Def }} />
+        </article>
+        <AsideContainer />
+      </main>
     </PageLayout>
   );
 }

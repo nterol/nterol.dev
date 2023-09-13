@@ -13,9 +13,9 @@ type Props = {
 const PostCard = ({ post, color }: Props) => (
   <CardWrapper color={color}>
     <section className={classes.content}>
-      <Link href={`/${post.slug}`}>
-        <h3>{post.title}</h3>
-        <p>{post.description}</p>
+      <Link href={`/post/${post.slug}`}>
+        <h3 className="font-bold text-xl">{post.title}</h3>
+        <p>{post.description ?? "ok"}</p>
       </Link>
     </section>
     <div className={classes.action}>

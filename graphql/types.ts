@@ -28,18 +28,13 @@ export const ArticleModelFieldsReferencingCategorieModel = {
 } as const;
 
 export type ArticleModelFieldsReferencingCategorieModel = typeof ArticleModelFieldsReferencingCategorieModel[keyof typeof ArticleModelFieldsReferencingCategorieModel];
-/** Linking fields */
-export const ArticleModelFieldsReferencingNoteModel = {
-  ArticleNotes: 'article_notes'
-} as const;
-
-export type ArticleModelFieldsReferencingNoteModel = typeof ArticleModelFieldsReferencingNoteModel[keyof typeof ArticleModelFieldsReferencingNoteModel];
 export type ArticleModelFilter = {
   AND?: InputMaybe<Array<InputMaybe<ArticleModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ArticleModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
   _isValid?: InputMaybe<BooleanFilter>;
+  _locales?: InputMaybe<LocalesFilter>;
   _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
   _publishedAt?: InputMaybe<PublishedAtFilter>;
   _status?: InputMaybe<StatusFilter>;
@@ -48,7 +43,6 @@ export type ArticleModelFilter = {
   categories?: InputMaybe<LinksFilter>;
   content?: InputMaybe<TextFilter>;
   id?: InputMaybe<ItemIdFilter>;
-  notes?: InputMaybe<LinksFilter>;
   slug?: InputMaybe<SlugFilter>;
   title?: InputMaybe<StringFilter>;
 };
@@ -88,6 +82,7 @@ export type ArticleRecord = RecordInterface & {
   _editingUrl?: Maybe<Scalars['String']['output']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
   _isValid: Scalars['BooleanType']['output'];
+  _locales: Array<SiteLocale>;
   _modelApiKey: Scalars['String']['output'];
   _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _publishedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -99,7 +94,6 @@ export type ArticleRecord = RecordInterface & {
   categories: Array<CategorieRecord>;
   content?: Maybe<Scalars['String']['output']>;
   id: Scalars['ItemId']['output'];
-  notes: Array<NoteRecord>;
   slug?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
 };
@@ -1926,24 +1920,6 @@ export type InUseFilter = {
   eq?: InputMaybe<Scalars['BooleanType']['input']>;
 };
 
-/** Specifies how to filter Integer fields */
-export type IntegerFilter = {
-  /** Search for records with an exact match */
-  eq?: InputMaybe<Scalars['IntType']['input']>;
-  /** Filter records with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']['input']>;
-  /** Filter records with a value that's strictly greater than the one specified */
-  gt?: InputMaybe<Scalars['IntType']['input']>;
-  /** Filter records with a value that's greater than or equal to the one specified */
-  gte?: InputMaybe<Scalars['IntType']['input']>;
-  /** Filter records with a value that's less than the one specified */
-  lt?: InputMaybe<Scalars['IntType']['input']>;
-  /** Filter records with a value that's less or equal than the one specified */
-  lte?: InputMaybe<Scalars['IntType']['input']>;
-  /** Exclude records with an exact match */
-  neq?: InputMaybe<Scalars['IntType']['input']>;
-};
-
 /** Specifies how to filter by linking fields */
 export type InverseRelationshipFieldFilterBetweenArticleAndCategorie = {
   /** Filter linking records that reference current record in at least one of the specified fields */
@@ -1952,26 +1928,10 @@ export type InverseRelationshipFieldFilterBetweenArticleAndCategorie = {
   notIn?: InputMaybe<Array<ArticleModelFieldsReferencingCategorieModel>>;
 };
 
-/** Specifies how to filter by linking fields */
-export type InverseRelationshipFieldFilterBetweenArticleAndNote = {
-  /** Filter linking records that reference current record in at least one of the specified fields */
-  anyIn?: InputMaybe<Array<ArticleModelFieldsReferencingNoteModel>>;
-  /** Filter linking records that do not reference current record in any of the specified fields */
-  notIn?: InputMaybe<Array<ArticleModelFieldsReferencingNoteModel>>;
-};
-
 /** Specifies how to filter linking records */
 export type InverseRelationshipFilterBetweenArticleAndCategorie = {
   /** Specifies how to filter by linking fields */
   fields?: InputMaybe<InverseRelationshipFieldFilterBetweenArticleAndCategorie>;
-  /** Specifies how to filter by linking locales */
-  locales?: InputMaybe<LinkingLocalesFilter>;
-};
-
-/** Specifies how to filter linking records */
-export type InverseRelationshipFilterBetweenArticleAndNote = {
-  /** Specifies how to filter by linking fields */
-  fields?: InputMaybe<InverseRelationshipFieldFilterBetweenArticleAndNote>;
   /** Specifies how to filter by linking locales */
   locales?: InputMaybe<LinkingLocalesFilter>;
 };
@@ -1999,7 +1959,7 @@ export type ItemStatus = typeof ItemStatus[keyof typeof ItemStatus];
 export const LinkingLocale = {
   NonLocalized: '_nonLocalized',
   En: 'en',
-  FrFr: 'fr_FR'
+  Fr: 'fr'
 } as const;
 
 export type LinkingLocale = typeof LinkingLocale[keyof typeof LinkingLocale];
@@ -2025,6 +1985,16 @@ export type LinksFilter = {
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ItemId']['input']>>>;
 };
 
+/** Specifies how to filter by locale */
+export type LocalesFilter = {
+  /** Filter records that are localized in all the specified locales */
+  allIn?: InputMaybe<Array<SiteLocale>>;
+  /** Filter records that are localized in at least one of the specified locales */
+  anyIn?: InputMaybe<Array<SiteLocale>>;
+  /** Filter records that are not localized in any of the specified locales */
+  notIn?: InputMaybe<Array<SiteLocale>>;
+};
+
 export const MuxThumbnailFormatType = {
   Gif: 'gif',
   Jpg: 'jpg',
@@ -2032,106 +2002,6 @@ export const MuxThumbnailFormatType = {
 } as const;
 
 export type MuxThumbnailFormatType = typeof MuxThumbnailFormatType[keyof typeof MuxThumbnailFormatType];
-export type NoteModelFilter = {
-  AND?: InputMaybe<Array<InputMaybe<NoteModelFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<NoteModelFilter>>>;
-  _createdAt?: InputMaybe<CreatedAtFilter>;
-  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
-  _isValid?: InputMaybe<BooleanFilter>;
-  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
-  _publishedAt?: InputMaybe<PublishedAtFilter>;
-  _status?: InputMaybe<StatusFilter>;
-  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
-  _updatedAt?: InputMaybe<UpdatedAtFilter>;
-  contenu?: InputMaybe<TextFilter>;
-  id?: InputMaybe<ItemIdFilter>;
-  noteNb?: InputMaybe<IntegerFilter>;
-  reference?: InputMaybe<StringFilter>;
-};
-
-export const NoteModelOrderBy = {
-  CreatedAtAsc: '_createdAt_ASC',
-  CreatedAtDesc: '_createdAt_DESC',
-  FirstPublishedAtAsc: '_firstPublishedAt_ASC',
-  FirstPublishedAtDesc: '_firstPublishedAt_DESC',
-  IsValidAsc: '_isValid_ASC',
-  IsValidDesc: '_isValid_DESC',
-  PublicationScheduledAtAsc: '_publicationScheduledAt_ASC',
-  PublicationScheduledAtDesc: '_publicationScheduledAt_DESC',
-  PublishedAtAsc: '_publishedAt_ASC',
-  PublishedAtDesc: '_publishedAt_DESC',
-  StatusAsc: '_status_ASC',
-  StatusDesc: '_status_DESC',
-  UnpublishingScheduledAtAsc: '_unpublishingScheduledAt_ASC',
-  UnpublishingScheduledAtDesc: '_unpublishingScheduledAt_DESC',
-  UpdatedAtAsc: '_updatedAt_ASC',
-  UpdatedAtDesc: '_updatedAt_DESC',
-  IdAsc: 'id_ASC',
-  IdDesc: 'id_DESC',
-  NoteNbAsc: 'noteNb_ASC',
-  NoteNbDesc: 'noteNb_DESC',
-  ReferenceAsc: 'reference_ASC',
-  ReferenceDesc: 'reference_DESC'
-} as const;
-
-export type NoteModelOrderBy = typeof NoteModelOrderBy[keyof typeof NoteModelOrderBy];
-/** Record of type Note (note) */
-export type NoteRecord = RecordInterface & {
-  __typename: 'NoteRecord';
-  _allReferencingArticles: Array<ArticleRecord>;
-  /** Returns meta information regarding a record collection */
-  _allReferencingArticlesMeta: CollectionMetadata;
-  _createdAt: Scalars['DateTime']['output'];
-  /** Editing URL */
-  _editingUrl?: Maybe<Scalars['String']['output']>;
-  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
-  _isValid: Scalars['BooleanType']['output'];
-  _modelApiKey: Scalars['String']['output'];
-  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
-  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
-  /** SEO meta tags */
-  _seoMetaTags: Array<Tag>;
-  _status: ItemStatus;
-  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
-  _updatedAt: Scalars['DateTime']['output'];
-  contenu?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ItemId']['output'];
-  noteNb?: Maybe<Scalars['IntType']['output']>;
-  reference?: Maybe<Scalars['String']['output']>;
-};
-
-
-/** Record of type Note (note) */
-export type NoteRecord_AllReferencingArticlesArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<ArticleModelFilter>;
-  first?: InputMaybe<Scalars['IntType']['input']>;
-  locale?: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<ArticleModelOrderBy>>>;
-  skip?: InputMaybe<Scalars['IntType']['input']>;
-  through?: InputMaybe<InverseRelationshipFilterBetweenArticleAndNote>;
-};
-
-
-/** Record of type Note (note) */
-export type NoteRecord_AllReferencingArticlesMetaArgs = {
-  filter?: InputMaybe<ArticleModelFilter>;
-  locale?: InputMaybe<SiteLocale>;
-  through?: InputMaybe<InverseRelationshipFilterBetweenArticleAndNote>;
-};
-
-
-/** Record of type Note (note) */
-export type NoteRecord_SeoMetaTagsArgs = {
-  locale?: InputMaybe<SiteLocale>;
-};
-
-
-/** Record of type Note (note) */
-export type NoteRecordContenuArgs = {
-  markdown?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
 /** Specifies how to filter by image orientation */
 export type OrientationFilter = {
   /** Search uploads with the specified orientation */
@@ -2165,8 +2035,6 @@ export type Query = {
   _allArticlesMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allCategoriesMeta: CollectionMetadata;
-  /** Returns meta information regarding a record collection */
-  _allNotesMeta: CollectionMetadata;
   /** Returns meta information regarding an assets collection */
   _allUploadsMeta: CollectionMetadata;
   /** Returns the single instance record */
@@ -2175,16 +2043,12 @@ export type Query = {
   allArticles: Array<ArticleRecord>;
   /** Returns a collection of records */
   allCategories: Array<CategorieRecord>;
-  /** Returns a collection of records */
-  allNotes: Array<NoteRecord>;
   /** Returns a collection of assets */
   allUploads: Array<FileField>;
   /** Returns a specific record */
   article?: Maybe<ArticleRecord>;
   /** Returns a specific record */
   categorie?: Maybe<CategorieRecord>;
-  /** Returns a specific record */
-  note?: Maybe<NoteRecord>;
   /** Returns a specific asset */
   upload?: Maybe<FileField>;
 };
@@ -2200,13 +2064,6 @@ export type Query_AllArticlesMetaArgs = {
 /** The query root for this schema */
 export type Query_AllCategoriesMetaArgs = {
   filter?: InputMaybe<CategorieModelFilter>;
-  locale?: InputMaybe<SiteLocale>;
-};
-
-
-/** The query root for this schema */
-export type Query_AllNotesMetaArgs = {
-  filter?: InputMaybe<NoteModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -2248,17 +2105,6 @@ export type QueryAllCategoriesArgs = {
 
 
 /** The query root for this schema */
-export type QueryAllNotesArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<NoteModelFilter>;
-  first?: InputMaybe<Scalars['IntType']['input']>;
-  locale?: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<NoteModelOrderBy>>>;
-  skip?: InputMaybe<Scalars['IntType']['input']>;
-};
-
-
-/** The query root for this schema */
 export type QueryAllUploadsArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<UploadFilter>;
@@ -2284,15 +2130,6 @@ export type QueryCategorieArgs = {
   filter?: InputMaybe<CategorieModelFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<CategorieModelOrderBy>>>;
-};
-
-
-/** The query root for this schema */
-export type QueryNoteArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<NoteModelFilter>;
-  locale?: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<NoteModelOrderBy>>>;
 };
 
 
@@ -2390,7 +2227,7 @@ export type SiteGlobalSeoArgs = {
 
 export const SiteLocale = {
   En: 'en',
-  FrFr: 'fr_FR'
+  Fr: 'fr'
 } as const;
 
 export type SiteLocale = typeof SiteLocale[keyof typeof SiteLocale];
@@ -2859,9 +2696,16 @@ export type GetArticlePathsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetArticlePathsQuery = { __typename: 'Query', allArticles: Array<{ __typename: 'ArticleRecord', _allSlugLocales?: Array<{ __typename: 'StringMultiLocaleField', value?: string | null, locale?: SiteLocale | null }> | null }> };
 
+export type GetArticlePathsByLocaleQueryVariables = Exact<{
+  locale: SiteLocale;
+}>;
+
+
+export type GetArticlePathsByLocaleQuery = { __typename: 'Query', allArticles: Array<{ __typename: 'ArticleRecord', slug?: string | null, title?: string | null }> };
+
 export type ArticleContentQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
 
 
-export type ArticleContentQuery = { __typename: 'Query', article?: { __typename: 'ArticleRecord', _createdAt: string, _updatedAt: string, title?: string | null, content?: string | null, notes: Array<{ __typename: 'NoteRecord', contenu?: string | null, reference?: string | null, noteNb?: any | null }> } | null };
+export type ArticleContentQuery = { __typename: 'Query', article?: { __typename: 'ArticleRecord', _createdAt: string, _updatedAt: string, title?: string | null, content?: string | null } | null };
