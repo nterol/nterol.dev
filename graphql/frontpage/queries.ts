@@ -11,7 +11,6 @@ export const frontPageQuery = gql`
       content
     }
     about(locale: $locale) {
-      vitrine
       description
     }
   }

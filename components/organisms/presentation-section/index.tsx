@@ -1,11 +1,12 @@
 import { GlowingText } from "@/components/mdx/glowing-text";
 import { Waving } from "@/components/mdx/waving";
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 
 import s from "./presentation-section.module.css";
 
 export const Bio = ({ children }: { children: React.ReactNode }) => (
-  <div className={s.bio_container}>{children}</div>
+  <div className="h-full p-8 flex rounded-lg bg-fancy-green shadow-md">
+    {children}
+  </div>
 );
 
 export function PresentationSection(): JSX.Element {

@@ -2902,4 +2902,4 @@ export type FrontPageQueryVariables = Exact<{
 }>;
 
 
-export type FrontPageQuery = { __typename: 'Query', allArticles: Array<{ __typename: 'ArticleRecord', slug?: string | null, title?: string | null }>, allQuizzs: Array<{ __typename: 'QuizzRecord', id: any, content?: string | null }>, about?: { __typename: 'AboutRecord', vitrine?: string | null, description?: string | null } | null };
+export type FrontPageQuery = { __typename: 'Query', allArticles: Array<{ __typename: 'ArticleRecord', slug?: string | null, title?: string | null }>, allQuizzs: Array<{ __typename: 'QuizzRecord', id: any, content?: string | null }>, about?: { __typename: 'AboutRecord', description?: string | null } | null };

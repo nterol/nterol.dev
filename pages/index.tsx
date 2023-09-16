@@ -36,23 +36,24 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({
     variables: { locale: locale as SiteLocale },
   });
 
-  const { allArticles: articles, about, allQuizzs: quizzes } = data;
+  const { allArticles: articles, about, allQuizzs } = data;
 
   if (!about) return { notFound: true };
-
-  const { vitrine, description } = about;
-  const [vitrineContent, descriptionContent, ...quizzesContent] =
-    await Promise.all(
-      [{ content: vitrine }, { content: description }, ...quizzes].map(
-        async (mdx) => (mdx.content ? await serialize(mdx.content) : null)
-      )
-    );
+  const bio = about.description ? await serialize(about.description) : null;
+  const quizzes = await Promise.all(
+    allQuizzs.map(async (item) => {
+      const content = item.content ? await serialize(item.content) : null;
+      return {
+        ...item,
+        content,
+      };
+    })
+  );
 
   return {
     props: {
-      bio: descriptionContent,
-      vitrine: vitrineContent,
-      quizzes: quizzesContent,
+      bio,
+      quizzes,
       articles,
     },
   };
@@ -60,9 +61,8 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({
 
 type HomeProps = {
   articles: FrontPageQuery["allArticles"];
-  vitrine: UncertainMDX;
   bio: UncertainMDX;
-  quizzes: UncertainMDX[];
+  quizzes: { content: UncertainMDX; id: string }[];
 };
 
 const colors = ["#8bd3dd", "#F9F871"];
@@ -70,8 +70,7 @@ const colors = ["#8bd3dd", "#F9F871"];
 export default function Home({
   articles,
   bio,
-}: // bioSource,
-InferGetStaticPropsType<typeof getStaticProps>) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <PageLayout
       meta={{
@@ -81,11 +80,11 @@ InferGetStaticPropsType<typeof getStaticProps>) {
       }}
     >
       <main className={`${s.main} p-2 `}>
-        <section className="flex min-h-[80vh] items-center">
+        <section className="flex min-h-[80vh] justify-center items-center gap-3">
           <PresentationSection />
           {bio ? <MDXRemote {...bio} components={{ Bio }} /> : null}
         </section>
-        {/* <PresentationSection bioSource={bioSource} /> */}
+
         <section className={styles.section_layout}>
           <div className={styles.section_header}>
             <h2 className="font-bold text-2xl">Articles</h2>
