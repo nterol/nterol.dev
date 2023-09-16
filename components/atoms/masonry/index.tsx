@@ -5,8 +5,8 @@ type Props = {
   children: React.ReactNode;
 };
 
-const Masonry = ({ children, tag: Tag = "div" }: Props): JSX.Element => (
-  <Tag className={styles.wrapper}>{children}</Tag>
+const Masonry = ({ children }: Props): JSX.Element => (
+  <section className={styles.wrapper}>{children}</section>
 );
 
 export default Masonry;

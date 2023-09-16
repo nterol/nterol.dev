@@ -15,7 +15,7 @@ const PostCard = ({ post, color }: Props) => (
     <section className={classes.content}>
       <Link href={`/post/${post.slug}`}>
         <h3 className="font-bold text-xl">{post.title}</h3>
-        <p>{post.description ?? "ok"}</p>
+        <p>{post.description}</p>
       </Link>
     </section>
     <div className={classes.action}>

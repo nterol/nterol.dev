@@ -1,3 +1,49 @@
+"""Record of type About (about)"""
+type AboutRecord implements RecordInterface {
+  _allDescriptionLocales(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): [StringMultiLocaleField!]
+  _allVitrineLocales(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): [StringMultiLocaleField!]
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _locales: [SiteLocale!]!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  description(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String
+  id: ItemId!
+  vitrine(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String
+}
+
 """Linking fields"""
 enum ArticleModelFieldsReferencingCategorieModel {
   article_categories
@@ -126,6 +172,7 @@ input CategorieModelFilter {
   _createdAt: CreatedAtFilter
   _firstPublishedAt: PublishedAtFilter
   _isValid: BooleanFilter
+  _locales: LocalesFilter
   _publicationScheduledAt: PublishedAtFilter
   _publishedAt: PublishedAtFilter
   _status: StatusFilter
@@ -163,6 +210,10 @@ enum CategorieModelOrderBy {
 
 """Record of type Catégorie (categorie)"""
 type CategorieRecord implements RecordInterface {
+  _allDescriptionLocales(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): [StringMultiLocaleField!]
   _allReferencingArticles(
     """
     If you want to fallback to a default translation when a translation has not been found
@@ -200,6 +251,7 @@ type CategorieRecord implements RecordInterface {
   _editingUrl: String
   _firstPublishedAt: DateTime
   _isValid: BooleanType!
+  _locales: [SiteLocale!]!
   _modelApiKey: String!
   _publicationScheduledAt: DateTime
   _publishedAt: DateTime
@@ -214,6 +266,9 @@ type CategorieRecord implements RecordInterface {
   _updatedAt: DateTime!
   couleurDuLogo: ColorField
   description(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
     """Process content as markdown"""
     markdown: Boolean
   ): String
@@ -2256,6 +2311,14 @@ type Query {
     locale: SiteLocale
   ): CollectionMetadata!
 
+  """Returns meta information regarding a record collection"""
+  _allQuizzsMeta(
+    filter: QuizzModelFilter
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): CollectionMetadata!
+
   """Returns meta information regarding an assets collection"""
   _allUploadsMeta(
     filter: UploadFilter
@@ -2274,6 +2337,17 @@ type Query {
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
   ): Site!
+
+  """Returns the single instance record"""
+  about(
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): AboutRecord
 
   """Returns a collection of records"""
   allArticles(
@@ -2312,6 +2386,25 @@ type Query {
     """Skip the first results"""
     skip: IntType
   ): [CategorieRecord!]!
+
+  """Returns a collection of records"""
+  allQuizzs(
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+    filter: QuizzModelFilter
+
+    """Limit the number of results"""
+    first: IntType = 20
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    orderBy: [QuizzModelOrderBy] = [_updatedAt_DESC]
+
+    """Skip the first results"""
+    skip: IntType
+  ): [QuizzRecord!]!
 
   """Returns a collection of assets"""
   allUploads(
@@ -2358,6 +2451,19 @@ type Query {
     orderBy: [CategorieModelOrderBy] = [_updatedAt_DESC]
   ): CategorieRecord
 
+  """Returns a specific record"""
+  quizz(
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+    filter: QuizzModelFilter
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    orderBy: [QuizzModelOrderBy] = [_updatedAt_DESC]
+  ): QuizzRecord
+
   """Returns a specific asset"""
   upload(
     """
@@ -2370,6 +2476,78 @@ type Query {
     locale: SiteLocale
     orderBy: [UploadOrderBy] = [_createdAt_DESC]
   ): FileField
+}
+
+input QuizzModelFilter {
+  AND: [QuizzModelFilter]
+  OR: [QuizzModelFilter]
+  _createdAt: CreatedAtFilter
+  _firstPublishedAt: PublishedAtFilter
+  _isValid: BooleanFilter
+  _locales: LocalesFilter
+  _publicationScheduledAt: PublishedAtFilter
+  _publishedAt: PublishedAtFilter
+  _status: StatusFilter
+  _unpublishingScheduledAt: PublishedAtFilter
+  _updatedAt: UpdatedAtFilter
+  content: TextFilter
+  id: ItemIdFilter
+}
+
+enum QuizzModelOrderBy {
+  _createdAt_ASC
+  _createdAt_DESC
+  _firstPublishedAt_ASC
+  _firstPublishedAt_DESC
+  _isValid_ASC
+  _isValid_DESC
+  _publicationScheduledAt_ASC
+  _publicationScheduledAt_DESC
+  _publishedAt_ASC
+  _publishedAt_DESC
+  _status_ASC
+  _status_DESC
+  _unpublishingScheduledAt_ASC
+  _unpublishingScheduledAt_DESC
+  _updatedAt_ASC
+  _updatedAt_DESC
+  id_ASC
+  id_DESC
+}
+
+"""Record of type Quizz (quizz)"""
+type QuizzRecord implements RecordInterface {
+  _allContentLocales(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): [StringMultiLocaleField!]
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _locales: [SiteLocale!]!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  content(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String
+  id: ItemId!
 }
 
 interface RecordInterface {

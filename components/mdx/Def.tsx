@@ -1,3 +1,6 @@
+import { useSetAtom } from "jotai";
+import { CurrentNote } from "./store";
+
 export function Def({
   noteID,
   children,
@@ -5,5 +8,13 @@ export function Def({
   noteID: string;
   children: React.ReactNode;
 }) {
-  return <span id={noteID}>{children}</span>;
+  const setCurrentNote = useSetAtom(CurrentNote);
+  const handleSetNote = () => {
+    setCurrentNote((n) => (n === noteID ? null : noteID));
+  };
+  return (
+    <span onClick={handleSetNote} id={noteID}>
+      {children}
+    </span>
+  );
 }
