@@ -6,6 +6,6 @@
 }
 
 .main {
-  width: var(--spacer);
+  max-width: var(--spacer);
   margin: 1rem auto;
 }

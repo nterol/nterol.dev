@@ -3,7 +3,7 @@ import { animated, useSpring } from "@react-spring/web";
 
 import s from "./Waving.module.css";
 
-const Waving = () => {
+export const Waving = () => {
   const [waving, set] = useState(false);
 
   const { x } = useSpring({
@@ -33,5 +33,3 @@ const Waving = () => {
     </animated.span>
   );
 };
-
-export default Waving;

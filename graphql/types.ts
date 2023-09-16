@@ -22,6 +22,62 @@ export type Scalars = {
   UploadId: { input: any; output: any; }
 };
 
+/** Record of type About (about) */
+export type AboutRecord = RecordInterface & {
+  __typename: 'AboutRecord';
+  _allDescriptionLocales?: Maybe<Array<StringMultiLocaleField>>;
+  _allVitrineLocales?: Maybe<Array<StringMultiLocaleField>>;
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _locales: Array<SiteLocale>;
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ItemId']['output'];
+  vitrine?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Record of type About (about) */
+export type AboutRecord_AllDescriptionLocalesArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** Record of type About (about) */
+export type AboutRecord_AllVitrineLocalesArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** Record of type About (about) */
+export type AboutRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Record of type About (about) */
+export type AboutRecordDescriptionArgs = {
+  locale?: InputMaybe<SiteLocale>;
+  markdown?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** Record of type About (about) */
+export type AboutRecordVitrineArgs = {
+  locale?: InputMaybe<SiteLocale>;
+  markdown?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 /** Linking fields */
 export const ArticleModelFieldsReferencingCategorieModel = {
   ArticleCategories: 'article_categories'
@@ -155,6 +211,7 @@ export type CategorieModelFilter = {
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
   _isValid?: InputMaybe<BooleanFilter>;
+  _locales?: InputMaybe<LocalesFilter>;
   _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
   _publishedAt?: InputMaybe<PublishedAtFilter>;
   _status?: InputMaybe<StatusFilter>;
@@ -194,6 +251,7 @@ export type CategorieModelOrderBy = typeof CategorieModelOrderBy[keyof typeof Ca
 /** Record of type Catégorie (categorie) */
 export type CategorieRecord = RecordInterface & {
   __typename: 'CategorieRecord';
+  _allDescriptionLocales?: Maybe<Array<StringMultiLocaleField>>;
   _allReferencingArticles: Array<ArticleRecord>;
   /** Returns meta information regarding a record collection */
   _allReferencingArticlesMeta: CollectionMetadata;
@@ -202,6 +260,7 @@ export type CategorieRecord = RecordInterface & {
   _editingUrl?: Maybe<Scalars['String']['output']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
   _isValid: Scalars['BooleanType']['output'];
+  _locales: Array<SiteLocale>;
   _modelApiKey: Scalars['String']['output'];
   _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _publishedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -215,6 +274,12 @@ export type CategorieRecord = RecordInterface & {
   id: Scalars['ItemId']['output'];
   name?: Maybe<Scalars['String']['output']>;
   slug?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Record of type Catégorie (categorie) */
+export type CategorieRecord_AllDescriptionLocalesArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
@@ -246,6 +311,7 @@ export type CategorieRecord_SeoMetaTagsArgs = {
 
 /** Record of type Catégorie (categorie) */
 export type CategorieRecordDescriptionArgs = {
+  locale?: InputMaybe<SiteLocale>;
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -2035,20 +2101,28 @@ export type Query = {
   _allArticlesMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allCategoriesMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
+  _allQuizzsMeta: CollectionMetadata;
   /** Returns meta information regarding an assets collection */
   _allUploadsMeta: CollectionMetadata;
   /** Returns the single instance record */
   _site: Site;
+  /** Returns the single instance record */
+  about?: Maybe<AboutRecord>;
   /** Returns a collection of records */
   allArticles: Array<ArticleRecord>;
   /** Returns a collection of records */
   allCategories: Array<CategorieRecord>;
+  /** Returns a collection of records */
+  allQuizzs: Array<QuizzRecord>;
   /** Returns a collection of assets */
   allUploads: Array<FileField>;
   /** Returns a specific record */
   article?: Maybe<ArticleRecord>;
   /** Returns a specific record */
   categorie?: Maybe<CategorieRecord>;
+  /** Returns a specific record */
+  quizz?: Maybe<QuizzRecord>;
   /** Returns a specific asset */
   upload?: Maybe<FileField>;
 };
@@ -2069,6 +2143,13 @@ export type Query_AllCategoriesMetaArgs = {
 
 
 /** The query root for this schema */
+export type Query_AllQuizzsMetaArgs = {
+  filter?: InputMaybe<QuizzModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
 export type Query_AllUploadsMetaArgs = {
   filter?: InputMaybe<UploadFilter>;
   locale?: InputMaybe<SiteLocale>;
@@ -2077,6 +2158,13 @@ export type Query_AllUploadsMetaArgs = {
 
 /** The query root for this schema */
 export type Query_SiteArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+export type QueryAboutArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   locale?: InputMaybe<SiteLocale>;
 };
@@ -2100,6 +2188,17 @@ export type QueryAllCategoriesArgs = {
   first?: InputMaybe<Scalars['IntType']['input']>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<CategorieModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']['input']>;
+};
+
+
+/** The query root for this schema */
+export type QueryAllQuizzsArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<QuizzModelFilter>;
+  first?: InputMaybe<Scalars['IntType']['input']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<QuizzModelOrderBy>>>;
   skip?: InputMaybe<Scalars['IntType']['input']>;
 };
 
@@ -2134,11 +2233,99 @@ export type QueryCategorieArgs = {
 
 
 /** The query root for this schema */
+export type QueryQuizzArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<QuizzModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<QuizzModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
 export type QueryUploadArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<UploadFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<UploadOrderBy>>>;
+};
+
+export type QuizzModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<QuizzModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<QuizzModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _locales?: InputMaybe<LocalesFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  content?: InputMaybe<TextFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+};
+
+export const QuizzModelOrderBy = {
+  CreatedAtAsc: '_createdAt_ASC',
+  CreatedAtDesc: '_createdAt_DESC',
+  FirstPublishedAtAsc: '_firstPublishedAt_ASC',
+  FirstPublishedAtDesc: '_firstPublishedAt_DESC',
+  IsValidAsc: '_isValid_ASC',
+  IsValidDesc: '_isValid_DESC',
+  PublicationScheduledAtAsc: '_publicationScheduledAt_ASC',
+  PublicationScheduledAtDesc: '_publicationScheduledAt_DESC',
+  PublishedAtAsc: '_publishedAt_ASC',
+  PublishedAtDesc: '_publishedAt_DESC',
+  StatusAsc: '_status_ASC',
+  StatusDesc: '_status_DESC',
+  UnpublishingScheduledAtAsc: '_unpublishingScheduledAt_ASC',
+  UnpublishingScheduledAtDesc: '_unpublishingScheduledAt_DESC',
+  UpdatedAtAsc: '_updatedAt_ASC',
+  UpdatedAtDesc: '_updatedAt_DESC',
+  IdAsc: 'id_ASC',
+  IdDesc: 'id_DESC'
+} as const;
+
+export type QuizzModelOrderBy = typeof QuizzModelOrderBy[keyof typeof QuizzModelOrderBy];
+/** Record of type Quizz (quizz) */
+export type QuizzRecord = RecordInterface & {
+  __typename: 'QuizzRecord';
+  _allContentLocales?: Maybe<Array<StringMultiLocaleField>>;
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _locales: Array<SiteLocale>;
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  content?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ItemId']['output'];
+};
+
+
+/** Record of type Quizz (quizz) */
+export type QuizzRecord_AllContentLocalesArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** Record of type Quizz (quizz) */
+export type QuizzRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Record of type Quizz (quizz) */
+export type QuizzRecordContentArgs = {
+  locale?: InputMaybe<SiteLocale>;
+  markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type RecordInterface = {
@@ -2709,3 +2896,10 @@ export type ArticleContentQueryVariables = Exact<{
 
 
 export type ArticleContentQuery = { __typename: 'Query', article?: { __typename: 'ArticleRecord', _createdAt: string, _updatedAt: string, title?: string | null, content?: string | null } | null };
+
+export type FrontPageQueryVariables = Exact<{
+  locale?: InputMaybe<SiteLocale>;
+}>;
+
+
+export type FrontPageQuery = { __typename: 'Query', allArticles: Array<{ __typename: 'ArticleRecord', slug?: string | null, title?: string | null }>, allQuizzs: Array<{ __typename: 'QuizzRecord', id: any, content?: string | null }>, about?: { __typename: 'AboutRecord', vitrine?: string | null, description?: string | null } | null };

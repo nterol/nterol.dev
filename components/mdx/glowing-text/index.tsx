@@ -5,7 +5,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const GlowingText = ({ children, color }: Props) => (
+export const GlowingText = ({ children, color }: Props) => (
   <span
     style={{ "--custom-color": color } as React.CSSProperties}
     className={classes.animated_font}
@@ -13,5 +13,3 @@ const GlowingText = ({ children, color }: Props) => (
     {children}
   </span>
 );
-
-export default GlowingText;

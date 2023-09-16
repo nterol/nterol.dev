@@ -1,10 +1,10 @@
-import { atom, useAtomValue, useSetAtom } from "jotai";
-import { MutableRefObject, useEffect, useRef } from "react";
+import { useAtomValue, useSetAtom } from "jotai";
+import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import { motion } from "framer-motion";
 
-export const AsideRefAtom = atom<MutableRefObject<HTMLDivElement | null>>({
-  current: null,
-});
+import s from "./aside.module.css";
+import { AsideRefAtom, IsAsideActive } from "./store";
 
 export function Aside({
   noteID,
@@ -26,6 +26,9 @@ export function Aside({
 export function AsideContainer() {
   const asideRef = useRef<HTMLDivElement | null>(null);
   const setAsideRef = useSetAtom(AsideRefAtom);
+  const isActive = useAtomValue(IsAsideActive);
+
+  // const variants = { open: { width: "100%" }, closed: { width: 0 } };
 
   useEffect(() => {
     if (asideRef.current !== null) {
@@ -34,9 +37,11 @@ export function AsideContainer() {
   }, []);
 
   return (
-    <aside
+    <motion.aside
+      // variants={variants}
+      // animate={isActive ? "open" : "closed"}
       ref={asideRef}
-      className="border border-blue-300 rounded-lg p-3 flex  flex-col gap-1"
-    ></aside>
+      className={`absolute border border-blue-300 rounded-lg p-3 flex  flex-col gap-1 ${s.aside_container} right-full`}
+    ></motion.aside>
   );
 }

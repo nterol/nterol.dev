@@ -14,13 +14,13 @@ import type {
   ArticleContentQueryVariables,
   GetArticlePathsQuery,
   GetArticlePathsQueryVariables,
-  SiteLocale,
 } from "graphql/types";
 import PageLayout from "@/components/templates/page-layout";
 import { CustomCompo } from "@/components/mdx/CustomCompo";
 import { Aside, AsideContainer } from "@/components/mdx/Aside";
 import { Def } from "@/components/mdx/Def";
 import s from "@/components/templates/page-layout/page-layout.module.css";
+import { getArticlesPath } from "@/utils/extract";
 
 type Props = { content: MDXRemoteSerializeResult };
 
@@ -49,30 +49,16 @@ export const getStaticProps: GetStaticProps<Props, PageParams> = async ({
   return { props: { content } };
 };
 
-export const getStaticPaths: GetStaticPaths = async (
-  q
-): Promise<GetStaticPathsResult<PageParams>> => {
+export const getStaticPaths: GetStaticPaths = async (): Promise<
+  GetStaticPathsResult<PageParams>
+> => {
   const { data } = await client.query<
     GetArticlePathsQuery,
     GetArticlePathsQueryVariables
   >({ query: getArticlePaths });
 
   return {
-    paths: data.allArticles
-      .flatMap(({ _allSlugLocales }) => _allSlugLocales)
-      .map((a) =>
-        a
-          ? {
-              params: {
-                slug: a?.value ?? "",
-              },
-              locale: a?.locale ?? "fr",
-            }
-          : undefined
-      )
-      .filter(
-        (e): e is { params: { slug: string }; locale: SiteLocale } => !!e
-      ),
+    paths: getArticlesPath(data.allArticles),
     fallback: "blocking",
   };
 };
@@ -84,11 +70,11 @@ export default function PostPage({
     <PageLayout
       meta={{
         pageTitle: "Nicolas Terol",
-        description: "I make posts about frontend tech I use and love !",
+        description: "this website is mine",
         imagePath: "",
       }}
     >
-      <main className={`${s.main} flex gap-1`}>
+      <main className={`${s.main} flex justify-center gap-1`}>
         <article className="prose lg:prose-xl">
           <MDXRemote {...content} components={{ CustomCompo, Aside, Def }} />
         </article>
