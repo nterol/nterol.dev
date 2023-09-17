@@ -1,50 +1,79 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
-import { MDXRemoteSerializeResult } from "next-mdx-remote";
+import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
+import client from "@/apollo-client";
 
-import { getAllPosts } from "@utils/mdx/posts";
-import type { IPost } from "@custom-types/posts";
-import Masonry from "@components/atoms/masonry";
-import { getBio } from "@utils/mdx/about";
-import PresentationSection from "@components/organisms/presentation-section";
-import PostCard from "@components/organisms/post-card";
-import PageLayout from "@components/templates/page-layout";
+import { PresentationSection } from "@/components/organisms/presentation-section";
+import PageLayout from "@/components/templates/page-layout";
+import {
+  FrontPageQuery,
+  FrontPageQueryVariables,
+  SiteLocale,
+} from "@/graphql/types";
+import s from "@/components/templates/page-layout/page-layout.module.css";
+import { frontPageQuery } from "@/graphql/frontpage/queries";
+import { ArticleDescription } from "@/components/organisms/article-description";
+import { AnchorTitle } from "@/components/molecules/anchor-title";
+import { ContactGrid } from "@/components/organisms/contact-grid";
+import { PatternBackground } from "@/components/molecules/pattern-background";
+import rehypeHighlight from "rehype-highlight";
 
-import styles from "../styles/Home.module.css";
+type UncertainMDX = MDXRemoteSerializeResult<
+  Record<string, unknown>,
+  Record<string, unknown>
+> | null;
 
 export const getStaticProps: GetStaticProps<HomeProps> = async ({
   locale = "fr",
 }) => {
-  const posts = getAllPosts(locale, [
-    "slug",
-    "date",
-    "thumbnail",
-    "title",
-    "description",
-  ]);
+  const { data } = await client.query<FrontPageQuery, FrontPageQueryVariables>({
+    query: frontPageQuery,
+    variables: { locale: locale as SiteLocale },
+  });
 
-  const { content } = getBio(locale);
-  const bioSource = await serialize(content);
+  const { allArticles: articles, about, allQuizzs } = data;
 
-  return { props: { posts, bioSource } };
+  if (!about) return { notFound: true };
+  const bio = about.description ? await serialize(about.description) : null;
+  const quizzes = await Promise.all(
+    allQuizzs.map(async (item) => {
+      const content = item.content
+        ? await serialize(item.content, {
+            mdxOptions: {
+              // @ts-ignore
+              rehypePlugins: [rehypeHighlight],
+            },
+          })
+        : null;
+      return {
+        ...item,
+        content,
+      };
+    })
+  );
+
+  return {
+    props: {
+      bio,
+      quizzes,
+      articles,
+      locale,
+    },
+  };
 };
 
 type HomeProps = {
-  posts: IPost[];
-  bioSource: MDXRemoteSerializeResult;
+  articles: FrontPageQuery["allArticles"];
+  bio: UncertainMDX;
+  quizzes: { content: UncertainMDX; id: string }[];
+  locale: string;
 };
 
-const colors = [
-  "#8bd3dd",
-  "#F9F871",
-  // "#BA3C67", "#00E2B4"
-];
-
 export default function Home({
-  posts,
-  bioSource,
+  articles,
+  bio,
+  locale,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log(posts);
   return (
     <PageLayout
       meta={{
@@ -53,21 +82,31 @@ export default function Home({
         imagePath: "",
       }}
     >
-      <PresentationSection bioSource={bioSource} />
-      <section className={styles.section_layout}>
-        <div className={styles.section_header}>
-          <h2>Articles</h2>
-        </div>
-        <Masonry>
-          {posts.map((post, i) => (
-            <PostCard
-              key={post.slug}
-              post={post}
-              color={colors[i % colors.length]}
-            />
+      <PatternBackground />
+      <main className={`${s.main} md:p-2 flex flex-col gap-8`}>
+        <section className="flex flex-col justify-center py-16 lg:py-24">
+          <div className="prose md:max-w-[50vw] lg:max-w-[45vw]">
+            <PresentationSection />
+            {bio ? (
+              <div className="font-bold lg:text-xl text-black">
+                <MDXRemote {...bio} />
+              </div>
+            ) : null}
+          </div>
+        </section>
+
+        <section className="flex flex-col gap-4">
+          <AnchorTitle title="articles" />
+
+          {articles?.map((article) => (
+            <ArticleDescription article={article} locale={locale} />
           ))}
-        </Masonry>
-      </section>
+        </section>
+        <section>
+          <AnchorTitle title="contact" />
+          <ContactGrid />
+        </section>
+      </main>
     </PageLayout>
   );
 }

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import { SITE_URL, SITE_NAME, TWITTER_USERNAME } from "@utils/constants";
+import { SITE_URL, SITE_NAME } from "@/utils/constants";
 
 export type MetaProps = {
   pageTitle: string;
@@ -9,7 +9,7 @@ export type MetaProps = {
   imagePath: string;
 };
 
-const Meta = ({
+export const Meta = ({
   pageTitle,
   description,
   imagePath,
@@ -23,10 +23,6 @@ const Meta = ({
   return (
     <Head>
       <title>{`${SITE_NAME} - ${pageTitle}`}</title>
-      <link
-        rel="stylesheet"
-        href="https://unpkg.com/dracula-prism/dist/css/dracula-prism.css"
-      ></link>
       {/* <link
         rel="apple-touch-icon"
         sizes="180x180"
@@ -66,12 +62,10 @@ const Meta = ({
         key="ogDescription"
       />
       <meta property="og:image" content={ogImage} key="ogImage" />
-      <meta name="twitter:card" content="summary_large_image" />
+      {/* <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content={TWITTER_USERNAME} />
       <meta name="twitter:creator" content={TWITTER_USERNAME} />
-      <meta name="twitter:title" content="nterol" />
+      <meta name="twitter:title" content="nterol" /> */}
     </Head>
   );
 };
-
-export default Meta;

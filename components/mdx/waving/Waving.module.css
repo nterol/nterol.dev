@@ -1,0 +1,9 @@
+.wave {
+  display: inline-block;
+}
+
+@media (hover: hover) {
+  .wave:hover {
+    cursor: pointer;
+  }
+}

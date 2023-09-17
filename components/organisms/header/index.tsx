@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import e from "@components/quarks/line-grid.module.css";
-import Logo from "@components/atoms/logo";
+import e from "@/components/quarks/line-grid.module.css";
+import Logo from "@/components/atoms/logo";
 import classes from "./header.module.css";
 
 export default function Header() {
@@ -9,17 +9,15 @@ export default function Header() {
     <header className={classes.header}>
       <div className={`${classes.container} ${e.line_grid}`}>
         <Link href="/">
-          <a>
-            <Logo />
-          </a>
+          <Logo />
         </Link>
         <nav className={e.line_grid}>
-          <Link href="/about">
-            <h3>A propos</h3>
-          </Link>
-          <Link href="/experiences">
-            <h3>Me contacter</h3>
-          </Link>
+          <a className="font-extrabold" href="#articles">
+            Articles
+          </a>
+          <a className="font-bold" href="#contact">
+            Contact
+          </a>
         </nav>
       </div>
     </header>

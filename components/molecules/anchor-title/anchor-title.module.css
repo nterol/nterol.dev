@@ -1,0 +1,8 @@
+.anchor {
+  position: relative;
+}
+
+.anchor[data-active="true"] {
+  text-decoration: underline;
+  text-decoration: wavy;
+}

@@ -1,8 +1,6 @@
 .container {
   height: var(--header-height);
 
-  width: var(--spacer);
+  max-width: var(--spacer);
   margin: 0 auto;
-
-  padding: 1rem;
 }

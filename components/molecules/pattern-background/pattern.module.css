@@ -1,0 +1,10 @@
+.pattern {
+  z-index: -1;
+  opacity: 0.8;
+  background-image: radial-gradient(
+    var(--ink-blue) 0.5px,
+    var(--sand-background) 0.5px
+  );
+  background-size: 10px 10px;
+  box-shadow: 0 0 5px 10px var(--sand-background);
+}

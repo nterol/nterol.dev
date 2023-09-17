@@ -11,7 +11,7 @@
   border-radius: 50%;
   background-image: linear-gradient(
     -180deg,
-    var(--blue),
+    var(--ink-blue),
     var(--sand-background)
   );
 }
