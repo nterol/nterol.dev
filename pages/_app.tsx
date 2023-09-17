@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "@/styles/night-owl.css";
 
 type AppProps = {
   Component: React.ComponentType;

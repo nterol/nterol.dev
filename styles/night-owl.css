@@ -1,158 +1,178 @@
-/**
- * MIT License
- * Copyright (c) 2018 Sarah Drasner
- * Sarah Drasner's[@sdras] Night Owl
- * Ported by Sara vieria [@SaraVieira]
- * Added by Souvik Mandal [@SimpleIndian]
- */
+/*
 
-code[class*="language-"],
-pre[class*="language-"] {
+Night Owl for highlight.js (c) Carl Baxter <carl@cbax.tech>
+
+An adaptation of Sarah Drasner's Night Owl VS Code Theme
+https://github.com/sdras/night-owl-vscode-theme
+
+Copyright (c) 2018 Sarah Drasner
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+*/
+
+.hljs {
+  /* background: #011627; */
   color: #d6deeb;
-  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
-  text-align: left;
-  white-space: pre;
-  word-spacing: normal;
-  word-break: normal;
-  word-wrap: normal;
-  line-height: 1.5;
-  font-size: 1em;
-
-  -moz-tab-size: 4;
-  -o-tab-size: 4;
-  tab-size: 4;
-
-  -webkit-hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
-  hyphens: none;
 }
 
-pre[class*="language-"]::-moz-selection,
-pre[class*="language-"] ::-moz-selection,
-code[class*="language-"]::-moz-selection,
-code[class*="language-"] ::-moz-selection {
-  text-shadow: none;
-  background: rgba(29, 59, 83, 0.99);
-}
-
-pre[class*="language-"]::selection,
-pre[class*="language-"] ::selection,
-code[class*="language-"]::selection,
-code[class*="language-"] ::selection {
-  text-shadow: none;
-  background: rgba(29, 59, 83, 0.99);
-}
-
-@media print {
-  code[class*="language-"],
-  pre[class*="language-"] {
-    text-shadow: none;
-  }
-}
-
-/* Code blocks */
-pre[class*="language-"] {
-  padding: 1em;
-  margin: 0.5em 0;
-  overflow: auto;
-}
-
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-  color: white;
-  background: #011627;
-}
-
-:not(pre) > code[class*="language-"] {
-  padding: 0.1em;
-  border-radius: 0.3em;
-  white-space: normal;
-}
-
-.token.comment,
-.token.prolog,
-.token.cdata {
-  color: rgb(99, 119, 119);
+/* General Purpose */
+.hljs-keyword {
+  color: #c792ea;
   font-style: italic;
 }
-
-.token.punctuation {
-  color: rgb(199, 146, 234);
-}
-
-.namespace {
-  color: rgb(178, 204, 214);
-}
-
-.token.deleted {
-  color: rgba(239, 83, 80, 0.56);
+.hljs-built_in {
+  color: #addb67;
   font-style: italic;
 }
-
-.token.symbol,
-.token.property {
-  color: rgb(128, 203, 196);
+.hljs-type {
+  color: #82aaff;
 }
-
-.token.tag,
-.token.operator {
-  color: rgb(127, 219, 202);
+.hljs-literal {
+  color: #ff5874;
 }
-
-.token.boolean {
-  color: rgb(255, 88, 116);
+.hljs-number {
+  color: #f78c6c;
 }
-
-.token.number {
-  color: rgb(247, 140, 108);
+.hljs-regexp {
+  color: #5ca7e4;
 }
-
-.token.constant,
-.token.function,
-.token.char {
-  color: rgb(130, 170, 255);
+.hljs-string {
+  color: #ecc48d;
 }
-
-.token.selector,
-.token.keyword,
-.token.doctype {
-  color: rgb(199, 146, 234);
+.hljs-subst {
+  color: #d3423e;
+}
+.hljs-symbol {
+  color: #82aaff;
+}
+.hljs-class {
+  color: #ffcb8b;
+}
+.hljs-function {
+  color: #82aaff;
+}
+.hljs-title {
+  color: #dcdcaa;
   font-style: italic;
 }
+.hljs-params {
+  color: #7fdbca;
+}
 
-.token.attr-name,
-.token.builtin,
-.token.inserted {
-  color: rgb(173, 219, 103);
+/* Meta */
+.hljs-comment {
+  color: #637777;
   font-style: italic;
 }
-
-.token.string,
-.token.url,
-.token.entity,
-.language-css .token.string,
-.style .token.string {
-  color: rgb(173, 219, 103);
+.hljs-doctag {
+  color: #7fdbca;
+}
+.hljs-meta {
+  color: #82aaff;
+}
+.hljs-meta .hljs-keyword {
+  color: #82aaff;
+}
+.hljs-meta .hljs-string {
+  color: #ecc48d;
 }
 
-.token.class-name,
-.token.atrule,
-.token.attr-value {
-  color: rgb(255, 203, 139);
+/* Tags, attributes, config */
+.hljs-section {
+  color: #82b1ff;
+}
+.hljs-tag,
+.hljs-name {
+  color: #7fdbca;
+}
+.hljs-attr {
+  color: #7fdbca;
+}
+.hljs-attribute {
+  color: #80cbc4;
+}
+.hljs-variable {
+  color: #addb67;
 }
 
-.token.regex,
-.token.important,
-.token.variable {
-  color: rgb(214, 222, 235);
+/* Markup */
+.hljs-bullet {
+  color: #d9f5dd;
 }
-
-.token.important,
-.token.bold {
+.hljs-code {
+  color: #80cbc4;
+}
+.hljs-emphasis {
+  color: #c792ea;
+  font-style: italic;
+}
+.hljs-strong {
+  color: #addb67;
   font-weight: bold;
 }
+.hljs-formula {
+  color: #c792ea;
+}
+.hljs-link {
+  color: #ff869a;
+}
+.hljs-quote {
+  color: #697098;
+  font-style: italic;
+}
 
-.token.italic {
+/* CSS */
+.hljs-selector-tag {
+  color: #ff6363;
+}
+
+.hljs-selector-id {
+  color: #fad430;
+}
+
+.hljs-selector-class {
+  color: #addb67;
+  font-style: italic;
+}
+
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+  color: #c792ea;
+  font-style: italic;
+}
+
+/* Templates */
+.hljs-template-tag {
+  color: #c792ea;
+}
+.hljs-template-variable {
+  color: #addb67;
+}
+
+/* diff */
+.hljs-addition {
+  color: #addb67ff;
+  font-style: italic;
+}
+
+.hljs-deletion {
+  color: #ef535090;
   font-style: italic;
 }

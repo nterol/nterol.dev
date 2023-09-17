@@ -16,6 +16,7 @@ import { ArticleDescription } from "@/components/organisms/article-description";
 import { AnchorTitle } from "@/components/molecules/anchor-title";
 import { ContactGrid } from "@/components/organisms/contact-grid";
 import { PatternBackground } from "@/components/molecules/pattern-background";
+import rehypeHighlight from "rehype-highlight";
 
 type UncertainMDX = MDXRemoteSerializeResult<
   Record<string, unknown>,
@@ -36,7 +37,14 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({
   const bio = about.description ? await serialize(about.description) : null;
   const quizzes = await Promise.all(
     allQuizzs.map(async (item) => {
-      const content = item.content ? await serialize(item.content) : null;
+      const content = item.content
+        ? await serialize(item.content, {
+            mdxOptions: {
+              // @ts-ignore
+              rehypePlugins: [rehypeHighlight],
+            },
+          })
+        : null;
       return {
         ...item,
         content,

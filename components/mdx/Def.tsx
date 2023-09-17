@@ -1,5 +1,5 @@
-import { useSetAtom } from "jotai";
-import { CurrentNote } from "./store";
+// import { useSetAtom } from "jotai";
+// import { CurrentNote } from "./store";
 
 export function Def({
   noteID,
@@ -8,13 +8,13 @@ export function Def({
   noteID: string;
   children: React.ReactNode;
 }) {
-  const setCurrentNote = useSetAtom(CurrentNote);
+  // const setCurrentNote = useSetAtom(CurrentNote);
   const handleSetNote = () => {
-    setCurrentNote((n) => (n === noteID ? null : noteID));
+    // setCurrentNote((n) => (n === noteID ? null : noteID));
   };
   return (
     <span
-      className="underline decoration-wavy "
+      // className="underline decoration-wavy"
       onClick={handleSetNote}
       id={noteID}
     >

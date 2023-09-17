@@ -7,6 +7,7 @@ import type {
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import client from "apollo-client";
+import rehypeHighlight from "rehype-highlight";
 
 import { articleContent, getArticlePaths } from "graphql/articles/queries";
 import type {
@@ -52,7 +53,12 @@ export const getStaticProps: GetStaticProps<Props, PageParams> = async ({
     return { notFound: true };
   }
 
-  const content = await serialize(data.article.content);
+  const content = await serialize(data.article.content, {
+    mdxOptions: {
+      // @ts-ignore
+      rehypePlugins: [rehypeHighlight],
+    },
+  });
 
   return { props: { article: { ...data.article, content } } };
 };
