@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "generate": "DOTENV_CONFIG_PATH=./.env graphql-codegen -r dotenv/config",
-    "dev": "npm run generate; next dev",
+    "predev": "npm run generate",
+    "dev": "next dev",
+    "prebuild": "npm run generate",
     "build": "next build",
     "start": "next start",
     "find:unused": "next-unused"
