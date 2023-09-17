@@ -4,10 +4,6 @@ type AboutRecord implements RecordInterface {
     """Process content as markdown"""
     markdown: Boolean
   ): [StringMultiLocaleField!]
-  _allVitrineLocales(
-    """Process content as markdown"""
-    markdown: Boolean
-  ): [StringMultiLocaleField!]
   _createdAt: DateTime!
 
   """Editing URL"""
@@ -35,13 +31,6 @@ type AboutRecord implements RecordInterface {
     markdown: Boolean
   ): String
   id: ItemId!
-  vitrine(
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-
-    """Process content as markdown"""
-    markdown: Boolean
-  ): String
 }
 
 """Linking fields"""
@@ -63,6 +52,7 @@ input ArticleModelFilter {
   _updatedAt: UpdatedAtFilter
   categories: LinksFilter
   content: TextFilter
+  description: TextFilter
   id: ItemIdFilter
   slug: SlugFilter
   title: StringFilter
@@ -94,6 +84,10 @@ enum ArticleModelOrderBy {
 """Record of type Article (article)"""
 type ArticleRecord implements RecordInterface {
   _allContentLocales(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): [StringMultiLocaleField!]
+  _allDescriptionLocales(
     """Process content as markdown"""
     markdown: Boolean
   ): [StringMultiLocaleField!]
@@ -130,6 +124,13 @@ type ArticleRecord implements RecordInterface {
   _updatedAt: DateTime!
   categories: [CategorieRecord!]!
   content(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String
+  description(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
 

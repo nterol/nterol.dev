@@ -12,12 +12,12 @@ export default function Header() {
           <Logo />
         </Link>
         <nav className={e.line_grid}>
-          <Link className="font-extrabold" href="/about">
-            A propos
-          </Link>
-          <Link className="font-bold" href="/experiences">
-            Me contacter
-          </Link>
+          <a className="font-extrabold" href="#articles">
+            Articles
+          </a>
+          <a className="font-bold" href="#contact">
+            Contact
+          </a>
         </nav>
       </div>
     </header>

@@ -5,6 +5,9 @@ export const frontPageQuery = gql`
     allArticles(locale: $locale) {
       slug
       title
+      description
+      _createdAt
+      _updatedAt
     }
     allQuizzs(locale: $locale) {
       id

@@ -26,7 +26,6 @@ export type Scalars = {
 export type AboutRecord = RecordInterface & {
   __typename: 'AboutRecord';
   _allDescriptionLocales?: Maybe<Array<StringMultiLocaleField>>;
-  _allVitrineLocales?: Maybe<Array<StringMultiLocaleField>>;
   _createdAt: Scalars['DateTime']['output'];
   /** Editing URL */
   _editingUrl?: Maybe<Scalars['String']['output']>;
@@ -43,18 +42,11 @@ export type AboutRecord = RecordInterface & {
   _updatedAt: Scalars['DateTime']['output'];
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ItemId']['output'];
-  vitrine?: Maybe<Scalars['String']['output']>;
 };
 
 
 /** Record of type About (about) */
 export type AboutRecord_AllDescriptionLocalesArgs = {
-  markdown?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-/** Record of type About (about) */
-export type AboutRecord_AllVitrineLocalesArgs = {
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -67,13 +59,6 @@ export type AboutRecord_SeoMetaTagsArgs = {
 
 /** Record of type About (about) */
 export type AboutRecordDescriptionArgs = {
-  locale?: InputMaybe<SiteLocale>;
-  markdown?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-/** Record of type About (about) */
-export type AboutRecordVitrineArgs = {
   locale?: InputMaybe<SiteLocale>;
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
@@ -98,6 +83,7 @@ export type ArticleModelFilter = {
   _updatedAt?: InputMaybe<UpdatedAtFilter>;
   categories?: InputMaybe<LinksFilter>;
   content?: InputMaybe<TextFilter>;
+  description?: InputMaybe<TextFilter>;
   id?: InputMaybe<ItemIdFilter>;
   slug?: InputMaybe<SlugFilter>;
   title?: InputMaybe<StringFilter>;
@@ -131,6 +117,7 @@ export type ArticleModelOrderBy = typeof ArticleModelOrderBy[keyof typeof Articl
 export type ArticleRecord = RecordInterface & {
   __typename: 'ArticleRecord';
   _allContentLocales?: Maybe<Array<StringMultiLocaleField>>;
+  _allDescriptionLocales?: Maybe<Array<StringMultiLocaleField>>;
   _allSlugLocales?: Maybe<Array<StringMultiLocaleField>>;
   _allTitleLocales?: Maybe<Array<StringMultiLocaleField>>;
   _createdAt: Scalars['DateTime']['output'];
@@ -149,6 +136,7 @@ export type ArticleRecord = RecordInterface & {
   _updatedAt: Scalars['DateTime']['output'];
   categories: Array<CategorieRecord>;
   content?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ItemId']['output'];
   slug?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
@@ -157,6 +145,12 @@ export type ArticleRecord = RecordInterface & {
 
 /** Record of type Article (article) */
 export type ArticleRecord_AllContentLocalesArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** Record of type Article (article) */
+export type ArticleRecord_AllDescriptionLocalesArgs = {
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -181,6 +175,13 @@ export type ArticleRecord_SeoMetaTagsArgs = {
 
 /** Record of type Article (article) */
 export type ArticleRecordContentArgs = {
+  locale?: InputMaybe<SiteLocale>;
+  markdown?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** Record of type Article (article) */
+export type ArticleRecordDescriptionArgs = {
   locale?: InputMaybe<SiteLocale>;
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
@@ -2902,4 +2903,4 @@ export type FrontPageQueryVariables = Exact<{
 }>;
 
 
-export type FrontPageQuery = { __typename: 'Query', allArticles: Array<{ __typename: 'ArticleRecord', slug?: string | null, title?: string | null }>, allQuizzs: Array<{ __typename: 'QuizzRecord', id: any, content?: string | null }>, about?: { __typename: 'AboutRecord', description?: string | null } | null };
+export type FrontPageQuery = { __typename: 'Query', allArticles: Array<{ __typename: 'ArticleRecord', slug?: string | null, title?: string | null, description?: string | null, _createdAt: string, _updatedAt: string }>, allQuizzs: Array<{ __typename: 'QuizzRecord', id: any, content?: string | null }>, about?: { __typename: 'AboutRecord', description?: string | null } | null };

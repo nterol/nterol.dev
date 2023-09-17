@@ -1,5 +1,5 @@
 import Header from "@/components/organisms/header";
-import Meta, { MetaProps } from "@/components/organisms/Meta";
+import { type MetaProps, Meta } from "@/components/organisms/Meta";
 import { Footer } from "@/components/organisms/page-footer";
 
 import styles from "./page-layout.module.css";

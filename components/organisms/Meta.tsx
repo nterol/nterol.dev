@@ -9,7 +9,7 @@ export type MetaProps = {
   imagePath: string;
 };
 
-const Meta = ({
+export const Meta = ({
   pageTitle,
   description,
   imagePath,
@@ -70,5 +70,3 @@ const Meta = ({
     </Head>
   );
 };
-
-export default Meta;

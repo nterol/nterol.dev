@@ -15,8 +15,8 @@
   font-weight: 900;
   background: linear-gradient(
     to right,
-    var(--blue),
-    var(--custom-color, #1cb5e0)
+    var(--start-color, var(--blue)),
+    var(--target-color, #1cb5e0)
   );
   /*linear-gradient(-90deg, #f72585, #b5179e, #7209b7);***/
   -webkit-background-clip: text;

@@ -3,13 +3,8 @@ import { serialize } from "next-mdx-remote/serialize";
 
 import client from "@/apollo-client";
 
-import Masonry from "@/components/atoms/masonry";
+import { PresentationSection } from "@/components/organisms/presentation-section";
 
-import {
-  PresentationSection,
-  Bio,
-} from "@/components/organisms/presentation-section";
-import PostCard from "@/components/organisms/post-card";
 import PageLayout from "@/components/templates/page-layout";
 
 import styles from "../styles/Home.module.css";
@@ -22,6 +17,8 @@ import {
 import s from "@/components/templates/page-layout/page-layout.module.css";
 import { frontPageQuery } from "@/graphql/frontpage/queries";
 import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
+import Link from "next/link";
+import { longDate } from "@/utils/date";
 
 type UncertainMDX = MDXRemoteSerializeResult<
   Record<string, unknown>,
@@ -55,6 +52,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({
       bio,
       quizzes,
       articles,
+      locale,
     },
   };
 };
@@ -63,6 +61,7 @@ type HomeProps = {
   articles: FrontPageQuery["allArticles"];
   bio: UncertainMDX;
   quizzes: { content: UncertainMDX; id: string }[];
+  locale: string;
 };
 
 const colors = ["#8bd3dd", "#F9F871"];
@@ -70,6 +69,7 @@ const colors = ["#8bd3dd", "#F9F871"];
 export default function Home({
   articles,
   bio,
+  locale,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <PageLayout
@@ -79,25 +79,42 @@ export default function Home({
         imagePath: "",
       }}
     >
-      <main className={`${s.main} p-2 `}>
-        <section className="flex min-h-[80vh] justify-center items-center gap-3">
-          <PresentationSection />
-          {bio ? <MDXRemote {...bio} components={{ Bio }} /> : null}
+      <main className={`${s.main} md:p-2 `}>
+        <section className="min-h-[80vh] flex flex-col justify-center">
+          <div className="prose md:max-w-[45vw]">
+            <PresentationSection />
+            {bio ? (
+              <div className="font-bold lg:text-xl text-black">
+                <MDXRemote {...bio} />
+              </div>
+            ) : null}
+          </div>
         </section>
 
-        <section className={styles.section_layout}>
-          <div className={styles.section_header}>
-            <h2 className="font-bold text-2xl">Articles</h2>
-          </div>
-          <Masonry>
-            {articles?.map((article, i) => (
-              <PostCard
-                key={article.slug}
-                post={{ slug: article.slug ?? "", title: article.title ?? "" }}
-                color={colors[i % colors.length]}
-              />
-            )) ?? <p>Je n'ai encore rien écris pour le moment </p>}
-          </Masonry>
+        <section className="mt-4 flex flex-col gap-4">
+          <a id="articles">
+            <h2 className="font-extrabold text-xl lg:text-3xl">Articles</h2>
+          </a>
+
+          {articles?.map((article) => (
+            <article className="flex flex-col gap-1" key={article.slug}>
+              <Link href={`/post/${article.slug}`}>
+                <h1 className="text-2xl font-bold">{article.title}</h1>
+              </Link>
+              <p>{article.description}</p>
+              <span className="flex gap-8 items-center">
+                <p className="font-bold text-sm text-inkblue">
+                  {longDate(article._updatedAt ?? article._createdAt, locale)}{" "}
+                </p>
+                <span>&rarr;</span>
+              </span>
+            </article>
+          ))}
+        </section>
+        <section className="mt-6">
+          <a id="contact">
+            <h2 className="font-extrabold lg:text-3xl text-xl">Contact</h2>
+          </a>
         </section>
       </main>
     </PageLayout>
