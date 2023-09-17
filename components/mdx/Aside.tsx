@@ -1,7 +1,7 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { motion } from "framer-motion";
+import { a, useSpring } from "@react-spring/web";
 
 import s from "./aside.module.css";
 import { AsideRefAtom, IsAsideActive } from "./store";
@@ -28,7 +28,9 @@ export function AsideContainer() {
   const setAsideRef = useSetAtom(AsideRefAtom);
   const isActive = useAtomValue(IsAsideActive);
 
-  // const variants = { open: { width: "100%" }, closed: { width: 0 } };
+  const spring = useSpring(
+    isActive ? { opacity: 1, width: "100%" } : { opacity: 0, width: "0%" }
+  );
 
   useEffect(() => {
     if (asideRef.current !== null) {
@@ -37,11 +39,10 @@ export function AsideContainer() {
   }, []);
 
   return (
-    <motion.aside
-      // variants={variants}
-      // animate={isActive ? "open" : "closed"}
+    <a.aside
+      style={spring}
       ref={asideRef}
       className={`absolute border border-blue-300 rounded-lg p-3 flex  flex-col gap-1 ${s.aside_container} right-full`}
-    ></motion.aside>
+    ></a.aside>
   );
 }

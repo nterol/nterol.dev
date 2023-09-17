@@ -22,7 +22,15 @@ import { Def } from "@/components/mdx/Def";
 import s from "@/components/templates/page-layout/page-layout.module.css";
 import { getArticlesPath } from "@/utils/extract";
 
-type Props = { content: MDXRemoteSerializeResult };
+type Props = {
+  article: {
+    __typename: "ArticleRecord";
+    _createdAt: string;
+    _updatedAt: string;
+    title?: string | null | undefined;
+    content: MDXRemoteSerializeResult;
+  };
+};
 
 type PageParams = {
   slug: string;
@@ -46,7 +54,7 @@ export const getStaticProps: GetStaticProps<Props, PageParams> = async ({
 
   const content = await serialize(data.article.content);
 
-  return { props: { content } };
+  return { props: { article: { ...data.article, content } } };
 };
 
 export const getStaticPaths: GetStaticPaths = async (): Promise<
@@ -64,7 +72,7 @@ export const getStaticPaths: GetStaticPaths = async (): Promise<
 };
 
 export default function PostPage({
-  content,
+  article,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <PageLayout
@@ -74,9 +82,13 @@ export default function PostPage({
         imagePath: "",
       }}
     >
-      <main className={`${s.main} flex justify-center gap-1`}>
+      <main className={`${s.main} md:p-2 flex flex-col gap-8`}>
         <article className="prose lg:prose-xl">
-          <MDXRemote {...content} components={{ CustomCompo, Aside, Def }} />
+          <h1>{article.title}</h1>
+          <MDXRemote
+            {...article.content}
+            components={{ CustomCompo, Aside, Def }}
+          />
         </article>
         <AsideContainer />
       </main>

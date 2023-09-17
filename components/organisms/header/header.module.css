@@ -2,14 +2,14 @@
   width: 100%;
   top: 0;
   height: var(--header-height);
-  background: var(--sand-background);
+  /* background: var(--sand-background); */
 }
 
 .container {
   max-width: var(--spacer);
   margin: 0 auto;
   height: 100%;
-  padding: 1rem;
+  padding: 1rem 0;
 }
 
 .container nav {

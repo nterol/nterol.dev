@@ -13,7 +13,11 @@ export function Def({
     setCurrentNote((n) => (n === noteID ? null : noteID));
   };
   return (
-    <span onClick={handleSetNote} id={noteID}>
+    <span
+      className="underline decoration-wavy "
+      onClick={handleSetNote}
+      id={noteID}
+    >
       {children}
     </span>
   );

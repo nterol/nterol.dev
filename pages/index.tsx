@@ -1,24 +1,21 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
-
+import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
 import client from "@/apollo-client";
 
 import { PresentationSection } from "@/components/organisms/presentation-section";
-
 import PageLayout from "@/components/templates/page-layout";
-
-import styles from "../styles/Home.module.css";
 import {
   FrontPageQuery,
   FrontPageQueryVariables,
   SiteLocale,
 } from "@/graphql/types";
-
 import s from "@/components/templates/page-layout/page-layout.module.css";
 import { frontPageQuery } from "@/graphql/frontpage/queries";
-import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
-import Link from "next/link";
-import { longDate } from "@/utils/date";
+import { ArticleDescription } from "@/components/organisms/article-description";
+import { AnchorTitle } from "@/components/molecules/anchor-title";
+import { ContactGrid } from "@/components/organisms/contact-grid";
+import { PatternBackground } from "@/components/molecules/pattern-background";
 
 type UncertainMDX = MDXRemoteSerializeResult<
   Record<string, unknown>,
@@ -64,8 +61,6 @@ type HomeProps = {
   locale: string;
 };
 
-const colors = ["#8bd3dd", "#F9F871"];
-
 export default function Home({
   articles,
   bio,
@@ -79,9 +74,10 @@ export default function Home({
         imagePath: "",
       }}
     >
-      <main className={`${s.main} md:p-2 `}>
-        <section className="min-h-[80vh] flex flex-col justify-center">
-          <div className="prose md:max-w-[45vw]">
+      <PatternBackground />
+      <main className={`${s.main} md:p-2 flex flex-col gap-8`}>
+        <section className="flex flex-col justify-center py-16 lg:py-24">
+          <div className="prose md:max-w-[50vw] lg:max-w-[45vw]">
             <PresentationSection />
             {bio ? (
               <div className="font-bold lg:text-xl text-black">
@@ -91,30 +87,16 @@ export default function Home({
           </div>
         </section>
 
-        <section className="mt-4 flex flex-col gap-4">
-          <a id="articles">
-            <h2 className="font-extrabold text-xl lg:text-3xl">Articles</h2>
-          </a>
+        <section className="flex flex-col gap-4">
+          <AnchorTitle title="articles" />
 
           {articles?.map((article) => (
-            <article className="flex flex-col gap-1" key={article.slug}>
-              <Link href={`/post/${article.slug}`}>
-                <h1 className="text-2xl font-bold">{article.title}</h1>
-              </Link>
-              <p>{article.description}</p>
-              <span className="flex gap-8 items-center">
-                <p className="font-bold text-sm text-inkblue">
-                  {longDate(article._updatedAt ?? article._createdAt, locale)}{" "}
-                </p>
-                <span>&rarr;</span>
-              </span>
-            </article>
+            <ArticleDescription article={article} locale={locale} />
           ))}
         </section>
-        <section className="mt-6">
-          <a id="contact">
-            <h2 className="font-extrabold lg:text-3xl text-xl">Contact</h2>
-          </a>
+        <section>
+          <AnchorTitle title="contact" />
+          <ContactGrid />
         </section>
       </main>
     </PageLayout>

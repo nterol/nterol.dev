@@ -15,7 +15,7 @@
   font-weight: 900;
   background: linear-gradient(
     to right,
-    var(--start-color, var(--blue)),
+    var(--start-color, var(--ink-blue)),
     var(--target-color, #1cb5e0)
   );
   /*linear-gradient(-90deg, #f72585, #b5179e, #7209b7);***/

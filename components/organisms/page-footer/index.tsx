@@ -5,7 +5,7 @@ import classes from "./page-footer.module.css";
 export const Footer = () => (
   <footer className={`${classes.container} ${e.line_grid}`}>
     <div>
-      <p>2021 - nterol</p>
+      <p className="text-sm font-bold">2021 - nterol</p>
     </div>
   </footer>
 );
