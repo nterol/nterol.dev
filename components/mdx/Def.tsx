@@ -1,20 +1,28 @@
-// import { useSetAtom } from "jotai";
-// import { CurrentNote } from "./store";
+import { useAtom, useSetAtom } from 'jotai';
+import { useEffect, useRef } from 'react';
 
-export function Def({
-  noteID,
-  children,
-}: {
-  noteID: string;
-  children: React.ReactNode;
-}) {
-  // const setCurrentNote = useSetAtom(CurrentNote);
+import s from './aside.module.css';
+import { CurrentNote, DefinitionCollection } from './store';
+
+export function Def({ noteID, children }: { noteID: string; children: React.ReactNode }) {
+  const defRef = useRef<HTMLDivElement | null>(null);
+  const setNoteRef = useSetAtom(DefinitionCollection(noteID));
+  const [isActive, setCurrentNote] = useAtom(CurrentNote);
+
   const handleSetNote = () => {
-    // setCurrentNote((n) => (n === noteID ? null : noteID));
+    setCurrentNote((n) => (n === noteID ? null : noteID));
   };
+
+  useEffect(() => {
+    if (defRef.current === null) return;
+
+    setNoteRef({ noteID, nodeRef: defRef });
+  }, [noteID, setNoteRef]);
   return (
     <span
-      // className="underline decoration-wavy"
+      data-active={isActive === noteID}
+      ref={defRef}
+      className={`max-w-full  ${s.definition} text-inkblue cursor-pointer`}
       onClick={handleSetNote}
       id={noteID}
     >

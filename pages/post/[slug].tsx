@@ -7,7 +7,6 @@ import { Aside, AsideContainer } from '@/components/mdx/Aside';
 import { CustomCompo } from '@/components/mdx/CustomCompo';
 import { Def } from '@/components/mdx/Def';
 import PageLayout from '@/components/templates/page-layout';
-import s from '@/components/templates/page-layout/page-layout.module.css';
 import { getArticlesPath } from '@/utils/extract';
 import client from 'apollo-client';
 import { articleContent, getArticlePaths } from 'graphql/articles/queries';
@@ -41,7 +40,6 @@ export const getStaticProps: GetStaticProps<Props, PageParams> = async ({ params
   if (!data.article?.content) {
     return { notFound: true };
   }
-
   const content = await serialize(data.article.content, {
     mdxOptions: {
       // @ts-ignore
@@ -49,7 +47,7 @@ export const getStaticProps: GetStaticProps<Props, PageParams> = async ({ params
     },
   });
 
-  return { props: { article: { ...data.article, content } } };
+  return { props: { article: { ...data.article, content } }, revalidate: 24 * 3600 };
 };
 
 export const getStaticPaths: GetStaticPaths = async (): Promise<GetStaticPathsResult<PageParams>> => {
@@ -70,12 +68,12 @@ export default function PostPage({ article }: InferGetStaticPropsType<typeof get
         imagePath: '',
       }}
     >
-      <main className={`${s.main} md:p-2 flex flex-col gap-8`}>
+      <main className="p-2 pb-[80px] flex flex-col gap-8 relative md:items-center">
+        <AsideContainer />
         <article className="prose lg:prose-xl">
           <h1>{article.title}</h1>
           <MDXRemote {...article.content} components={{ CustomCompo, Aside, Def }} />
         </article>
-        <AsideContainer />
       </main>
     </PageLayout>
   );

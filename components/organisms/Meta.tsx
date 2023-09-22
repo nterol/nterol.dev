@@ -1,7 +1,7 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 
-import { SITE_URL, SITE_NAME } from "@/utils/constants";
+import { SITE_URL, SITE_NAME } from '@/utils/constants';
 
 export type MetaProps = {
   pageTitle: string;
@@ -9,20 +9,20 @@ export type MetaProps = {
   imagePath: string;
 };
 
-export const Meta = ({
-  pageTitle,
-  description,
-  imagePath,
-}: MetaProps): JSX.Element => {
+export const Meta = ({ pageTitle, description, imagePath }: MetaProps): JSX.Element => {
   const router = useRouter();
   const ogUrl = SITE_URL + router.asPath;
-  const ogType = router.pathname === "/" ? "website" : "article";
+  const ogType = router.pathname === '/' ? 'website' : 'article';
   //   const ogTitle = pageTitle ? pageTitle : "Nicolas Terol personal blog";
   const ogImage = `${SITE_URL}${imagePath}`;
 
   return (
     <Head>
       <title>{`${SITE_NAME} - ${pageTitle}`}</title>
+      <link
+        rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤙</text></svg>"
+      />
       {/* <link
         rel="apple-touch-icon"
         sizes="180x180"
@@ -40,27 +40,19 @@ export const Meta = ({
         sizes="16x16"
         href="/favicon/favicon-16x16.png"
       /> */}
-      <link rel="manifest" href="/favicon/site.webmanifest" />
-      <link
-        rel="mask-icon"
-        href="/favicon/safari-pinned-tab.svg"
-        color="#5bbad5"
-      />
-      <link rel="shortcut icon" href="/favicon/favicon.ico" />
-      <meta name="msapplication-TileColor" content="#001858" />
-      <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
-      <meta name="theme-color" content="#fff" />
+      {/* <link rel="manifest" href="/favicon/site.webmanifest" /> */}
+      {/* <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+      <link rel="shortcut icon" href="/favicon/favicon.ico" /> */}
+      <meta name="msapplication-TileColor" content="#fef6e4" />
+      {/* <meta name="msapplication-config" content="/favicon/browserconfig.xml" /> */}
+      <meta name="theme-color" content="#fef6e4" />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       <meta name="description" content={description} key="description" />
       <meta property="og:url" content={ogUrl} />
       <meta property="og:type" content={ogType} />
       <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:title" content={pageTitle} />
-      <meta
-        property="og:description"
-        content={description}
-        key="ogDescription"
-      />
+      <meta property="og:description" content={description} key="ogDescription" />
       <meta property="og:image" content={ogImage} key="ogImage" />
       {/* <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content={TWITTER_USERNAME} />
