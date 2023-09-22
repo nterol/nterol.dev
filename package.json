@@ -4,12 +4,15 @@
   "private": true,
   "scripts": {
     "generate": "DOTENV_CONFIG_PATH=./.env graphql-codegen -r dotenv/config",
+    "lint": "next lint",
     "predev": "npm run generate",
     "dev": "next dev",
     "prebuild": "npm run generate",
     "build": "next build",
     "start": "next start",
-    "find:unused": "next-unused"
+    "find:unused": "next-unused",
+    "prepare": "husky install",
+    "tscheck": "tsc --noEmit && rm tsconfig.tsbuildinfo"
   },
   "next-unused": {
     "alias": {
@@ -43,9 +46,13 @@
     "@types/react-dom": "^18.2.7",
     "@types/react-syntax-highlighter": "^15.5.7",
     "autoprefixer": "^10.4.14",
+    "eslint": "8.49.0",
+    "eslint-config-next": "13.5.2",
+    "eslint-plugin-import": "^2.28.1",
     "next-unused": "^0.0.6",
     "postcss": "^8.4.27",
     "tailwindcss": "^3.3.3",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "husky": "^8.0.0"
   }
 }

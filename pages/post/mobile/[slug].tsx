@@ -1,22 +1,18 @@
-import type { GetStaticPaths, GetStaticPathsResult, GetStaticProps, InferGetStaticPropsType } from 'next';
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { GetStaticPaths, GetStaticPathsResult, GetStaticProps, InferGetStaticPropsType } from 'next';
+import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 import rehypeHighlight from 'rehype-highlight';
 
-import { Aside, AsideContainer } from '@/components/mdx/Aside';
-import { CustomCompo } from '@/components/mdx/CustomCompo';
-import { Def } from '@/components/mdx/Def';
 import PageLayout from '@/components/templates/page-layout';
-import s from '@/components/templates/page-layout/page-layout.module.css';
-import { getArticlesPath } from '@/utils/extract';
-import client from 'apollo-client';
-import { articleContent, getArticlePaths } from 'graphql/articles/queries';
-import type {
+import { articleContent, getArticlePaths } from '@/graphql/articles/queries';
+import {
   ArticleContentQuery,
   ArticleContentQueryVariables,
   GetArticlePathsQuery,
   GetArticlePathsQueryVariables,
-} from 'graphql/types';
+} from '@/graphql/types';
+import { getArticlesPath } from '@/utils/extract';
+import client from 'apollo-client';
 
 type Props = {
   article: Omit<NonNullable<ArticleContentQuery['article']>, 'content'> & {
@@ -61,7 +57,7 @@ export const getStaticPaths: GetStaticPaths = async (): Promise<GetStaticPathsRe
   };
 };
 
-export default function PostPage({ article }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function MobilePostPage({ article }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <PageLayout
       meta={{
@@ -70,13 +66,7 @@ export default function PostPage({ article }: InferGetStaticPropsType<typeof get
         imagePath: '',
       }}
     >
-      <main className={`${s.main} md:p-2 flex flex-col gap-8`}>
-        <article className="prose lg:prose-xl">
-          <h1>{article.title}</h1>
-          <MDXRemote {...article.content} components={{ CustomCompo, Aside, Def }} />
-        </article>
-        <AsideContainer />
-      </main>
+      <main></main>
     </PageLayout>
   );
 }

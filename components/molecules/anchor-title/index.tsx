@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export function AnchorTitle({ title }: { title: string }) {
   const [isActive, setIsActive] = useState(false);
@@ -6,17 +6,13 @@ export function AnchorTitle({ title }: { title: string }) {
     const handleLocation = () => {
       setIsActive(location.hash.includes(title));
     };
-    window.addEventListener("hashchange", handleLocation);
-    return () => window.removeEventListener("hashchange", handleLocation);
-  }, []);
+    window.addEventListener('hashchange', handleLocation);
+    return () => window.removeEventListener('hashchange', handleLocation);
+  }, [title]);
 
   return (
     <a id={title}>
-      <h2
-        data-text={title}
-        data-active={isActive}
-        className="font-extrabold text-xl lg:text-3xl capitalize"
-      >
+      <h2 data-text={title} data-active={isActive} className="font-extrabold text-xl lg:text-3xl capitalize mb-4">
         {title}
       </h2>
     </a>

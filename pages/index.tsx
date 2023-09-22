@@ -1,31 +1,22 @@
-import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { serialize } from "next-mdx-remote/serialize";
-import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
-import client from "@/apollo-client";
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { MDXRemote, type MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { serialize } from 'next-mdx-remote/serialize';
+import rehypeHighlight from 'rehype-highlight';
 
-import { PresentationSection } from "@/components/organisms/presentation-section";
-import PageLayout from "@/components/templates/page-layout";
-import {
-  FrontPageQuery,
-  FrontPageQueryVariables,
-  SiteLocale,
-} from "@/graphql/types";
-import s from "@/components/templates/page-layout/page-layout.module.css";
-import { frontPageQuery } from "@/graphql/frontpage/queries";
-import { ArticleDescription } from "@/components/organisms/article-description";
-import { AnchorTitle } from "@/components/molecules/anchor-title";
-import { ContactGrid } from "@/components/organisms/contact-grid";
-import { PatternBackground } from "@/components/molecules/pattern-background";
-import rehypeHighlight from "rehype-highlight";
+import client from '@/apollo-client';
+import { AnchorTitle } from '@/components/molecules/anchor-title';
+import { PatternBackground } from '@/components/molecules/pattern-background';
+import { ArticleDescription } from '@/components/organisms/article-description';
+import { ContactGrid } from '@/components/organisms/contact-grid';
+import { PresentationSection } from '@/components/organisms/presentation-section';
+import PageLayout from '@/components/templates/page-layout';
+import s from '@/components/templates/page-layout/page-layout.module.css';
+import { frontPageQuery } from '@/graphql/frontpage/queries';
+import { FrontPageQuery, FrontPageQueryVariables, SiteLocale } from '@/graphql/types';
 
-type UncertainMDX = MDXRemoteSerializeResult<
-  Record<string, unknown>,
-  Record<string, unknown>
-> | null;
+type UncertainMDX = MDXRemoteSerializeResult<Record<string, unknown>, Record<string, unknown>> | null;
 
-export const getStaticProps: GetStaticProps<HomeProps> = async ({
-  locale = "fr",
-}) => {
+export const getStaticProps: GetStaticProps<HomeProps> = async ({ locale = 'fr' }) => {
   const { data } = await client.query<FrontPageQuery, FrontPageQueryVariables>({
     query: frontPageQuery,
     variables: { locale: locale as SiteLocale },
@@ -49,7 +40,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({
         ...item,
         content,
       };
-    })
+    }),
   );
 
   return {
@@ -63,23 +54,19 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({
 };
 
 type HomeProps = {
-  articles: FrontPageQuery["allArticles"];
+  articles: FrontPageQuery['allArticles'];
   bio: UncertainMDX;
   quizzes: { content: UncertainMDX; id: string }[];
   locale: string;
 };
 
-export default function Home({
-  articles,
-  bio,
-  locale,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Home({ articles, bio, locale }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <PageLayout
       meta={{
-        pageTitle: "Nicolas Terol",
-        description: "I make posts about frontend tech I use and love !",
-        imagePath: "",
+        pageTitle: 'Nicolas Terol',
+        description: 'I make posts about frontend tech I use and love !',
+        imagePath: '',
       }}
     >
       <PatternBackground />
@@ -99,7 +86,7 @@ export default function Home({
           <AnchorTitle title="articles" />
 
           {articles?.map((article) => (
-            <ArticleDescription article={article} locale={locale} />
+            <ArticleDescription key={article.slug} article={article} locale={locale} />
           ))}
         </section>
         <section>

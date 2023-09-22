@@ -1,8 +1,9 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import e from "@/components/quarks/line-grid.module.css";
-import Logo from "@/components/atoms/logo";
-import classes from "./header.module.css";
+import Logo from '@/components/atoms/logo';
+import e from '@/components/quarks/line-grid.module.css';
+
+import classes from './header.module.css';
 
 export default function Header() {
   return (

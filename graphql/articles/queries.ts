@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const frontPageArticlesQ = gql`
   query frontPageArticle {
@@ -37,6 +37,7 @@ export const articleContent = gql`
       _updatedAt
       title
       content
+      description
     }
   }
 `;
