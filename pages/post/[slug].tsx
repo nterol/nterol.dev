@@ -3,10 +3,10 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 import rehypeHighlight from 'rehype-highlight';
 
-import { Aside, AsideContainer } from '@/components/mdx/Aside';
-import { CustomCompo } from '@/components/mdx/CustomCompo';
-import { Def } from '@/components/mdx/Def';
 import PageLayout from '@/components/templates/page-layout';
+import { Aside, AsideContainer } from '@/mdx/Aside';
+import { CustomCompo } from '@/mdx/CustomCompo';
+import { Def } from '@/mdx/Def';
 import { getArticlesPath } from '@/utils/extract';
 import client from 'apollo-client';
 import { articleContent, getArticlePaths } from 'graphql/articles/queries';

@@ -1,5 +1,5 @@
-import { GlowingText } from '@/components/mdx/glowing-text';
-import { Waving } from '@/components/mdx/waving';
+import { GlowingText } from '@/mdx/glowing-text';
+import { Waving } from '@/mdx/waving';
 
 export function PresentationSection(): JSX.Element {
   return (

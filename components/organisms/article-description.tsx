@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { FrontPageQuery } from '@/graphql/types';
 import { longDate } from '@/utils/date';
 
-import { GlowingText } from '../mdx/glowing-text';
+import { GlowingText } from '../../mdx/glowing-text';
 
 type P = {
   article: FrontPageQuery['allArticles'][number];
