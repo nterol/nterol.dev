@@ -2,6 +2,10 @@ import { atom } from 'jotai';
 import { atomFamily } from 'jotai/utils';
 import { MutableRefObject } from 'react';
 
+export const ArticleCoreRefAtom = atom<MutableRefObject<HTMLDivElement | null>>({
+  current: null,
+});
+
 export const AsideRefAtom = atom<MutableRefObject<HTMLDivElement | null>>({
   current: null,
 });

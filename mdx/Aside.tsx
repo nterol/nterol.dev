@@ -3,8 +3,9 @@ import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
+import { AsideRefAtom, DefinitionCollection, IsNoteActive } from '../store/aside-note';
+
 import s from './aside.module.css';
-import { AsideRefAtom, DefinitionCollection, IsNoteActive } from './store';
 
 export function Aside({ noteID, children }: { noteID: string; children: React.ReactNode }) {
   const asideRef = useAtomValue(AsideRefAtom);
@@ -18,8 +19,9 @@ export function Aside({ noteID, children }: { noteID: string; children: React.Re
       ([entry]) => {
         if (entry.isIntersecting) {
           const { y } = entry.boundingClientRect;
-          console.log('new entry');
+          console.log('new position', y);
           setPosition(y);
+          return;
         } else if (isNoteActive) {
           setNote(noteID);
         }
@@ -31,8 +33,12 @@ export function Aside({ noteID, children }: { noteID: string; children: React.Re
       },
     );
 
-    if (nodeRef.current === null || !isNoteActive) return;
-
+    if (nodeRef.current === null || !isNoteActive) {
+      console.log("Disconnect");
+      observerRef.current.disconnect();
+      return;
+    }
+    console.log({ [noteID]: isNoteActive }, 'set observer');
     observerRef.current.observe(nodeRef.current);
 
     return () => observerRef.current?.disconnect();
@@ -44,7 +50,7 @@ export function Aside({ noteID, children }: { noteID: string; children: React.Re
 
   return asideRef.current
     ? createPortal(
-        <a.span style={spring} className="absolute top-0 block p-1 rounded-md bg-blue-200">
+        <a.span style={spring} className={s.note_container}>
           {children}
         </a.span>,
         asideRef.current,
@@ -52,15 +58,3 @@ export function Aside({ noteID, children }: { noteID: string; children: React.Re
     : null;
 }
 
-export function AsideContainer() {
-  const asideRef = useRef<HTMLDivElement | null>(null);
-  const setAsideRef = useSetAtom(AsideRefAtom);
-
-  useEffect(() => {
-    if (asideRef.current !== null) {
-      setAsideRef(asideRef);
-    }
-  }, [setAsideRef]);
-
-  return <aside id="note-container" ref={asideRef} className={`${s.aside_container}`}></aside>;
-}

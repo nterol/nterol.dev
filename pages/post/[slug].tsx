@@ -1,12 +1,11 @@
 import type { GetStaticPaths, GetStaticPathsResult, GetStaticProps, InferGetStaticPropsType } from 'next';
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 import rehypeHighlight from 'rehype-highlight';
 
+import { ArticleCore } from '@/components/organisms/Article';
+import { type ArticleWithMDX } from '@/components/organisms/Article/types';
+import { AsideContainer } from '@/components/organisms/desktop/aside';
 import PageLayout from '@/components/templates/page-layout';
-import { Aside, AsideContainer } from '@/mdx/Aside';
-import { CustomCompo } from '@/mdx/CustomCompo';
-import { Def } from '@/mdx/Def';
 import { getArticlesPath } from '@/utils/extract';
 import client from 'apollo-client';
 import { articleContent, getArticlePaths } from 'graphql/articles/queries';
@@ -18,9 +17,7 @@ import type {
 } from 'graphql/types';
 
 type Props = {
-  article: Omit<NonNullable<ArticleContentQuery['article']>, 'content'> & {
-    content: MDXRemoteSerializeResult<Record<string, unknown>, Record<string, unknown>>;
-  };
+  article: ArticleWithMDX;
 };
 
 type PageParams = {
@@ -70,10 +67,7 @@ export default function PostPage({ article }: InferGetStaticPropsType<typeof get
     >
       <main className="p-2 pb-[80px] flex flex-col gap-8 relative md:items-center">
         <AsideContainer />
-        <article className="prose lg:prose-xl">
-          <h1>{article.title}</h1>
-          <MDXRemote {...article.content} components={{ CustomCompo, Aside, Def }} />
-        </article>
+        <ArticleCore article={article} />
       </main>
     </PageLayout>
   );

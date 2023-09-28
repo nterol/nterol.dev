@@ -14,3 +14,12 @@
 .definition[data-active='true'] {
   @apply underline decoration-wavy underline-offset-2;
 }
+
+
+.note_container {
+   @apply absolute top-0 block p-1 rounded-md bg-blue-200 h-fit;
+}
+
+.note_container > p {
+  border: 1px solid red;
+}

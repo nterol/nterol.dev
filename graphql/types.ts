@@ -206,6 +206,93 @@ export type BooleanFilter = {
   eq?: InputMaybe<Scalars['BooleanType']['input']>;
 };
 
+/** Linking fields */
+export const BreveModelFieldsReferencingCategorieModel = {
+  BreveCategories: 'breve_categories'
+} as const;
+
+export type BreveModelFieldsReferencingCategorieModel = typeof BreveModelFieldsReferencingCategorieModel[keyof typeof BreveModelFieldsReferencingCategorieModel];
+export type BreveModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<BreveModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<BreveModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _locales?: InputMaybe<LocalesFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  categories?: InputMaybe<LinksFilter>;
+  content?: InputMaybe<TextFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+};
+
+export const BreveModelOrderBy = {
+  CreatedAtAsc: '_createdAt_ASC',
+  CreatedAtDesc: '_createdAt_DESC',
+  FirstPublishedAtAsc: '_firstPublishedAt_ASC',
+  FirstPublishedAtDesc: '_firstPublishedAt_DESC',
+  IsValidAsc: '_isValid_ASC',
+  IsValidDesc: '_isValid_DESC',
+  PublicationScheduledAtAsc: '_publicationScheduledAt_ASC',
+  PublicationScheduledAtDesc: '_publicationScheduledAt_DESC',
+  PublishedAtAsc: '_publishedAt_ASC',
+  PublishedAtDesc: '_publishedAt_DESC',
+  StatusAsc: '_status_ASC',
+  StatusDesc: '_status_DESC',
+  UnpublishingScheduledAtAsc: '_unpublishingScheduledAt_ASC',
+  UnpublishingScheduledAtDesc: '_unpublishingScheduledAt_DESC',
+  UpdatedAtAsc: '_updatedAt_ASC',
+  UpdatedAtDesc: '_updatedAt_DESC',
+  IdAsc: 'id_ASC',
+  IdDesc: 'id_DESC'
+} as const;
+
+export type BreveModelOrderBy = typeof BreveModelOrderBy[keyof typeof BreveModelOrderBy];
+/** Record of type Brève (breve) */
+export type BreveRecord = RecordInterface & {
+  __typename: 'BreveRecord';
+  _allContentLocales?: Maybe<Array<StringMultiLocaleField>>;
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _locales: Array<SiteLocale>;
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  categories: Array<CategorieRecord>;
+  content?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ItemId']['output'];
+};
+
+
+/** Record of type Brève (breve) */
+export type BreveRecord_AllContentLocalesArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** Record of type Brève (breve) */
+export type BreveRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Record of type Brève (breve) */
+export type BreveRecordContentArgs = {
+  locale?: InputMaybe<SiteLocale>;
+  markdown?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type CategorieModelFilter = {
   AND?: InputMaybe<Array<InputMaybe<CategorieModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CategorieModelFilter>>>;
@@ -256,6 +343,9 @@ export type CategorieRecord = RecordInterface & {
   _allReferencingArticles: Array<ArticleRecord>;
   /** Returns meta information regarding a record collection */
   _allReferencingArticlesMeta: CollectionMetadata;
+  _allReferencingBreves: Array<BreveRecord>;
+  /** Returns meta information regarding a record collection */
+  _allReferencingBrevesMeta: CollectionMetadata;
   _createdAt: Scalars['DateTime']['output'];
   /** Editing URL */
   _editingUrl?: Maybe<Scalars['String']['output']>;
@@ -301,6 +391,26 @@ export type CategorieRecord_AllReferencingArticlesMetaArgs = {
   filter?: InputMaybe<ArticleModelFilter>;
   locale?: InputMaybe<SiteLocale>;
   through?: InputMaybe<InverseRelationshipFilterBetweenArticleAndCategorie>;
+};
+
+
+/** Record of type Catégorie (categorie) */
+export type CategorieRecord_AllReferencingBrevesArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<BreveModelFilter>;
+  first?: InputMaybe<Scalars['IntType']['input']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<BreveModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']['input']>;
+  through?: InputMaybe<InverseRelationshipFilterBetweenBreveAndCategorie>;
+};
+
+
+/** Record of type Catégorie (categorie) */
+export type CategorieRecord_AllReferencingBrevesMetaArgs = {
+  filter?: InputMaybe<BreveModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  through?: InputMaybe<InverseRelationshipFilterBetweenBreveAndCategorie>;
 };
 
 
@@ -1995,10 +2105,26 @@ export type InverseRelationshipFieldFilterBetweenArticleAndCategorie = {
   notIn?: InputMaybe<Array<ArticleModelFieldsReferencingCategorieModel>>;
 };
 
+/** Specifies how to filter by linking fields */
+export type InverseRelationshipFieldFilterBetweenBreveAndCategorie = {
+  /** Filter linking records that reference current record in at least one of the specified fields */
+  anyIn?: InputMaybe<Array<BreveModelFieldsReferencingCategorieModel>>;
+  /** Filter linking records that do not reference current record in any of the specified fields */
+  notIn?: InputMaybe<Array<BreveModelFieldsReferencingCategorieModel>>;
+};
+
 /** Specifies how to filter linking records */
 export type InverseRelationshipFilterBetweenArticleAndCategorie = {
   /** Specifies how to filter by linking fields */
   fields?: InputMaybe<InverseRelationshipFieldFilterBetweenArticleAndCategorie>;
+  /** Specifies how to filter by linking locales */
+  locales?: InputMaybe<LinkingLocalesFilter>;
+};
+
+/** Specifies how to filter linking records */
+export type InverseRelationshipFilterBetweenBreveAndCategorie = {
+  /** Specifies how to filter by linking fields */
+  fields?: InputMaybe<InverseRelationshipFieldFilterBetweenBreveAndCategorie>;
   /** Specifies how to filter by linking locales */
   locales?: InputMaybe<LinkingLocalesFilter>;
 };
@@ -2101,6 +2227,8 @@ export type Query = {
   /** Returns meta information regarding a record collection */
   _allArticlesMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
+  _allBrevesMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
   _allCategoriesMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allQuizzsMeta: CollectionMetadata;
@@ -2113,6 +2241,8 @@ export type Query = {
   /** Returns a collection of records */
   allArticles: Array<ArticleRecord>;
   /** Returns a collection of records */
+  allBreves: Array<BreveRecord>;
+  /** Returns a collection of records */
   allCategories: Array<CategorieRecord>;
   /** Returns a collection of records */
   allQuizzs: Array<QuizzRecord>;
@@ -2120,6 +2250,8 @@ export type Query = {
   allUploads: Array<FileField>;
   /** Returns a specific record */
   article?: Maybe<ArticleRecord>;
+  /** Returns a specific record */
+  breve?: Maybe<BreveRecord>;
   /** Returns a specific record */
   categorie?: Maybe<CategorieRecord>;
   /** Returns a specific record */
@@ -2132,6 +2264,13 @@ export type Query = {
 /** The query root for this schema */
 export type Query_AllArticlesMetaArgs = {
   filter?: InputMaybe<ArticleModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+export type Query_AllBrevesMetaArgs = {
+  filter?: InputMaybe<BreveModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -2183,6 +2322,17 @@ export type QueryAllArticlesArgs = {
 
 
 /** The query root for this schema */
+export type QueryAllBrevesArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<BreveModelFilter>;
+  first?: InputMaybe<Scalars['IntType']['input']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<BreveModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']['input']>;
+};
+
+
+/** The query root for this schema */
 export type QueryAllCategoriesArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<CategorieModelFilter>;
@@ -2221,6 +2371,15 @@ export type QueryArticleArgs = {
   filter?: InputMaybe<ArticleModelFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<ArticleModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+export type QueryBreveArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<BreveModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<BreveModelOrderBy>>>;
 };
 
 

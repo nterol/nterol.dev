@@ -2,7 +2,7 @@ import { useAtom, useSetAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
 
 import s from './aside.module.css';
-import { CurrentNote, DefinitionCollection } from './store';
+import { CurrentNote, DefinitionCollection } from '../store/aside-note';
 
 export function Def({ noteID, children }: { noteID: string; children: React.ReactNode }) {
   const defRef = useRef<HTMLDivElement | null>(null);
