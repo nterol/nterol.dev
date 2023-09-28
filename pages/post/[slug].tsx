@@ -57,6 +57,7 @@ export const getStaticPaths: GetStaticPaths = async (): Promise<GetStaticPathsRe
 };
 
 export default function PostPage({ article }: InferGetStaticPropsType<typeof getStaticProps>) {
+  
   return (
     <PageLayout
       meta={{

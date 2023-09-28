@@ -176,25 +176,3 @@ SOFTWARE.
   color: #ef535090;
   font-style: italic;
 }
-
-/* Custom CSS */
-span code:not(.hljs) {
-  @apply text-inkblue;
-}
-
-code:not(.hljs) {
-  @apply rounded-lg p-1 bg-slate-200 border border-slate-300;
-}
-
-code:not(.hljs):after,
-code:not(.hljs):before {
-  content: '';
-}
-
-aside:not(#note-container) {
-  @apply p-4 bg-blue-100 border border-blue-300 rounded-lg;
-}
-
-aside:not(#note-container) p {
-  margin: 0;
-}

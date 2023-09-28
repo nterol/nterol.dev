@@ -15,6 +15,7 @@ export const CurrentNote = atom<string | null>(null);
 export const DefinitionCollection = atomFamily((noteID: string) =>
   atom({
     noteID,
+    position: 0,
     nodeRef: { current: null } as MutableRefObject<HTMLDivElement | null>,
   }),
 );
@@ -27,11 +28,7 @@ export const IsNoteActive = atomFamily((note) =>
     },
     (get, set, noteID: string) => {
       const current = get(CurrentNote);
-      if (current === noteID) {
-        console.log('SET TO NULL');
-        set(CurrentNote, null);
-      }
-      set(CurrentNote, noteID);
+      set(CurrentNote, current === noteID ? null : noteID);      
     },
   ),
 );

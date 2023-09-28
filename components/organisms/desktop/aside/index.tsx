@@ -15,6 +15,8 @@ export function AsideContainer() {
       }
     }, [setAsideRef]);
   
-    return <aside id="note-container" ref={asideRef} className={`${s.aside_container}`}></aside>;
+    return <aside id="note-container" ref={asideRef} className={`${s.aside_container}`}>
+        
+    </aside>;
   }
   
