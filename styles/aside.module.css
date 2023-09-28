@@ -1,0 +1,27 @@
+.aside_container {
+  /* No idea why ch won't evaluate to correct size */
+  width: calc((100vw - calc(65ch)) * 0.5 - 100px - 1rem);
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  height: 100%;
+}
+
+.definition {
+  text-decoration-skip-ink: none;
+}
+
+.definition[data-active='true'] {
+  @apply underline decoration-wavy underline-offset-2;
+}
+
+
+
+
+
+
+.note_container {
+   @apply absolute top-0 block p-1 rounded-md bg-blue-200 max-h-80 overflow-y-scroll shadow-md;
+}
+
+

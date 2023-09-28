@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { animated, useSpring } from "@react-spring/web";
+import { animated, useSpring } from '@react-spring/web';
+import { useState } from 'react';
 
-import s from "./Waving.module.css";
+import s from './Waving.module.css';
 
 export const Waving = () => {
   const [waving, set] = useState(false);

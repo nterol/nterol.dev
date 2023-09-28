@@ -1,9 +1,7 @@
-import e from "@/components/quarks/line-grid.module.css";
-
-import classes from "./page-footer.module.css";
+import classes from './page-footer.module.css';
 
 export const Footer = () => (
-  <footer className={`${classes.container} ${e.line_grid}`}>
+  <footer className={`${classes.container} grid grid-flow-col justify-between items-center`}>
     <div>
       <p className="text-sm font-bold py-4">2021 - nterol</p>
     </div>
