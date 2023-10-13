@@ -15,7 +15,7 @@ type AboutRecord implements RecordInterface {
   _publicationScheduledAt: DateTime
   _publishedAt: DateTime
 
-  """SEO meta tags"""
+  """Generates SEO and Social card meta tags to be used in your frontend"""
   _seoMetaTags(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
@@ -114,7 +114,7 @@ type ArticleRecord implements RecordInterface {
   _publicationScheduledAt: DateTime
   _publishedAt: DateTime
 
-  """SEO meta tags"""
+  """Generates SEO and Social card meta tags to be used in your frontend"""
   _seoMetaTags(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
@@ -227,7 +227,7 @@ type BreveRecord implements RecordInterface {
   _publicationScheduledAt: DateTime
   _publishedAt: DateTime
 
-  """SEO meta tags"""
+  """Generates SEO and Social card meta tags to be used in your frontend"""
   _seoMetaTags(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
@@ -367,7 +367,7 @@ type CategorieRecord implements RecordInterface {
   _publicationScheduledAt: DateTime
   _publishedAt: DateTime
 
-  """SEO meta tags"""
+  """Generates SEO and Social card meta tags to be used in your frontend"""
   _seoMetaTags(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
@@ -476,7 +476,9 @@ enum FaviconType {
 type FileField implements FileFieldInterface {
   _createdAt: DateTime!
 
-  """Editing URL"""
+  """
+  The DatoCMS URL where you can edit this entity. To use this field, you need to set a X-Base-Editing-Url header in the request
+  """
   _editingUrl: String
   _updatedAt: DateTime!
   alt(
@@ -573,7 +575,9 @@ type FileField implements FileFieldInterface {
 interface FileFieldInterface {
   _createdAt: DateTime!
 
-  """Editing URL"""
+  """
+  The DatoCMS URL where you can edit this entity. To use this field, you need to set a X-Base-Editing-Url header in the request
+  """
   _editingUrl: String
   _updatedAt: DateTime!
   alt(
@@ -2705,7 +2709,7 @@ type QuizzRecord implements RecordInterface {
   _publicationScheduledAt: DateTime
   _publishedAt: DateTime
 
-  """SEO meta tags"""
+  """Generates SEO and Social card meta tags to be used in your frontend"""
   _seoMetaTags(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
@@ -2734,7 +2738,7 @@ interface RecordInterface {
   _publicationScheduledAt: DateTime
   _publishedAt: DateTime
 
-  """SEO meta tags"""
+  """Generates SEO and Social card meta tags to be used in your frontend"""
   _seoMetaTags(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
