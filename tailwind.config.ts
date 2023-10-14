@@ -20,6 +20,9 @@ module.exports = {
         inkblue: "#001858",
         "sand-background": "#fef6e4",
       },
+      height: {
+        screen: ['100vh /* fallback for Opera, IE and etc. */', '100dvh'],
+      }
     },
   },
   plugins: [require("@tailwindcss/typography")],

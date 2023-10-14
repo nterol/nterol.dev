@@ -6,7 +6,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export const GlowingText = ({ children, startColor, targetColor }: Props) => (
+export const GlowingText = ({  children, startColor, targetColor }: Props) => (
   <span
     style={
       {

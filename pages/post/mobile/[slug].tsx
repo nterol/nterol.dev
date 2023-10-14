@@ -1,8 +1,10 @@
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps, InferGetStaticPropsType } from 'next';
-import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 import rehypeHighlight from 'rehype-highlight';
 
+import { ArticleBody } from '@/components/organisms/Article';
+import { ArticleWithMDX } from '@/components/organisms/Article/types';
+import { Drawer } from '@/components/organisms/drawer';
 import PageLayout from '@/components/templates/page-layout';
 import { articleContent, getArticlePaths } from '@/graphql/articles/queries';
 import {
@@ -15,9 +17,7 @@ import { getArticlesPath } from '@/utils/extract';
 import client from 'apollo-client';
 
 type Props = {
-  article: Omit<NonNullable<ArticleContentQuery['article']>, 'content'> & {
-    content: MDXRemoteSerializeResult<Record<string, unknown>, Record<string, unknown>>;
-  };
+  article: ArticleWithMDX;
 };
 
 type PageParams = {
@@ -66,7 +66,13 @@ export default function MobilePostPage({ article }: InferGetStaticPropsType<type
         imagePath: '',
       }}
     >
-      <main></main>
+      <main className="min-h-screen p-3 pb-[80px] flex flex-col gap-8 relative md:items-center">
+        <p>This is📱 version</p>
+        <ArticleBody article={article} />
+      </main>
+      <Drawer>
+        <p>mock</p>
+      </Drawer>
     </PageLayout>
   );
 }

@@ -6,10 +6,9 @@ export function middleware(request: NextRequest) {
   const viewport = device.type === "mobile" ? "mobile" : "desktop";
 
   if (viewport === "mobile") {
-    const { url } = request;
-    const mobileURl = url.replace("/post", "/post/mobile");
-
-    NextResponse.rewrite(mobileURl);
+    
+ 
+    return NextResponse.rewrite(request.url.replace("/post/", "/post/mobile/"));
   }
 }
 

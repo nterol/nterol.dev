@@ -2,7 +2,7 @@ import type { GetStaticPaths, GetStaticPathsResult, GetStaticProps, InferGetStat
 import { serialize } from 'next-mdx-remote/serialize';
 import rehypeHighlight from 'rehype-highlight';
 
-import { ArticleCore } from '@/components/organisms/Article';
+import { ArticleBody } from '@/components/organisms/Article';
 import { type ArticleWithMDX } from '@/components/organisms/Article/types';
 import { AsideContainer } from '@/components/organisms/desktop/aside';
 import PageLayout from '@/components/templates/page-layout';
@@ -69,7 +69,7 @@ export default function PostPage({ article }: InferGetStaticPropsType<typeof get
       <main className="p-2 pb-[80px] flex flex-col gap-8 relative md:items-center">
        
         <AsideContainer />
-        <ArticleCore article={article} />
+        <ArticleBody article={article} />
       </main>
     </PageLayout>
   );
