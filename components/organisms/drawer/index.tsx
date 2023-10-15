@@ -17,8 +17,14 @@ export function Drawer({ tag = 'aside', children }: DrawerProps) {
   const { binders } = useDrawerSwipe({ springApi });
 
   return (
-    <Tag style={positionSpring} {...binders()} className="flex flex-col fixed z-10 overflow-hidden bg-inkblue text-white w-full rounded-xl min-h-[100px] bottom-0">
-      <header className='flex flex-col justify-center p-4'><hr className='' /></header>
+    <Tag
+      style={positionSpring}
+      {...binders()}
+      className="flex flex-col fixed z-10 overflow-hidden bg-inkblue text-white w-full rounded-xl min-h-[100px] bottom-0"
+    >
+      <header className="flex flex-col justify-center p-4">
+        <hr className="" />
+      </header>
       <main>{children}</main>
     </Tag>
   );

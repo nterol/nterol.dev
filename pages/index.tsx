@@ -11,8 +11,8 @@ import { ContactGrid } from '@/components/organisms/contact-grid';
 import { PresentationSection } from '@/components/organisms/presentation-section';
 import PageLayout from '@/components/templates/page-layout';
 import s from '@/components/templates/page-layout/page-layout.module.css';
-import { frontPageQuery } from '@/graphql/frontpage/queries';
-import { FrontPageQuery, FrontPageQueryVariables, SiteLocale } from '@/graphql/types';
+import { frontPageQuery } from '@/graphql/cms/frontpage/queries';
+import { FrontPageQuery, FrontPageQueryVariables, SiteLocale } from '@/graphql/cms/types';
 
 type UncertainMDX = MDXRemoteSerializeResult<Record<string, unknown>, Record<string, unknown>> | null;
 

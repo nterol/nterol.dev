@@ -1,4 +1,4 @@
-import type { GetArticlePathsQuery, SiteLocale } from "@/graphql/types";
+import type { GetArticlePathsQuery, SiteLocale } from "@/graphql/cms/types";
 
 export function getArticlesPath(articles: GetArticlePathsQuery["allArticles"]) {
   return articles

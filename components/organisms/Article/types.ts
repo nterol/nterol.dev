@@ -1,6 +1,6 @@
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
-import { ArticleContentQuery } from '@/graphql/types';
+import { ArticleContentQuery } from '@/graphql/cms/types';
 
 export type ArticleWithMDX = Omit<NonNullable<ArticleContentQuery['article']>, 'content'> & {
   content: MDXRemoteSerializeResult<Record<string, unknown>, Record<string, unknown>>;
