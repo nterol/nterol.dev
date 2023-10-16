@@ -1,4 +1,4 @@
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
 
 import { CurrentNote, DefinitionCollection } from '@/store/aside-note';
@@ -10,11 +10,10 @@ let instance = 0;
 
 export function Def({ noteID, children }: DefProps) {
   const defRef = useRef<HTMLDivElement | null>(null);
-  
+
   const [noteRef, setNoteRef] = useAtom(DefinitionCollection(noteID));
 
   const [isActive, setCurrentNote] = useAtom(CurrentNote);
-
 
   const handleSetNote = () => {
     setCurrentNote((n) => (n === noteID ? null : noteID));
@@ -23,17 +22,18 @@ export function Def({ noteID, children }: DefProps) {
   useEffect(() => {
     if (defRef.current === null) return;
 
-    setNoteRef({ noteID, nodeRef: defRef, position: instance+=1 });
+    setNoteRef({ noteID, nodeRef: defRef, position: (instance += 1) });
   }, [noteID, setNoteRef]);
   return (
     <span
       data-active={isActive === noteID}
       ref={defRef}
-      className={`max-w-full  ${s.definition} text-inkblue cursor-pointer`}
+      className={`max-w-full ${s.definition} text-inkblue`}
       onClick={handleSetNote}
-      id={noteID.replaceAll(" ", "-")}
+      id={noteID.replaceAll(' ', '-')}
     >
-      {children}<sup className='ml-1'>{noteRef.position}</sup>
+      {children}
+      <sup className="ml-1">{noteRef.position}</sup>
     </span>
   );
 }

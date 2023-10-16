@@ -9,19 +9,13 @@
 
 .definition {
   text-decoration-skip-ink: none;
+  cursor: pointer;
 }
 
 .definition[data-active='true'] {
   @apply underline decoration-wavy underline-offset-2;
 }
 
-
-
-
-
-
 .note_container {
-   @apply absolute top-0 block p-1 rounded-md bg-blue-200 max-h-80 overflow-y-scroll shadow-md;
+  @apply absolute top-0 block p-1 rounded-md bg-blue-200 max-h-80 overflow-y-scroll shadow-md;
 }
-
-

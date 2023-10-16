@@ -6,7 +6,12 @@ type Args = {
 };
 
 export function useDrawerSwipe({ springApi }: Args) {
-  const binders = useDrag((e) => {});
+  const binders = useDrag(({movement: [, y], args, active}) => {
+    console.log(args);
+
+    springApi.start(() => ({y}))
+
+  });
 
   return { binders };
 }
