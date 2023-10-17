@@ -70,9 +70,7 @@ export default function MobilePostPage({ article }: InferGetStaticPropsType<type
         <p>This is📱 version</p>
         <ArticleBody article={article} />
       </main>
-      <Drawer>
-        <p>mock</p>
-      </Drawer>
+      <Drawer />
     </PageLayout>
   );
 }

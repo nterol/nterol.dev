@@ -1,11 +1,13 @@
 .aside_container {
-  /* No idea why ch won't evaluate to correct size */
-  width: calc((100vw - calc(65ch)) * 0.5 - 100px - 1rem);
-  position: absolute;
-  top: 0;
-  right: 1rem;
-  height: 100%;
+    /* No idea why ch won't evaluate to correct size */
+    width: calc((100vw - calc(65ch)) * 0.5 - 100px - 1rem);
+    position: absolute;
+    top: 0;
+    right: 1rem;
+    height: 100%;
 }
+
+
 
 .definition {
   text-decoration-skip-ink: none;

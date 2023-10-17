@@ -39,6 +39,7 @@ export const getStaticProps: GetStaticProps<Props, PageParams> = async ({ params
   }
   const content = await serialize(data.article.content, {
     mdxOptions: {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       rehypePlugins: [rehypeHighlight],
     },
@@ -57,7 +58,6 @@ export const getStaticPaths: GetStaticPaths = async (): Promise<GetStaticPathsRe
 };
 
 export default function PostPage({ article }: InferGetStaticPropsType<typeof getStaticProps>) {
-  
   return (
     <PageLayout
       meta={{
@@ -67,7 +67,6 @@ export default function PostPage({ article }: InferGetStaticPropsType<typeof get
       }}
     >
       <main className="p-2 pb-[80px] flex flex-col gap-8 relative md:items-center">
-       
         <AsideContainer />
         <ArticleBody article={article} />
       </main>

@@ -10,6 +10,7 @@ export const AsideRefAtom = atom<MutableRefObject<HTMLDivElement | null>>({
   current: null,
 });
 
+
 export const CurrentNote = atom<string | null>(null);
 
 export const DefinitionCollection = atomFamily((noteID: string) =>
