@@ -1,0 +1,14 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "rules": {
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": ["tailwind", "screen", "apply", "variants", "responsive"]
+      }
+    ],
+    "selector-pseudo-class-no-unknown": [true, { "ignorePseudoClasses": ["global", "local"] }],
+    "selector-pseudo-element-colon-notation": null,
+    "selector-class-pattern": "^[a-z][a-zA-Z0-9_-]+$"
+  }
+}

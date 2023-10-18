@@ -1,10 +1,11 @@
+import { useHydrateAtoms } from 'jotai/utils';
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps, InferGetStaticPropsType } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
 import rehypeHighlight from 'rehype-highlight';
 
 import { ArticleBody } from '@/components/organisms/Article';
 import { ArticleWithMDX } from '@/components/organisms/Article/types';
-import { Drawer } from '@/components/organisms/drawer';
+import { BottomContainer } from '@/components/organisms/aside';
 import PageLayout from '@/components/templates/page-layout';
 import { articleContent, getArticlePaths } from '@/graphql/articles/queries';
 import {
@@ -13,6 +14,7 @@ import {
   GetArticlePathsQuery,
   GetArticlePathsQueryVariables,
 } from '@/graphql/types';
+import { IsSideNote } from '@/store/aside-note';
 import { getArticlesPath } from '@/utils/extract';
 import client from 'apollo-client';
 
@@ -58,6 +60,7 @@ export const getStaticPaths: GetStaticPaths = async (): Promise<GetStaticPathsRe
 };
 
 export default function MobilePostPage({ article }: InferGetStaticPropsType<typeof getStaticProps>) {
+  useHydrateAtoms([[IsSideNote, false]]);
   return (
     <PageLayout
       meta={{
@@ -70,7 +73,7 @@ export default function MobilePostPage({ article }: InferGetStaticPropsType<type
         <p>This is📱 version</p>
         <ArticleBody article={article} />
       </main>
-      <Drawer />
+      <BottomContainer />
     </PageLayout>
   );
 }

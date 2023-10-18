@@ -10,7 +10,6 @@ export const AsideRefAtom = atom<MutableRefObject<HTMLDivElement | null>>({
   current: null,
 });
 
-
 export const CurrentNote = atom<string | null>(null);
 
 export const DefinitionCollection = atomFamily((noteID: string) =>
@@ -29,7 +28,9 @@ export const IsNoteActive = atomFamily((note) =>
     },
     (get, set, noteID: string) => {
       const current = get(CurrentNote);
-      set(CurrentNote, current === noteID ? null : noteID);      
+      set(CurrentNote, current === noteID ? null : noteID);
     },
   ),
 );
+
+export const IsSideNote = atom(true);
