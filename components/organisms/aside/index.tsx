@@ -34,7 +34,6 @@ export function BottomContainer() {
 
   useEffect(() => {
     if (bottomRef.current !== null) {
-      console.log('New ref');
       setBottomRef(bottomRef);
     }
   }, [setBottomRef]);
@@ -42,10 +41,18 @@ export function BottomContainer() {
   const [spring, api] = useSpring(() => ({ from: { height: 0 } }));
 
   useEffect(() => {
-    api.start(currentNote ? { height: 400 } : { height: 0 });
+    api.start(currentNote ? { height: 200 } : { height: 0 });
   }, [api, currentNote]);
 
   if (isSideNote) return null;
 
-  return <a.aside ref={bottomRef} style={spring} id="note-container" className={s.bottom_container}></a.aside>;
+  return (
+    <a.aside
+      data-active={!!isSideNote}
+      ref={bottomRef}
+      style={spring}
+      id="note-container"
+      className={s.bottom_container}
+    ></a.aside>
+  );
 }

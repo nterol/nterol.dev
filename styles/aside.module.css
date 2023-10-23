@@ -8,16 +8,22 @@
 }
 
 .bottom_container {
+  @apply p-0 data-[active=true]:p-4;
+
   position: fixed;
   width: 100%;
   overflow: hidden;
   bottom:0;
-  outline: 1px slateblue solid;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
+
+/* .bottom_container:[data-active='true'] {
+  padding: 16px;
+} */
 
 .definition {
   text-decoration-skip-ink: none;
@@ -34,5 +40,9 @@
 }
 
 .bottom_note {
-  @apply hidden data-[active='true']:flex p-4 rounded-md bg-blue-200 h-fit max-h-full overflow-y-scroll shadow-md relative max-w-[350px];
+  @apply overflow-hidden rounded-md bg-blue-200 relative p-4 w-full h-fit hidden data-[active=true]:flex overflow-y-scroll shadow-md max-w-[350px];
+}
+
+.bottom_note_button {
+  @apply sticky right-1 w-[24px] h-[24px];
 }

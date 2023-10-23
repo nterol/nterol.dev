@@ -2,9 +2,8 @@ import { useSetAtom } from 'jotai';
 import { MDXRemote } from 'next-mdx-remote';
 import { MutableRefObject, useEffect, useRef } from 'react';
 
-import { CustomCompo } from '@/mdx/CustomCompo';
+import { Aside } from '@/mdx/Aside';
 import { Def } from '@/mdx/Def';
-import { Aside } from '@/mdx/Note';
 import { ArticleCoreRefAtom } from '@/store/aside-note';
 import s from '@/styles/article.module.css';
 
@@ -33,7 +32,7 @@ export function ArticleBody({ article }: ArticleCoreProps) {
   return (
     <article ref={articleRef} className={s.article}>
       <h1>{article.title}</h1>
-      <MDXRemote {...article.content} components={{ CustomCompo, Aside, Def }} />
+      <MDXRemote {...article.content} components={{ Aside, Def }} />
     </article>
   );
 }

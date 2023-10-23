@@ -3,6 +3,7 @@ import { useAtom, useAtomValue } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
+import { CrossIcon } from '@/components/atoms/icons';
 import { ArticleCoreRefAtom, AsideRefAtom, DefinitionCollection, IsNoteActive, IsSideNote } from '@/store/aside-note';
 import s from '@/styles/aside.module.css';
 
@@ -15,13 +16,17 @@ export function Aside(props: AsideProps) {
 
 export function BottomAside({ noteID, children }: AsideProps) {
   const asideRef = useAtomValue(AsideRefAtom);
-  const [isNoteActive] = useAtom(IsNoteActive(noteID));
-  console.log(noteID, asideRef.current);
+  const isNoteActive = useAtomValue(IsNoteActive(noteID));
+
+  const handleClick = () => {};
   return asideRef.current
     ? createPortal(
-        <div data-active={isNoteActive} className={s.bottom_note}>
+        <article data-active={isNoteActive} className={s.bottom_note}>
+          <button className={s.bottom_note_button} onClick={handleClick}>
+            <CrossIcon />
+          </button>
           {children}
-        </div>,
+        </article>,
         asideRef.current,
       )
     : null;

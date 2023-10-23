@@ -44,3 +44,11 @@ export function GithubIcon({ w, h, classname }: IconProps): JSX.Element {
     </svg>
   );
 }
+
+export function CrossIcon({ classname, h = 24, w = 24 }: IconProps) {
+  return (
+    <svg className={classname} width={w} height={h} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18.295 7.115c.3894-.38936.3894-1.02064 0-1.41-.3894-.38936-1.0206-.38936-1.41 0L12 10.59 7.115 5.705c-.38936-.38936-1.02064-.38936-1.41 0-.38936.38936-.38936 1.02064 0 1.41L10.59 12l-4.885 4.885c-.38936.3894-.38936 1.0206 0 1.41.38936.3894 1.02064.3894 1.41 0L12 13.41l4.885 4.885c.3894.3894 1.0206.3894 1.41 0 .3894-.3894.3894-1.0206 0-1.41L13.41 12l4.885-4.885Z" />
+    </svg>
+  );
+}
