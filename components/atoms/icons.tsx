@@ -6,13 +6,7 @@ type IconProps = {
 
 export function LinkedInIcon({ w, h, classname }: IconProps): JSX.Element {
   return (
-    <svg
-      className={classname}
-      height={h}
-      width={w}
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 128 128"
-    >
+    <svg className={classname} height={h} width={w} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
       <path
         fill="#0076b2"
         d="M116 3H12a8.91 8.91 0 0 0-9 8.8v104.42a8.91 8.91 0 0 0 9 8.78h104a8.93 8.93 0 0 0 9-8.81V11.77A8.93 8.93 0 0 0 116 3z"
@@ -27,13 +21,7 @@ export function LinkedInIcon({ w, h, classname }: IconProps): JSX.Element {
 
 export function MailIcon({ w, h, classname }: IconProps) {
   return (
-    <svg
-      className={classname}
-      height={h}
-      width={w}
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 512 512"
-    >
+    <svg className={classname} height={h} width={w} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
       <path
         fill="currentColor"
         d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z"
@@ -44,13 +32,7 @@ export function MailIcon({ w, h, classname }: IconProps) {
 
 export function GithubIcon({ w, h, classname }: IconProps): JSX.Element {
   return (
-    <svg
-      className={classname}
-      height={h}
-      width={w}
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 128 128"
-    >
+    <svg className={classname} height={h} width={w} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
       <g fill="#181616">
         <path
           fillRule="evenodd"
@@ -59,6 +41,14 @@ export function GithubIcon({ w, h, classname }: IconProps): JSX.Element {
         />
         <path d="M26.484 91.806c-.133.3-.605.39-1.035.185-.44-.196-.685-.605-.543-.906.13-.31.603-.395 1.04-.188.44.197.69.61.537.91zm2.446 2.729c-.287.267-.85.143-1.232-.28-.396-.42-.47-.983-.177-1.254.298-.266.844-.14 1.24.28.394.426.472.984.17 1.255zm2.382 3.477c-.37.258-.976.017-1.35-.52-.37-.538-.37-1.183.01-1.44.373-.258.97-.025 1.35.507.368.545.368 1.19-.01 1.452zm3.261 3.361c-.33.365-1.036.267-1.552-.23-.527-.487-.674-1.18-.343-1.544.336-.366 1.045-.264 1.564.23.527.486.686 1.18.333 1.543zm4.5 1.951c-.147.473-.825.688-1.51.486-.683-.207-1.13-.76-.99-1.238.14-.477.823-.7 1.512-.485.683.206 1.13.756.988 1.237zm4.943.361c.017.498-.563.91-1.28.92-.723.017-1.308-.387-1.315-.877 0-.503.568-.91 1.29-.924.717-.013 1.306.387 1.306.88zm4.598-.782c.086.485-.413.984-1.126 1.117-.7.13-1.35-.172-1.44-.653-.086-.498.422-.997 1.122-1.126.714-.123 1.354.17 1.444.663zm0 0" />
       </g>
+    </svg>
+  );
+}
+
+export function CrossIcon({ classname, h = 24, w = 24 }: IconProps) {
+  return (
+    <svg className={classname} width={w} height={h} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18.295 7.115c.3894-.38936.3894-1.02064 0-1.41-.3894-.38936-1.0206-.38936-1.41 0L12 10.59 7.115 5.705c-.38936-.38936-1.02064-.38936-1.41 0-.38936.38936-.38936 1.02064 0 1.41L10.59 12l-4.885 4.885c-.38936.3894-.38936 1.0206 0 1.41.38936.3894 1.02064.3894 1.41 0L12 13.41l4.885 4.885c.3894.3894 1.0206.3894 1.41 0 .3894-.3894.3894-1.0206 0-1.41L13.41 12l4.885-4.885Z" />
     </svg>
   );
 }

@@ -8,18 +8,17 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 :root {
   --card-border-radius: 8px;
-
   --header-height: 64px;
-
   --ink-blue: #001858;
   --sand-background: #fef6e4;
   --orange: #ffb253;
   --sanguine: #ec715a;
   --berry: #ba3c67;
   --neon-green: #00e2b4;
-
   --spacer: 90vw;
 }
 

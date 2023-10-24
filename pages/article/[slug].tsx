@@ -1,13 +1,12 @@
-import { GetStaticPaths, GetStaticPathsResult, GetStaticProps, InferGetStaticPropsType } from 'next';
+import type { GetStaticPaths, GetStaticPathsResult, GetStaticProps, InferGetStaticPropsType } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
 import rehypeHighlight from 'rehype-highlight';
 
-import { ArticleBody } from '@/components/organisms/Article';
-import { ArticleWithMDX } from '@/components/organisms/Article/types';
-import { Drawer } from '@/components/organisms/drawer';
+import { type ArticleWithMDX } from '@/components/organisms/Article/types';
+import { ArticleCore } from '@/components/templates/article-core';
 import PageLayout from '@/components/templates/page-layout';
 import { articleContent, getArticlePaths } from '@/graphql/cms/articles/queries';
-import {
+import type {
   ArticleContentQuery,
   ArticleContentQueryVariables,
   GetArticlePathsQuery,
@@ -37,15 +36,15 @@ export const getStaticProps: GetStaticProps<Props, PageParams> = async ({ params
   if (!data.article?.content) {
     return { notFound: true };
   }
-
   const content = await serialize(data.article.content, {
     mdxOptions: {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       rehypePlugins: [rehypeHighlight],
     },
   });
 
-  return { props: { article: { ...data.article, content } } };
+  return { props: { article: { ...data.article, content } }, revalidate: 24 * 3600 };
 };
 
 export const getStaticPaths: GetStaticPaths = async (): Promise<GetStaticPathsResult<PageParams>> => {
@@ -57,7 +56,7 @@ export const getStaticPaths: GetStaticPaths = async (): Promise<GetStaticPathsRe
   };
 };
 
-export default function MobilePostPage({ article }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function PostPage({ article }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <PageLayout
       meta={{
@@ -66,13 +65,7 @@ export default function MobilePostPage({ article }: InferGetStaticPropsType<type
         imagePath: '',
       }}
     >
-      <main className="min-h-screen p-3 flex flex-col gap-8 relative md:items-center">
-        <p>This is📱 version</p>
-        <ArticleBody article={article} />
-      </main>
-      <Drawer>
-        <p>mock</p>
-      </Drawer>
+      <ArticleCore article={article} />
     </PageLayout>
   );
 }

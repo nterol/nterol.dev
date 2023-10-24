@@ -1,39 +1,35 @@
 .article {
-    @apply relative prose lg:prose-xl;
+  @apply relative prose lg:prose-xl;
 }
 
 .article code:not(:global(.hljs)) {
-    @apply text-inkblue;
-  }
-  
-.article code:not(:global(.hljs)) {
-    @apply rounded-lg p-1 bg-slate-200 border border-slate-300;
-  }
+  @apply text-inkblue rounded-lg p-1 bg-slate-200 border border-slate-300;
+}
   
 .article code:not(:global(.hljs)):after,
 .article code:not(:global(.hljs)):before {
-    content: '';
+  content: '';
 }
   
 .article aside:not(#note-container) {
-    @apply p-4 bg-blue-100 border border-blue-300 rounded-lg;
-  }
+  @apply p-4 bg-blue-100 border border-blue-300 rounded-lg;
+}
   
 .article aside:not(#note-container) p {
-    margin: 0;
-  }
+  margin: 0;
+}
 
-.article a {
-    @apply text-fancy-red;
+.article a  {
+  @apply text-fancy-red;
 }
   
 .article a:after {
-    content: "";
-    margin-left: 4px; 
-    height: 12px;
-    width: 12px;
-    display: inline-flex;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 32.822 32.822'%3E%3Cg data-name='Lager 80' transform='translate(0 .822)'%3E%3Cpath fill='%23BA3C67' d='M24 22v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h5a2 2 0 0 0 2-2 2 2 0 0 0-2-2H3a3 3 0 0 0-3 3v22a3 3 0 0 0 3 3h22a3 3 0 0 0 3-3v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2Z' data-name='Path 89'/%3E%3Crect width='16' height='4' fill='%23BA3C67' data-name='Rectangle 40' rx='2' transform='translate(16)'/%3E%3Crect width='16' height='4' fill='%23BA3C67' data-name='Rectangle 41' rx='2' transform='rotate(90 16 16)'/%3E%3Cg data-name='Group 37'%3E%3Crect width='32.296' height='3.971' fill='%23BA3C67' data-name='Rectangle 42' rx='1.986' transform='rotate(-45 30.162 2.342)'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    background-size: 12px 12px;
-  }
+  content: "";
+  margin-left: 4px; 
+  height: 12px;
+  width: 12px;
+  display: inline-flex;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 32.822 32.822'%3E%3Cg data-name='Lager 80' transform='translate(0 .822)'%3E%3Cpath fill='%23BA3C67' d='M24 22v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h5a2 2 0 0 0 2-2 2 2 0 0 0-2-2H3a3 3 0 0 0-3 3v22a3 3 0 0 0 3 3h22a3 3 0 0 0 3-3v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2Z' data-name='Path 89'/%3E%3Crect width='16' height='4' fill='%23BA3C67' data-name='Rectangle 40' rx='2' transform='translate(16)'/%3E%3Crect width='16' height='4' fill='%23BA3C67' data-name='Rectangle 41' rx='2' transform='rotate(90 16 16)'/%3E%3Cg data-name='Group 37'%3E%3Crect width='32.296' height='3.971' fill='%23BA3C67' data-name='Rectangle 42' rx='1.986' transform='rotate(-45 30.162 2.342)'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-size: 12px 12px;
+}
   

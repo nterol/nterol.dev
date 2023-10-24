@@ -6,12 +6,10 @@ import '@/styles/night-owl.css';
 
 import { ViewerQueryData, viewerDataAtom } from '@/store/viewer-data';
 
-
-
 type AppProps = {
   Component: React.ComponentType;
   pageProps: Record<string, unknown>;
-  nterol: ViewerQueryData['data']["viewer"];
+  nterol: ViewerQueryData['data']['viewer'];
 };
 
 // I know this is not ideal.
@@ -35,7 +33,7 @@ MyApp.getInitialProps = async (ctx: AppContext) => {
     }),
   });
   const res: ViewerQueryData = await raw.json();
-  
+
   const nterol = res.data.viewer;
 
   return { nterol, pageProps };

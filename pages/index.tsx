@@ -31,6 +31,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({ locale = 'fr' 
       const content = item.content
         ? await serialize(item.content, {
             mdxOptions: {
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
               rehypePlugins: [rehypeHighlight],
             },
@@ -85,9 +86,7 @@ export default function Home({ articles, bio, locale }: InferGetStaticPropsType<
         <section className="flex flex-col gap-4">
           <AnchorTitle title="articles" />
 
-          {articles?.map((article) => (
-            <ArticleDescription key={article.slug} article={article} locale={locale} />
-          ))}
+          {articles?.map((article) => <ArticleDescription key={article.slug} article={article} locale={locale} />)}
         </section>
         <section>
           <AnchorTitle title="contact" />
