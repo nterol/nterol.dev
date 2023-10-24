@@ -1,23 +1,22 @@
-import { GetStaticPaths, GetStaticPathsResult, GetStaticProps, InferGetStaticPropsType } from 'next';
-import { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import type { GetStaticPaths, GetStaticPathsResult, GetStaticProps, InferGetStaticPropsType } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
 import rehypeHighlight from 'rehype-highlight';
 
+import { type ArticleWithMDX } from '@/components/organisms/Article/types';
+import { ArticleCore } from '@/components/templates/article-core';
 import PageLayout from '@/components/templates/page-layout';
-import { articleContent, getArticlePaths } from '@/graphql/articles/queries';
-import {
+import { getArticlesPath } from '@/utils/extract';
+import client from 'apollo-client';
+import { articleContent, getArticlePaths } from 'graphql/articles/queries';
+import type {
   ArticleContentQuery,
   ArticleContentQueryVariables,
   GetArticlePathsQuery,
   GetArticlePathsQueryVariables,
-} from '@/graphql/types';
-import { getArticlesPath } from '@/utils/extract';
-import client from 'apollo-client';
+} from 'graphql/types';
 
 type Props = {
-  article: Omit<NonNullable<ArticleContentQuery['article']>, 'content'> & {
-    content: MDXRemoteSerializeResult<Record<string, unknown>, Record<string, unknown>>;
-  };
+  article: ArticleWithMDX;
 };
 
 type PageParams = {
@@ -37,15 +36,15 @@ export const getStaticProps: GetStaticProps<Props, PageParams> = async ({ params
   if (!data.article?.content) {
     return { notFound: true };
   }
-
   const content = await serialize(data.article.content, {
     mdxOptions: {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       rehypePlugins: [rehypeHighlight],
     },
   });
 
-  return { props: { article: { ...data.article, content } } };
+  return { props: { article: { ...data.article, content } }, revalidate: 24 * 3600 };
 };
 
 export const getStaticPaths: GetStaticPaths = async (): Promise<GetStaticPathsResult<PageParams>> => {
@@ -57,7 +56,7 @@ export const getStaticPaths: GetStaticPaths = async (): Promise<GetStaticPathsRe
   };
 };
 
-export default function MobilePostPage({ article }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function PostPage({ article }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <PageLayout
       meta={{
@@ -66,7 +65,7 @@ export default function MobilePostPage({ article }: InferGetStaticPropsType<type
         imagePath: '',
       }}
     >
-      <main></main>
+      <ArticleCore article={article} />
     </PageLayout>
   );
 }

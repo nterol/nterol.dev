@@ -7,21 +7,45 @@
   height: 100%;
 }
 
+.bottom_container {
+  position: fixed;
+  width: 100%;
+  height:0;
+  bottom:0;
+}
+
 .definition {
+  @apply text-inkblue max-w-full;
+
   text-decoration-skip-ink: none;
+  cursor: pointer;
+
 }
 
 .definition[data-active='true'] {
   @apply underline decoration-wavy underline-offset-2;
 }
 
-
-
-
-
-
-.note_container {
-   @apply absolute top-0 block p-1 rounded-md bg-blue-200 max-h-80 overflow-y-scroll shadow-md;
+.definition > sup {
+  @apply ml-1;
 }
 
 
+.side_note {
+  @apply absolute top-0 block p-1 rounded-md bg-blue-200 max-h-80 overflow-y-scroll shadow-md;
+}
+
+.bottom_note {
+  @apply overflow-hidden flex rounded-md bg-blue-200 absolute p-4 w-full h-fit max-h-[200px] overflow-y-scroll shadow-md max-w-[350px] gap-1;
+  
+  top: 0;
+  left: 50%;
+  right: 50%;
+  transform: translateX(-50%);
+  margin: 0 auto;
+  
+}
+
+.bottom_note_button {
+  @apply sticky top-0 w-[24px] h-[24px] rounded-full;
+}

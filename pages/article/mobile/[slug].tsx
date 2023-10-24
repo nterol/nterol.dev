@@ -1,20 +1,22 @@
-import type { GetStaticPaths, GetStaticPathsResult, GetStaticProps, InferGetStaticPropsType } from 'next';
+import { useHydrateAtoms } from 'jotai/utils';
+import { GetStaticPaths, GetStaticPathsResult, GetStaticProps, InferGetStaticPropsType } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
 import rehypeHighlight from 'rehype-highlight';
 
-import { ArticleCore } from '@/components/organisms/Article';
-import { type ArticleWithMDX } from '@/components/organisms/Article/types';
-import { AsideContainer } from '@/components/organisms/desktop/aside';
+import { ArticleBody } from '@/components/organisms/Article';
+import { ArticleWithMDX } from '@/components/organisms/Article/types';
+import { BottomContainer } from '@/components/organisms/aside';
 import PageLayout from '@/components/templates/page-layout';
-import { getArticlesPath } from '@/utils/extract';
-import client from 'apollo-client';
-import { articleContent, getArticlePaths } from 'graphql/articles/queries';
-import type {
+import { articleContent, getArticlePaths } from '@/graphql/articles/queries';
+import {
   ArticleContentQuery,
   ArticleContentQueryVariables,
   GetArticlePathsQuery,
   GetArticlePathsQueryVariables,
-} from 'graphql/types';
+} from '@/graphql/types';
+import { IsSideNote } from '@/store/aside-note';
+import { getArticlesPath } from '@/utils/extract';
+import client from 'apollo-client';
 
 type Props = {
   article: ArticleWithMDX;
@@ -37,6 +39,7 @@ export const getStaticProps: GetStaticProps<Props, PageParams> = async ({ params
   if (!data.article?.content) {
     return { notFound: true };
   }
+
   const content = await serialize(data.article.content, {
     mdxOptions: {
       // @ts-ignore
@@ -44,7 +47,7 @@ export const getStaticProps: GetStaticProps<Props, PageParams> = async ({ params
     },
   });
 
-  return { props: { article: { ...data.article, content } }, revalidate: 24 * 3600 };
+  return { props: { article: { ...data.article, content } } };
 };
 
 export const getStaticPaths: GetStaticPaths = async (): Promise<GetStaticPathsResult<PageParams>> => {
@@ -56,8 +59,8 @@ export const getStaticPaths: GetStaticPaths = async (): Promise<GetStaticPathsRe
   };
 };
 
-export default function PostPage({ article }: InferGetStaticPropsType<typeof getStaticProps>) {
-  
+export default function MobilePostPage({ article }: InferGetStaticPropsType<typeof getStaticProps>) {
+  useHydrateAtoms([[IsSideNote, false]]);
   return (
     <PageLayout
       meta={{
@@ -66,10 +69,11 @@ export default function PostPage({ article }: InferGetStaticPropsType<typeof get
         imagePath: '',
       }}
     >
-      <main className="p-2 pb-[80px] flex flex-col gap-8 relative md:items-center">
-        <AsideContainer />
-        <ArticleCore article={article} />
+      <main className="min-h-screen p-3 pb-[80px] flex flex-col gap-8 relative md:items-center">
+        <p>This is📱 version</p>
+        <ArticleBody article={article} />
       </main>
+      <BottomContainer />
     </PageLayout>
   );
 }

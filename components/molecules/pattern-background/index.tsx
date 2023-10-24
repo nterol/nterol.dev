@@ -1,4 +1,4 @@
-import s from "./pattern.module.css";
+import s from './pattern.module.css';
 
 export function PatternBackground() {
   return (

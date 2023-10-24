@@ -13,7 +13,7 @@ type P = {
 export function ArticleDescription({ article, locale }: P) {
   return (
     <article className="flex flex-col gap-1 " key={article.slug}>
-      <Link href={`/post/${article.slug}`}>
+      <Link href={`/article/${article.slug}`}>
         <h1 className="text-lg lg:text-2xl font-bold">
           <GlowingText startColor="black" targetColor="var(--ink-blue)">
             {article.title}

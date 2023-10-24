@@ -35,7 +35,7 @@ export type AboutRecord = RecordInterface & {
   _modelApiKey: Scalars['String']['output'];
   _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _publishedAt?: Maybe<Scalars['DateTime']['output']>;
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>;
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
@@ -129,7 +129,7 @@ export type ArticleRecord = RecordInterface & {
   _modelApiKey: Scalars['String']['output'];
   _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _publishedAt?: Maybe<Scalars['DateTime']['output']>;
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>;
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
@@ -264,7 +264,7 @@ export type BreveRecord = RecordInterface & {
   _modelApiKey: Scalars['String']['output'];
   _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _publishedAt?: Maybe<Scalars['DateTime']['output']>;
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>;
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
@@ -355,7 +355,7 @@ export type CategorieRecord = RecordInterface & {
   _modelApiKey: Scalars['String']['output'];
   _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _publishedAt?: Maybe<Scalars['DateTime']['output']>;
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>;
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
@@ -491,7 +491,7 @@ export type FaviconType = typeof FaviconType[keyof typeof FaviconType];
 export type FileField = FileFieldInterface & {
   __typename: 'FileField';
   _createdAt: Scalars['DateTime']['output'];
-  /** Editing URL */
+  /** The DatoCMS URL where you can edit this entity. To use this field, you need to set a X-Base-Editing-Url header in the request */
   _editingUrl?: Maybe<Scalars['String']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   alt?: Maybe<Scalars['String']['output']>;
@@ -569,7 +569,7 @@ export type FileFieldUrlArgs = {
 
 export type FileFieldInterface = {
   _createdAt: Scalars['DateTime']['output'];
-  /** Editing URL */
+  /** The DatoCMS URL where you can edit this entity. To use this field, you need to set a X-Base-Editing-Url header in the request */
   _editingUrl?: Maybe<Scalars['String']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   alt?: Maybe<Scalars['String']['output']>;
@@ -2460,7 +2460,7 @@ export type QuizzRecord = RecordInterface & {
   _modelApiKey: Scalars['String']['output'];
   _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _publishedAt?: Maybe<Scalars['DateTime']['output']>;
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>;
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
@@ -2497,7 +2497,7 @@ export type RecordInterface = {
   _modelApiKey: Scalars['String']['output'];
   _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _publishedAt?: Maybe<Scalars['DateTime']['output']>;
-  /** SEO meta tags */
+  /** Generates SEO and Social card meta tags to be used in your frontend */
   _seoMetaTags: Array<Tag>;
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
