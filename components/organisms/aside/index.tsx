@@ -1,8 +1,7 @@
-import { a, useSpring } from '@react-spring/web';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
 
-import { AsideRefAtom, CurrentNote, IsSideNote } from '@/store/aside-note';
+import { AsideRefAtom, BottomRefAtom, IsSideNote } from '@/store/aside-note';
 import s from '@/styles/aside.module.css';
 
 export function AsideContainer() {
@@ -24,13 +23,9 @@ export function AsideContainer() {
 
 export function BottomContainer() {
   const bottomRef = useRef<HTMLDivElement | null>(null);
-  const setBottomRef = useSetAtom(AsideRefAtom);
-
-  const currentNote = useAtomValue(CurrentNote);
+  const setBottomRef = useSetAtom(BottomRefAtom);
 
   const isSideNote = useAtomValue(IsSideNote);
-
-  console.log({ bottomRef: bottomRef });
 
   useEffect(() => {
     if (bottomRef.current !== null) {
@@ -38,21 +33,5 @@ export function BottomContainer() {
     }
   }, [setBottomRef]);
 
-  const [spring, api] = useSpring(() => ({ from: { height: 0 } }));
-
-  useEffect(() => {
-    api.start(currentNote ? { height: 200 } : { height: 0 });
-  }, [api, currentNote]);
-
-  if (isSideNote) return null;
-
-  return (
-    <a.aside
-      data-active={!!isSideNote}
-      ref={bottomRef}
-      style={spring}
-      id="note-container"
-      className={s.bottom_container}
-    ></a.aside>
-  );
+  return <aside data-active={!!isSideNote} ref={bottomRef} id="note-container" className={s.bottom_container}></aside>;
 }

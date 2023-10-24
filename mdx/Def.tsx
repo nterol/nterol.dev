@@ -28,12 +28,12 @@ export function Def({ noteID, children }: DefProps) {
     <span
       data-active={isActive === noteID}
       ref={defRef}
-      className={`max-w-full ${s.definition} text-inkblue`}
+      className={s.definition}
       onClick={handleSetNote}
       id={noteID.replaceAll(' ', '-')}
     >
       {children}
-      <sup className="ml-1">{noteRef.position}</sup>
+      <sup>{noteRef.position}</sup>
     </span>
   );
 }

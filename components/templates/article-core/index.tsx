@@ -24,10 +24,10 @@ export function ArticleCore({ article }: ArticleCoreProps) {
   return (
     <>
       <main className="p-2 pb-[80px] flex flex-col gap-8 relative md:items-center">
-        <AsideContainer />
         <ArticleBody article={article} />
+        <AsideContainer />
+        <BottomContainer />
       </main>
-      <BottomContainer />
     </>
   );
 }

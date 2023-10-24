@@ -19,7 +19,7 @@
   margin: 0;
 }
 
-.article a {
+.article a  {
   @apply text-fancy-red;
 }
   
