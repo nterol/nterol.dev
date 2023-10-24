@@ -33,8 +33,6 @@ export function BottomNote({ noteID, children }: AsideProps) {
     }
   }, [asideRef, h]);
 
-  console.log({ h });
-
   const handleClick = () => setNote(null);
 
   const spring = useSpring({ opacity: isNoteActive ? 1 : 0, x: '-50%', y: isNoteActive ? -1 * (h ?? 100) - 24 : 80 });
@@ -68,8 +66,6 @@ export function SideNote({ noteID, children }: AsideProps) {
   useEffect(() => {
     if (!articleCoreRef.current) return;
     const topDelta = `${Math.abs(articleCoreRef.current?.getBoundingClientRect().y) ?? 0}px`;
-
-    console.log(topDelta);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
