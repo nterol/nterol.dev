@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { FrontPageQuery } from '@/graphql/types';
+import { FrontPageQuery } from '@/graphql/cms/types';
 import { longDate } from '@/utils/date';
 
 import { GlowingText } from '../../mdx/glowing-text';

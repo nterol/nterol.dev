@@ -5,15 +5,15 @@ import rehypeHighlight from 'rehype-highlight';
 import { type ArticleWithMDX } from '@/components/organisms/Article/types';
 import { ArticleCore } from '@/components/templates/article-core';
 import PageLayout from '@/components/templates/page-layout';
-import { getArticlesPath } from '@/utils/extract';
-import client from 'apollo-client';
-import { articleContent, getArticlePaths } from 'graphql/articles/queries';
+import { articleContent, getArticlePaths } from '@/graphql/cms/articles/queries';
 import type {
   ArticleContentQuery,
   ArticleContentQueryVariables,
   GetArticlePathsQuery,
   GetArticlePathsQueryVariables,
-} from 'graphql/types';
+} from '@/graphql/cms/types';
+import { getArticlesPath } from '@/utils/extract';
+import client from 'apollo-client';
 
 type Props = {
   article: ArticleWithMDX;

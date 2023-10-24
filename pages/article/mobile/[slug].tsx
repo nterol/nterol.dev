@@ -7,13 +7,13 @@ import { ArticleBody } from '@/components/organisms/Article';
 import { ArticleWithMDX } from '@/components/organisms/Article/types';
 import { BottomContainer } from '@/components/organisms/aside';
 import PageLayout from '@/components/templates/page-layout';
-import { articleContent, getArticlePaths } from '@/graphql/articles/queries';
+import { articleContent, getArticlePaths } from '@/graphql/cms/articles/queries';
 import {
   ArticleContentQuery,
   ArticleContentQueryVariables,
   GetArticlePathsQuery,
   GetArticlePathsQueryVariables,
-} from '@/graphql/types';
+} from '@/graphql/cms/types';
 import { IsSideNote } from '@/store/aside-note';
 import { getArticlesPath } from '@/utils/extract';
 import client from 'apollo-client';
@@ -70,7 +70,6 @@ export default function MobilePostPage({ article }: InferGetStaticPropsType<type
       }}
     >
       <main className="min-h-screen p-3 pb-[80px] flex flex-col gap-8 relative md:items-center">
-        <p>This is📱 version</p>
         <ArticleBody article={article} />
       </main>
       <BottomContainer />

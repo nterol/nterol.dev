@@ -8,10 +8,10 @@ const codegenConfig: CodegenConfig = {
       },
     },
   },
-  documents: ["./graphql/**/*.ts"],
+  documents: ["./graphql/cms/**/*.ts"],
   ignoreNoDocuments: true,
   generates: {
-    "./graphql/types.ts": {
+    "./graphql/cms/types.ts": {
       plugins: ["typescript", "typescript-operations"],
       config: {
         enumsAsConst: true,
@@ -22,7 +22,7 @@ const codegenConfig: CodegenConfig = {
         },
       },
     },
-    "./graphql/schema.graphql": {
+    "./graphql/cms/schema.graphql": {
       plugins: ["schema-ast"],
     },
   },
