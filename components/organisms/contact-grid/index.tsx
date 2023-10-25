@@ -15,13 +15,13 @@ const contacts = (viewerData: ViewerData | null) => [
     type: 'link',
     content: 'github',
     icon: GithubIcon,
-    value: 'https://github.com/nterol',
+    value: viewerData?.url ?? '',
   },
   {
     type: 'link',
     content: 'linkedin',
     icon: LinkedInIcon,
-    value: viewerData?.url ?? '',
+    value: 'https://linkedin.com/in/teroln',
   },
 ];
 
@@ -33,7 +33,7 @@ export function ContactGrid() {
         <Fragment key={content}>
           <Icon classname="h-6 w-6" />
           <a className="col-span-2" href={`${type === 'mail' ? `mailto:` : ''}${value}`}>
-            {value}
+            {content}
           </a>
         </Fragment>
       ))}
