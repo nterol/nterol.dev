@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import { useHydrateAtoms } from 'jotai/utils';
 import App, { AppContext } from 'next/app';
 
@@ -17,7 +18,12 @@ type AppProps = {
 // I don't care
 function MyApp({ Component, pageProps, nterol }: AppProps): JSX.Element {
   useHydrateAtoms([[viewerDataAtom, nterol]]);
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Component {...pageProps} />
+      <Analytics />
+    </>
+  );
 }
 MyApp.getInitialProps = async (ctx: AppContext) => {
   const query = `{ viewer { login url name repository(name: "${process.env.GITHUB_REPO_NAME}") { pushedAt } } }`;
