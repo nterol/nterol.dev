@@ -1,0 +1,15 @@
+.definition {
+    @apply text-inkblue max-w-full;
+  
+    text-decoration-skip-ink: none;
+    cursor: pointer;
+  
+}
+  
+.definition[data-active='true'] {
+    @apply underline decoration-wavy underline-offset-2;
+}
+  
+.definition > sup {
+    @apply ml-1;
+}
