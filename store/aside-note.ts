@@ -20,7 +20,7 @@ export const DefinitionCollection = atomFamily((noteID: string) =>
   atom({
     noteID,
     position: 0,
-    nodeRef: { current: null } as MutableRefObject<HTMLDivElement | null>,
+    positionY: null as number | null,
   }),
 );
 

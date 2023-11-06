@@ -23,7 +23,7 @@ export function ArticleCore({ article }: ArticleCoreProps) {
   useShowSideBar();
   return (
     <>
-      <main className="p-2 pb-[80px] flex flex-col gap-8 relative md:items-center">
+      <main className="p-2 flex flex-col gap-8 relative md:items-center">
         <ArticleBody article={article} />
         <AsideContainer />
         <BottomContainer />
