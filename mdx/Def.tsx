@@ -2,7 +2,7 @@ import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { MutableRefObject, useCallback, useEffect, useRef } from 'react';
 
 import { ArticleCoreRefAtom, DefinitionCollection, IsNoteActive, IsSideNote } from '@/store/aside-note';
-import s from '@/styles/aside.module.css';
+import s from '@/styles/definition.module.css';
 
 type DefProps = { noteID: string; children: React.ReactNode };
 
@@ -20,7 +20,7 @@ function useObserver({ ref, noteID }: Args) {
   const setNoteRef = useSetAtom(DefinitionCollection(noteID));
   useEffect(() => {
     if (!ref.current || !articleCoreRef.current) return;
-    const topDelta = `${Math.abs(articleCoreRef.current?.getBoundingClientRect().y) ?? 0}px`;
+    const topDelta = `${Math.abs(articleCoreRef.current?.getBoundingClientRect().y) ?? 0}px`; // This is not optimal. Works fine unless header is present in the viewport.
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting && isActive) {
@@ -53,7 +53,7 @@ export function Def({ noteID, children }: DefProps) {
   useObserver({ ref: defRef, noteID });
 
   useEffect(() => {
-    setNoteRef({ noteID, position: (instance += 1), nodeRef: defRef, positionY: null });
+    setNoteRef({ noteID, position: (instance += 1), positionY: null });
   }, [noteID, setNoteRef]);
 
   const handleClick = useCallback(() => {

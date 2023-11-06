@@ -21,7 +21,6 @@ export const DefinitionCollection = atomFamily((noteID: string) =>
     noteID,
     position: 0,
     positionY: null as number | null,
-    nodeRef: { current: null } as MutableRefObject<HTMLDivElement | null>,
   }),
 );
 

@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 
 import { CrossIcon } from '@/components/atoms/icons';
 import { AsideRefAtom, BottomRefAtom, DefinitionCollection, IsNoteActive, IsSideNote } from '@/store/aside-note';
-import s from '@/styles/aside.module.css';
+import s from '@/styles/note.module.css';
 
 type AsideProps = { noteID: string; children: React.ReactNode };
 
@@ -51,12 +51,7 @@ export function BottomNote({ noteID, children }: AsideProps) {
 export function SideNote({ noteID, children }: AsideProps) {
   const asideRef = useAtomValue(AsideRefAtom);
   const isNoteActive = useAtomValue(IsNoteActive(noteID));
-  const observerRef = useRef<IntersectionObserver | null>(null);
-  const { nodeRef, positionY } = useAtomValue(DefinitionCollection(noteID));
-
-  useEffect(() => {
-    if (observerRef.current && !isNoteActive && nodeRef.current) observerRef.current?.unobserve(nodeRef.current);
-  }, [isNoteActive, nodeRef]);
+  const { positionY } = useAtomValue(DefinitionCollection(noteID));
 
   const spring = useSpring(
     isNoteActive ? { opacity: 1, y: positionY ?? 200 } : { opacity: 0, y: (positionY ?? 200) + 20 },
@@ -64,12 +59,12 @@ export function SideNote({ noteID, children }: AsideProps) {
 
   return asideRef.current
     ? createPortal(
-        <a.span style={spring} className={s.side_note}>
+        <a.article style={spring} className={`${s.side_note}`}>
           {Children.map(children, (child) => {
             if (typeof child === 'string') return <p>{child}</p>;
             return child;
           })}
-        </a.span>,
+        </a.article>,
         asideRef.current,
       )
     : null;
