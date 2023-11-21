@@ -1,17 +1,17 @@
-import type { GetArticlePathsQuery, SiteLocale } from "@/graphql/cms/types";
+import type { GetArticlePathsQuery, SiteLocale } from '@/graphql/cms/types';
 
-export function getArticlesPath(articles: GetArticlePathsQuery["allArticles"]) {
+export function getArticlesPath(articles: GetArticlePathsQuery['allArticles']) {
   return articles
     .flatMap(({ _allSlugLocales }) => _allSlugLocales)
     .map((a) =>
       a
         ? {
             params: {
-              slug: a?.value ?? "",
+              slug: a?.value ?? '',
             },
-            locale: a?.locale ?? "fr",
+            locale: a?.locale ?? 'fr',
           }
-        : undefined
+        : undefined,
     )
     .filter((e): e is { params: { slug: string }; locale: SiteLocale } => !!e);
 }

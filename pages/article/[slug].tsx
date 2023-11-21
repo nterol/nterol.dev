@@ -6,11 +6,12 @@ import { type ArticleWithMDX } from '@/components/organisms/Article/types';
 import { ArticleCore } from '@/components/templates/article-core';
 import PageLayout from '@/components/templates/page-layout';
 import { articleContent, getArticlePaths } from '@/graphql/cms/articles/queries';
-import type {
-  ArticleContentQuery,
-  ArticleContentQueryVariables,
-  GetArticlePathsQuery,
-  GetArticlePathsQueryVariables,
+import {
+  SiteLocale,
+  type ArticleContentQuery,
+  type ArticleContentQueryVariables,
+  type GetArticlePathsQuery,
+  type GetArticlePathsQueryVariables,
 } from '@/graphql/cms/types';
 import { getArticlesPath } from '@/utils/extract';
 import client from 'apollo-client';
@@ -23,17 +24,17 @@ type PageParams = {
   slug: string;
 };
 
-export const getStaticProps: GetStaticProps<Props, PageParams> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<Props, PageParams> = async ({ params, locale = 'fr' }) => {
   if (!params?.slug)
     return {
       notFound: true,
     };
   const { data } = await client.query<ArticleContentQuery, ArticleContentQueryVariables>({
     query: articleContent,
-    variables: { slug: params?.slug },
+    variables: { slug: params?.slug, locale: locale as SiteLocale },
   });
 
-  if (!data.article?.content) {
+  if (!data.article || !data.article?.content) {
     return { notFound: true };
   }
   const content = await serialize(data.article.content, {

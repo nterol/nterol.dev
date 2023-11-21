@@ -3052,6 +3052,7 @@ export type GetArticlePathsByLocaleQuery = { __typename: 'Query', allArticles: A
 
 export type ArticleContentQueryVariables = Exact<{
   slug: Scalars['String']['input'];
+  locale?: InputMaybe<SiteLocale>;
 }>;
 
 

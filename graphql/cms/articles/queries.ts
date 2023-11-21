@@ -31,8 +31,8 @@ export const getArticlePathsByLocale = gql`
 `;
 
 export const articleContent = gql`
-  query articleContent($slug: String!) {
-    article(filter: { slug: { eq: $slug } }) {
+  query articleContent($slug: String!, $locale: SiteLocale) {
+    article(locale: $locale, filter: { slug: { eq: $slug } }) {
       _createdAt
       _updatedAt
       title
