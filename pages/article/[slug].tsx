@@ -2,7 +2,6 @@ import type { GetStaticPaths, GetStaticPathsResult, GetStaticProps, InferGetStat
 import { serialize } from 'next-mdx-remote/serialize';
 import rehypeHighlight from 'rehype-highlight';
 
-import { type ArticleWithMDX } from '@/components/organisms/Article/types';
 import { ArticleCore } from '@/components/templates/article-core';
 import PageLayout from '@/components/templates/page-layout';
 import { articleContent, getArticlePaths } from '@/graphql/cms/articles/queries';
@@ -14,9 +13,11 @@ import {
   type GetArticlePathsQueryVariables,
 } from '@/graphql/cms/types';
 import { getArticlesPath } from '@/utils/extract';
+import type { ArticleWithMDX, TranslationURL } from '@/utils/types';
 import client from 'apollo-client';
 
-type Props = {
+export type ArticlePageProps = {
+  translations: TranslationURL[] | undefined;
   article: ArticleWithMDX;
 };
 
@@ -24,7 +25,7 @@ type PageParams = {
   slug: string;
 };
 
-export const getStaticProps: GetStaticProps<Props, PageParams> = async ({ params, locale = 'fr' }) => {
+export const getStaticProps: GetStaticProps<ArticlePageProps, PageParams> = async ({ params, locale = 'fr' }) => {
   if (!params?.slug)
     return {
       notFound: true,
@@ -45,7 +46,11 @@ export const getStaticProps: GetStaticProps<Props, PageParams> = async ({ params
     },
   });
 
-  return { props: { article: { ...data.article, content } }, revalidate: 24 * 3600 };
+  const translations = data.allArticles[0]._allSlugLocales
+    ?.filter((t) => t.locale !== locale)
+    .filter((tt): tt is TranslationURL => !!tt);
+
+  return { props: { translations, article: { ...data.article, content } }, revalidate: 24 * 3600 };
 };
 
 export const getStaticPaths: GetStaticPaths = async (): Promise<GetStaticPathsResult<PageParams>> => {
@@ -57,16 +62,16 @@ export const getStaticPaths: GetStaticPaths = async (): Promise<GetStaticPathsRe
   };
 };
 
-export default function PostPage({ article }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function ArticlePage(props: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <PageLayout
       meta={{
-        pageTitle: article.title ?? 'A post by nterol',
-        description: article.description ?? '',
+        pageTitle: props.article.title ?? 'A post by nterol',
+        description: props.article.description ?? '',
         imagePath: '',
       }}
     >
-      <ArticleCore article={article} />
+      <ArticleCore {...props} />
     </PageLayout>
   );
 }

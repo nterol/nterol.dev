@@ -3056,7 +3056,7 @@ export type ArticleContentQueryVariables = Exact<{
 }>;
 
 
-export type ArticleContentQuery = { __typename: 'Query', article?: { __typename: 'ArticleRecord', _createdAt: string, _updatedAt: string, title?: string | null, content?: string | null, description?: string | null } | null };
+export type ArticleContentQuery = { __typename: 'Query', allArticles: Array<{ __typename: 'ArticleRecord', _allSlugLocales?: Array<{ __typename: 'StringMultiLocaleField', value?: string | null, locale?: SiteLocale | null }> | null }>, article?: { __typename: 'ArticleRecord', _createdAt: string, _updatedAt: string, title?: string | null, content?: string | null, description?: string | null } | null };
 
 export type FrontPageQueryVariables = Exact<{
   locale?: InputMaybe<SiteLocale>;

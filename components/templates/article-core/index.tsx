@@ -1,10 +1,11 @@
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
+import { TranslationsBar } from '@/components/molecules/translations-bar';
 import { ArticleBody } from '@/components/organisms/Article';
-import { ArticleWithMDX } from '@/components/organisms/Article/types';
 import { AsideContainer, BottomContainer } from '@/components/organisms/aside';
 import useScreen from '@/hooks/useScreen';
+import { ArticlePageProps } from '@/pages/article/[slug]';
 import { IsSideNote } from '@/store/aside-note';
 
 function useShowSideBar() {
@@ -16,15 +17,13 @@ function useShowSideBar() {
   }, [isSideNote, setIsSideNote]);
 }
 
-type ArticleCoreProps = {
-  article: ArticleWithMDX;
-};
-export function ArticleCore({ article }: ArticleCoreProps) {
+export function ArticleCore(props: ArticlePageProps) {
   useShowSideBar();
   return (
     <>
-      <main className="p-2 flex flex-col gap-8 relative md:items-center">
-        <ArticleBody article={article} />
+      <main className="p-2 flex flex-col gap-8 relative md:items-center min-h-full">
+        <TranslationsBar translations={props.translations} />
+        <ArticleBody {...props} />
         <AsideContainer />
         <BottomContainer />
       </main>
