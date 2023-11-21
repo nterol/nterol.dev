@@ -1,0 +1,11 @@
+.q_button {
+    @apply bg-slate-200 rounded-lg p-0.5 col-span-1 flex items-center gap-2;
+}
+
+.letter_case {
+    @apply flex rounded-lg items-center justify-center w-5 p-0.5 aspect-square bg-blue-400 leading-normal;
+}
+
+.section { 
+    @apply grid grid-cols-2 gap-2;
+}
