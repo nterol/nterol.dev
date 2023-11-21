@@ -7,19 +7,19 @@ export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> =
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string };
-  String: { input: string; output: string };
-  Boolean: { input: boolean; output: boolean };
-  Int: { input: number; output: number };
-  Float: { input: number; output: number };
-  BooleanType: { input: any; output: any };
-  CustomData: { input: any; output: any };
-  DateTime: { input: string; output: string };
-  FloatType: { input: any; output: any };
-  IntType: { input: any; output: any };
-  ItemId: { input: any; output: any };
-  MetaTagAttributes: { input: any; output: any };
-  UploadId: { input: any; output: any };
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
+  BooleanType: { input: any; output: any; }
+  CustomData: { input: any; output: any; }
+  DateTime: { input: string; output: string; }
+  FloatType: { input: any; output: any; }
+  IntType: { input: any; output: any; }
+  ItemId: { input: any; output: any; }
+  MetaTagAttributes: { input: any; output: any; }
+  UploadId: { input: any; output: any; }
 };
 
 /** Record of type About (about) */
@@ -44,15 +44,18 @@ export type AboutRecord = RecordInterface & {
   id: Scalars['ItemId']['output'];
 };
 
+
 /** Record of type About (about) */
 export type AboutRecord_AllDescriptionLocalesArgs = {
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+
 /** Record of type About (about) */
 export type AboutRecord_SeoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
+
 
 /** Record of type About (about) */
 export type AboutRecordDescriptionArgs = {
@@ -62,11 +65,10 @@ export type AboutRecordDescriptionArgs = {
 
 /** Linking fields */
 export const ArticleModelFieldsReferencingCategorieModel = {
-  ArticleCategories: 'article_categories',
+  ArticleCategories: 'article_categories'
 } as const;
 
-export type ArticleModelFieldsReferencingCategorieModel =
-  (typeof ArticleModelFieldsReferencingCategorieModel)[keyof typeof ArticleModelFieldsReferencingCategorieModel];
+export type ArticleModelFieldsReferencingCategorieModel = typeof ArticleModelFieldsReferencingCategorieModel[keyof typeof ArticleModelFieldsReferencingCategorieModel];
 export type ArticleModelFilter = {
   AND?: InputMaybe<Array<InputMaybe<ArticleModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ArticleModelFilter>>>;
@@ -107,10 +109,10 @@ export const ArticleModelOrderBy = {
   IdAsc: 'id_ASC',
   IdDesc: 'id_DESC',
   TitleAsc: 'title_ASC',
-  TitleDesc: 'title_DESC',
+  TitleDesc: 'title_DESC'
 } as const;
 
-export type ArticleModelOrderBy = (typeof ArticleModelOrderBy)[keyof typeof ArticleModelOrderBy];
+export type ArticleModelOrderBy = typeof ArticleModelOrderBy[keyof typeof ArticleModelOrderBy];
 /** Record of type Article (article) */
 export type ArticleRecord = RecordInterface & {
   __typename: 'ArticleRecord';
@@ -140,30 +142,36 @@ export type ArticleRecord = RecordInterface & {
   title?: Maybe<Scalars['String']['output']>;
 };
 
+
 /** Record of type Article (article) */
 export type ArticleRecord_AllContentLocalesArgs = {
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
+
 
 /** Record of type Article (article) */
 export type ArticleRecord_AllDescriptionLocalesArgs = {
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+
 /** Record of type Article (article) */
 export type ArticleRecord_AllSlugLocalesArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
 };
+
 
 /** Record of type Article (article) */
 export type ArticleRecord_AllTitleLocalesArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
 };
 
+
 /** Record of type Article (article) */
 export type ArticleRecord_SeoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
+
 
 /** Record of type Article (article) */
 export type ArticleRecordContentArgs = {
@@ -171,17 +179,20 @@ export type ArticleRecordContentArgs = {
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+
 /** Record of type Article (article) */
 export type ArticleRecordDescriptionArgs = {
   locale?: InputMaybe<SiteLocale>;
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+
 /** Record of type Article (article) */
 export type ArticleRecordSlugArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   locale?: InputMaybe<SiteLocale>;
 };
+
 
 /** Record of type Article (article) */
 export type ArticleRecordTitleArgs = {
@@ -197,11 +208,10 @@ export type BooleanFilter = {
 
 /** Linking fields */
 export const BreveModelFieldsReferencingCategorieModel = {
-  BreveCategories: 'breve_categories',
+  BreveCategories: 'breve_categories'
 } as const;
 
-export type BreveModelFieldsReferencingCategorieModel =
-  (typeof BreveModelFieldsReferencingCategorieModel)[keyof typeof BreveModelFieldsReferencingCategorieModel];
+export type BreveModelFieldsReferencingCategorieModel = typeof BreveModelFieldsReferencingCategorieModel[keyof typeof BreveModelFieldsReferencingCategorieModel];
 export type BreveModelFilter = {
   AND?: InputMaybe<Array<InputMaybe<BreveModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<BreveModelFilter>>>;
@@ -237,10 +247,10 @@ export const BreveModelOrderBy = {
   UpdatedAtAsc: '_updatedAt_ASC',
   UpdatedAtDesc: '_updatedAt_DESC',
   IdAsc: 'id_ASC',
-  IdDesc: 'id_DESC',
+  IdDesc: 'id_DESC'
 } as const;
 
-export type BreveModelOrderBy = (typeof BreveModelOrderBy)[keyof typeof BreveModelOrderBy];
+export type BreveModelOrderBy = typeof BreveModelOrderBy[keyof typeof BreveModelOrderBy];
 /** Record of type Brève (breve) */
 export type BreveRecord = RecordInterface & {
   __typename: 'BreveRecord';
@@ -264,15 +274,18 @@ export type BreveRecord = RecordInterface & {
   id: Scalars['ItemId']['output'];
 };
 
+
 /** Record of type Brève (breve) */
 export type BreveRecord_AllContentLocalesArgs = {
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+
 /** Record of type Brève (breve) */
 export type BreveRecord_SeoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
+
 
 /** Record of type Brève (breve) */
 export type BreveRecordContentArgs = {
@@ -319,10 +332,10 @@ export const CategorieModelOrderBy = {
   IdAsc: 'id_ASC',
   IdDesc: 'id_DESC',
   NameAsc: 'name_ASC',
-  NameDesc: 'name_DESC',
+  NameDesc: 'name_DESC'
 } as const;
 
-export type CategorieModelOrderBy = (typeof CategorieModelOrderBy)[keyof typeof CategorieModelOrderBy];
+export type CategorieModelOrderBy = typeof CategorieModelOrderBy[keyof typeof CategorieModelOrderBy];
 /** Record of type Catégorie (categorie) */
 export type CategorieRecord = RecordInterface & {
   __typename: 'CategorieRecord';
@@ -354,10 +367,12 @@ export type CategorieRecord = RecordInterface & {
   slug?: Maybe<Scalars['String']['output']>;
 };
 
+
 /** Record of type Catégorie (categorie) */
 export type CategorieRecord_AllDescriptionLocalesArgs = {
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
+
 
 /** Record of type Catégorie (categorie) */
 export type CategorieRecord_AllReferencingArticlesArgs = {
@@ -370,12 +385,14 @@ export type CategorieRecord_AllReferencingArticlesArgs = {
   through?: InputMaybe<InverseRelationshipFilterBetweenArticleAndCategorie>;
 };
 
+
 /** Record of type Catégorie (categorie) */
 export type CategorieRecord_AllReferencingArticlesMetaArgs = {
   filter?: InputMaybe<ArticleModelFilter>;
   locale?: InputMaybe<SiteLocale>;
   through?: InputMaybe<InverseRelationshipFilterBetweenArticleAndCategorie>;
 };
+
 
 /** Record of type Catégorie (categorie) */
 export type CategorieRecord_AllReferencingBrevesArgs = {
@@ -388,6 +405,7 @@ export type CategorieRecord_AllReferencingBrevesArgs = {
   through?: InputMaybe<InverseRelationshipFilterBetweenBreveAndCategorie>;
 };
 
+
 /** Record of type Catégorie (categorie) */
 export type CategorieRecord_AllReferencingBrevesMetaArgs = {
   filter?: InputMaybe<BreveModelFilter>;
@@ -395,10 +413,12 @@ export type CategorieRecord_AllReferencingBrevesMetaArgs = {
   through?: InputMaybe<InverseRelationshipFilterBetweenBreveAndCategorie>;
 };
 
+
 /** Record of type Catégorie (categorie) */
 export type CategorieRecord_SeoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
+
 
 /** Record of type Catégorie (categorie) */
 export type CategorieRecordDescriptionArgs = {
@@ -423,10 +443,10 @@ export const ColorBucketType = {
   Purple: 'purple',
   Red: 'red',
   White: 'white',
-  Yellow: 'yellow',
+  Yellow: 'yellow'
 } as const;
 
-export type ColorBucketType = (typeof ColorBucketType)[keyof typeof ColorBucketType];
+export type ColorBucketType = typeof ColorBucketType[keyof typeof ColorBucketType];
 export type ColorField = {
   __typename: 'ColorField';
   alpha: Scalars['IntType']['output'];
@@ -464,10 +484,10 @@ export type CreatedAtFilter = {
 export const FaviconType = {
   AppleTouchIcon: 'appleTouchIcon',
   Icon: 'icon',
-  MsApplication: 'msApplication',
+  MsApplication: 'msApplication'
 } as const;
 
-export type FaviconType = (typeof FaviconType)[keyof typeof FaviconType];
+export type FaviconType = typeof FaviconType[keyof typeof FaviconType];
 export type FileField = FileFieldInterface & {
   __typename: 'FileField';
   _createdAt: Scalars['DateTime']['output'];
@@ -502,10 +522,12 @@ export type FileField = FileFieldInterface & {
   width?: Maybe<Scalars['IntType']['output']>;
 };
 
+
 export type FileFieldAltArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   locale?: InputMaybe<SiteLocale>;
 };
+
 
 export type FileFieldBlurUpThumbArgs = {
   imgixParams?: InputMaybe<ImgixParams>;
@@ -514,15 +536,18 @@ export type FileFieldBlurUpThumbArgs = {
   size?: Scalars['Int']['input'];
 };
 
+
 export type FileFieldCustomDataArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   locale?: InputMaybe<SiteLocale>;
 };
 
+
 export type FileFieldFocalPointArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   locale?: InputMaybe<SiteLocale>;
 };
+
 
 export type FileFieldResponsiveImageArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
@@ -531,10 +556,12 @@ export type FileFieldResponsiveImageArgs = {
   sizes?: InputMaybe<Scalars['String']['input']>;
 };
 
+
 export type FileFieldTitleArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   locale?: InputMaybe<SiteLocale>;
 };
+
 
 export type FileFieldUrlArgs = {
   imgixParams?: InputMaybe<ImgixParams>;
@@ -573,10 +600,12 @@ export type FileFieldInterface = {
   width?: Maybe<Scalars['IntType']['output']>;
 };
 
+
 export type FileFieldInterfaceAltArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   locale?: InputMaybe<SiteLocale>;
 };
+
 
 export type FileFieldInterfaceBlurUpThumbArgs = {
   imgixParams?: InputMaybe<ImgixParams>;
@@ -585,15 +614,18 @@ export type FileFieldInterfaceBlurUpThumbArgs = {
   size?: Scalars['Int']['input'];
 };
 
+
 export type FileFieldInterfaceCustomDataArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   locale?: InputMaybe<SiteLocale>;
 };
 
+
 export type FileFieldInterfaceFocalPointArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   locale?: InputMaybe<SiteLocale>;
 };
+
 
 export type FileFieldInterfaceResponsiveImageArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
@@ -602,10 +634,12 @@ export type FileFieldInterfaceResponsiveImageArgs = {
   sizes?: InputMaybe<Scalars['String']['input']>;
 };
 
+
 export type FileFieldInterfaceTitleArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   locale?: InputMaybe<SiteLocale>;
 };
+
 
 export type FileFieldInterfaceUrlArgs = {
   imgixParams?: InputMaybe<ImgixParams>;
@@ -1859,38 +1893,38 @@ export const ImgixParamsAuto = {
   Compress: 'compress',
   Enhance: 'enhance',
   Format: 'format',
-  Redeye: 'redeye',
+  Redeye: 'redeye'
 } as const;
 
-export type ImgixParamsAuto = (typeof ImgixParamsAuto)[keyof typeof ImgixParamsAuto];
+export type ImgixParamsAuto = typeof ImgixParamsAuto[keyof typeof ImgixParamsAuto];
 export const ImgixParamsBlendAlign = {
   Bottom: 'bottom',
   Center: 'center',
   Left: 'left',
   Middle: 'middle',
   Right: 'right',
-  Top: 'top',
+  Top: 'top'
 } as const;
 
-export type ImgixParamsBlendAlign = (typeof ImgixParamsBlendAlign)[keyof typeof ImgixParamsBlendAlign];
+export type ImgixParamsBlendAlign = typeof ImgixParamsBlendAlign[keyof typeof ImgixParamsBlendAlign];
 export const ImgixParamsBlendCrop = {
   Bottom: 'bottom',
   Faces: 'faces',
   Left: 'left',
   Right: 'right',
-  Top: 'top',
+  Top: 'top'
 } as const;
 
-export type ImgixParamsBlendCrop = (typeof ImgixParamsBlendCrop)[keyof typeof ImgixParamsBlendCrop];
+export type ImgixParamsBlendCrop = typeof ImgixParamsBlendCrop[keyof typeof ImgixParamsBlendCrop];
 export const ImgixParamsBlendFit = {
   Clamp: 'clamp',
   Clip: 'clip',
   Crop: 'crop',
   Max: 'max',
-  Scale: 'scale',
+  Scale: 'scale'
 } as const;
 
-export type ImgixParamsBlendFit = (typeof ImgixParamsBlendFit)[keyof typeof ImgixParamsBlendFit];
+export type ImgixParamsBlendFit = typeof ImgixParamsBlendFit[keyof typeof ImgixParamsBlendFit];
 export const ImgixParamsBlendMode = {
   Burn: 'burn',
   Color: 'color',
@@ -1907,22 +1941,22 @@ export const ImgixParamsBlendMode = {
   Overlay: 'overlay',
   Saturation: 'saturation',
   Screen: 'screen',
-  Softlight: 'softlight',
+  Softlight: 'softlight'
 } as const;
 
-export type ImgixParamsBlendMode = (typeof ImgixParamsBlendMode)[keyof typeof ImgixParamsBlendMode];
+export type ImgixParamsBlendMode = typeof ImgixParamsBlendMode[keyof typeof ImgixParamsBlendMode];
 export const ImgixParamsBlendSize = {
-  Inherit: 'inherit',
+  Inherit: 'inherit'
 } as const;
 
-export type ImgixParamsBlendSize = (typeof ImgixParamsBlendSize)[keyof typeof ImgixParamsBlendSize];
+export type ImgixParamsBlendSize = typeof ImgixParamsBlendSize[keyof typeof ImgixParamsBlendSize];
 export const ImgixParamsCh = {
   Dpr: 'dpr',
   SaveData: 'saveData',
-  Width: 'width',
+  Width: 'width'
 } as const;
 
-export type ImgixParamsCh = (typeof ImgixParamsCh)[keyof typeof ImgixParamsCh];
+export type ImgixParamsCh = typeof ImgixParamsCh[keyof typeof ImgixParamsCh];
 export const ImgixParamsCrop = {
   Bottom: 'bottom',
   Edges: 'edges',
@@ -1931,24 +1965,24 @@ export const ImgixParamsCrop = {
   Focalpoint: 'focalpoint',
   Left: 'left',
   Right: 'right',
-  Top: 'top',
+  Top: 'top'
 } as const;
 
-export type ImgixParamsCrop = (typeof ImgixParamsCrop)[keyof typeof ImgixParamsCrop];
+export type ImgixParamsCrop = typeof ImgixParamsCrop[keyof typeof ImgixParamsCrop];
 export const ImgixParamsCs = {
   Adobergb1998: 'adobergb1998',
   Srgb: 'srgb',
   Strip: 'strip',
-  Tinysrgb: 'tinysrgb',
+  Tinysrgb: 'tinysrgb'
 } as const;
 
-export type ImgixParamsCs = (typeof ImgixParamsCs)[keyof typeof ImgixParamsCs];
+export type ImgixParamsCs = typeof ImgixParamsCs[keyof typeof ImgixParamsCs];
 export const ImgixParamsFill = {
   Blur: 'blur',
-  Solid: 'solid',
+  Solid: 'solid'
 } as const;
 
-export type ImgixParamsFill = (typeof ImgixParamsFill)[keyof typeof ImgixParamsFill];
+export type ImgixParamsFill = typeof ImgixParamsFill[keyof typeof ImgixParamsFill];
 export const ImgixParamsFit = {
   Clamp: 'clamp',
   Clip: 'clip',
@@ -1958,17 +1992,17 @@ export const ImgixParamsFit = {
   Fillmax: 'fillmax',
   Max: 'max',
   Min: 'min',
-  Scale: 'scale',
+  Scale: 'scale'
 } as const;
 
-export type ImgixParamsFit = (typeof ImgixParamsFit)[keyof typeof ImgixParamsFit];
+export type ImgixParamsFit = typeof ImgixParamsFit[keyof typeof ImgixParamsFit];
 export const ImgixParamsFlip = {
   H: 'h',
   Hv: 'hv',
-  V: 'v',
+  V: 'v'
 } as const;
 
-export type ImgixParamsFlip = (typeof ImgixParamsFlip)[keyof typeof ImgixParamsFlip];
+export type ImgixParamsFlip = typeof ImgixParamsFlip[keyof typeof ImgixParamsFlip];
 export const ImgixParamsFm = {
   Avif: 'avif',
   Blurhash: 'blurhash',
@@ -1983,80 +2017,80 @@ export const ImgixParamsFm = {
   Png8: 'png8',
   Png32: 'png32',
   Webm: 'webm',
-  Webp: 'webp',
+  Webp: 'webp'
 } as const;
 
-export type ImgixParamsFm = (typeof ImgixParamsFm)[keyof typeof ImgixParamsFm];
+export type ImgixParamsFm = typeof ImgixParamsFm[keyof typeof ImgixParamsFm];
 export const ImgixParamsIptc = {
   Allow: 'allow',
-  Block: 'block',
+  Block: 'block'
 } as const;
 
-export type ImgixParamsIptc = (typeof ImgixParamsIptc)[keyof typeof ImgixParamsIptc];
+export type ImgixParamsIptc = typeof ImgixParamsIptc[keyof typeof ImgixParamsIptc];
 export const ImgixParamsMarkAlign = {
   Bottom: 'bottom',
   Center: 'center',
   Left: 'left',
   Middle: 'middle',
   Right: 'right',
-  Top: 'top',
+  Top: 'top'
 } as const;
 
-export type ImgixParamsMarkAlign = (typeof ImgixParamsMarkAlign)[keyof typeof ImgixParamsMarkAlign];
+export type ImgixParamsMarkAlign = typeof ImgixParamsMarkAlign[keyof typeof ImgixParamsMarkAlign];
 export const ImgixParamsMarkFit = {
   Clip: 'clip',
   Crop: 'crop',
   Fill: 'fill',
   Max: 'max',
-  Scale: 'scale',
+  Scale: 'scale'
 } as const;
 
-export type ImgixParamsMarkFit = (typeof ImgixParamsMarkFit)[keyof typeof ImgixParamsMarkFit];
+export type ImgixParamsMarkFit = typeof ImgixParamsMarkFit[keyof typeof ImgixParamsMarkFit];
 export const ImgixParamsMarkTile = {
-  Grid: 'grid',
+  Grid: 'grid'
 } as const;
 
-export type ImgixParamsMarkTile = (typeof ImgixParamsMarkTile)[keyof typeof ImgixParamsMarkTile];
+export type ImgixParamsMarkTile = typeof ImgixParamsMarkTile[keyof typeof ImgixParamsMarkTile];
 export const ImgixParamsPalette = {
   Css: 'css',
-  Json: 'json',
+  Json: 'json'
 } as const;
 
-export type ImgixParamsPalette = (typeof ImgixParamsPalette)[keyof typeof ImgixParamsPalette];
+export type ImgixParamsPalette = typeof ImgixParamsPalette[keyof typeof ImgixParamsPalette];
 export const ImgixParamsTransparency = {
-  Grid: 'grid',
+  Grid: 'grid'
 } as const;
 
-export type ImgixParamsTransparency = (typeof ImgixParamsTransparency)[keyof typeof ImgixParamsTransparency];
+export type ImgixParamsTransparency = typeof ImgixParamsTransparency[keyof typeof ImgixParamsTransparency];
 export const ImgixParamsTrim = {
   Auto: 'auto',
-  Color: 'color',
+  Color: 'color'
 } as const;
 
-export type ImgixParamsTrim = (typeof ImgixParamsTrim)[keyof typeof ImgixParamsTrim];
+export type ImgixParamsTrim = typeof ImgixParamsTrim[keyof typeof ImgixParamsTrim];
 export const ImgixParamsTxtAlign = {
   Bottom: 'bottom',
   Center: 'center',
   Left: 'left',
   Middle: 'middle',
   Right: 'right',
-  Top: 'top',
+  Top: 'top'
 } as const;
 
-export type ImgixParamsTxtAlign = (typeof ImgixParamsTxtAlign)[keyof typeof ImgixParamsTxtAlign];
+export type ImgixParamsTxtAlign = typeof ImgixParamsTxtAlign[keyof typeof ImgixParamsTxtAlign];
 export const ImgixParamsTxtClip = {
   Ellipsis: 'ellipsis',
   End: 'end',
   Middle: 'middle',
-  Start: 'start',
+  Start: 'start'
 } as const;
 
-export type ImgixParamsTxtClip = (typeof ImgixParamsTxtClip)[keyof typeof ImgixParamsTxtClip];
+export type ImgixParamsTxtClip = typeof ImgixParamsTxtClip[keyof typeof ImgixParamsTxtClip];
 export const ImgixParamsTxtFit = {
-  Max: 'max',
+  Max: 'max'
 } as const;
 
-export type ImgixParamsTxtFit = (typeof ImgixParamsTxtFit)[keyof typeof ImgixParamsTxtFit];
+export type ImgixParamsTxtFit = typeof ImgixParamsTxtFit[keyof typeof ImgixParamsTxtFit];
 /** Specifies how to filter by usage */
 export type InUseFilter = {
   /** Search uploads that are currently used by some record or not */
@@ -2110,18 +2144,18 @@ export type ItemIdFilter = {
 export const ItemStatus = {
   Draft: 'draft',
   Published: 'published',
-  Updated: 'updated',
+  Updated: 'updated'
 } as const;
 
-export type ItemStatus = (typeof ItemStatus)[keyof typeof ItemStatus];
+export type ItemStatus = typeof ItemStatus[keyof typeof ItemStatus];
 /** Linking locales */
 export const LinkingLocale = {
   NonLocalized: '_nonLocalized',
   En: 'en',
-  Fr: 'fr',
+  Fr: 'fr'
 } as const;
 
-export type LinkingLocale = (typeof LinkingLocale)[keyof typeof LinkingLocale];
+export type LinkingLocale = typeof LinkingLocale[keyof typeof LinkingLocale];
 /** Specifies how to filter by linking locales */
 export type LinkingLocalesFilter = {
   /** Filter linking records that link to current record in at least one of the specified locales */
@@ -2157,10 +2191,10 @@ export type LocalesFilter = {
 export const MuxThumbnailFormatType = {
   Gif: 'gif',
   Jpg: 'jpg',
-  Png: 'png',
+  Png: 'png'
 } as const;
 
-export type MuxThumbnailFormatType = (typeof MuxThumbnailFormatType)[keyof typeof MuxThumbnailFormatType];
+export type MuxThumbnailFormatType = typeof MuxThumbnailFormatType[keyof typeof MuxThumbnailFormatType];
 /** Specifies how to filter by image orientation */
 export type OrientationFilter = {
   /** Search uploads with the specified orientation */
@@ -2226,11 +2260,13 @@ export type Query = {
   upload?: Maybe<FileField>;
 };
 
+
 /** The query root for this schema */
 export type Query_AllArticlesMetaArgs = {
   filter?: InputMaybe<ArticleModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
+
 
 /** The query root for this schema */
 export type Query_AllBrevesMetaArgs = {
@@ -2238,11 +2274,13 @@ export type Query_AllBrevesMetaArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
+
 /** The query root for this schema */
 export type Query_AllCategoriesMetaArgs = {
   filter?: InputMaybe<CategorieModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
+
 
 /** The query root for this schema */
 export type Query_AllQuizzsMetaArgs = {
@@ -2250,11 +2288,13 @@ export type Query_AllQuizzsMetaArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
+
 /** The query root for this schema */
 export type Query_AllUploadsMetaArgs = {
   filter?: InputMaybe<UploadFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
+
 
 /** The query root for this schema */
 export type Query_SiteArgs = {
@@ -2262,11 +2302,13 @@ export type Query_SiteArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
+
 /** The query root for this schema */
 export type QueryAboutArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   locale?: InputMaybe<SiteLocale>;
 };
+
 
 /** The query root for this schema */
 export type QueryAllArticlesArgs = {
@@ -2278,6 +2320,7 @@ export type QueryAllArticlesArgs = {
   skip?: InputMaybe<Scalars['IntType']['input']>;
 };
 
+
 /** The query root for this schema */
 export type QueryAllBrevesArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
@@ -2287,6 +2330,7 @@ export type QueryAllBrevesArgs = {
   orderBy?: InputMaybe<Array<InputMaybe<BreveModelOrderBy>>>;
   skip?: InputMaybe<Scalars['IntType']['input']>;
 };
+
 
 /** The query root for this schema */
 export type QueryAllCategoriesArgs = {
@@ -2298,6 +2342,7 @@ export type QueryAllCategoriesArgs = {
   skip?: InputMaybe<Scalars['IntType']['input']>;
 };
 
+
 /** The query root for this schema */
 export type QueryAllQuizzsArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
@@ -2307,6 +2352,7 @@ export type QueryAllQuizzsArgs = {
   orderBy?: InputMaybe<Array<InputMaybe<QuizzModelOrderBy>>>;
   skip?: InputMaybe<Scalars['IntType']['input']>;
 };
+
 
 /** The query root for this schema */
 export type QueryAllUploadsArgs = {
@@ -2318,6 +2364,7 @@ export type QueryAllUploadsArgs = {
   skip?: InputMaybe<Scalars['IntType']['input']>;
 };
 
+
 /** The query root for this schema */
 export type QueryArticleArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
@@ -2325,6 +2372,7 @@ export type QueryArticleArgs = {
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<ArticleModelOrderBy>>>;
 };
+
 
 /** The query root for this schema */
 export type QueryBreveArgs = {
@@ -2334,6 +2382,7 @@ export type QueryBreveArgs = {
   orderBy?: InputMaybe<Array<InputMaybe<BreveModelOrderBy>>>;
 };
 
+
 /** The query root for this schema */
 export type QueryCategorieArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
@@ -2342,6 +2391,7 @@ export type QueryCategorieArgs = {
   orderBy?: InputMaybe<Array<InputMaybe<CategorieModelOrderBy>>>;
 };
 
+
 /** The query root for this schema */
 export type QueryQuizzArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
@@ -2349,6 +2399,7 @@ export type QueryQuizzArgs = {
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<QuizzModelOrderBy>>>;
 };
+
 
 /** The query root for this schema */
 export type QueryUploadArgs = {
@@ -2392,10 +2443,10 @@ export const QuizzModelOrderBy = {
   UpdatedAtAsc: '_updatedAt_ASC',
   UpdatedAtDesc: '_updatedAt_DESC',
   IdAsc: 'id_ASC',
-  IdDesc: 'id_DESC',
+  IdDesc: 'id_DESC'
 } as const;
 
-export type QuizzModelOrderBy = (typeof QuizzModelOrderBy)[keyof typeof QuizzModelOrderBy];
+export type QuizzModelOrderBy = typeof QuizzModelOrderBy[keyof typeof QuizzModelOrderBy];
 /** Record of type Quizz (quizz) */
 export type QuizzRecord = RecordInterface & {
   __typename: 'QuizzRecord';
@@ -2418,15 +2469,18 @@ export type QuizzRecord = RecordInterface & {
   id: Scalars['ItemId']['output'];
 };
 
+
 /** Record of type Quizz (quizz) */
 export type QuizzRecord_AllContentLocalesArgs = {
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+
 /** Record of type Quizz (quizz) */
 export type QuizzRecord_SeoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
+
 
 /** Record of type Quizz (quizz) */
 export type QuizzRecordContentArgs = {
@@ -2451,6 +2505,7 @@ export type RecordInterface = {
   id: Scalars['ItemId']['output'];
 };
 
+
 export type RecordInterface_SeoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
@@ -2471,10 +2526,10 @@ export const ResolutionType = {
   Icon: 'icon',
   Large: 'large',
   Medium: 'medium',
-  Small: 'small',
+  Small: 'small'
 } as const;
 
-export type ResolutionType = (typeof ResolutionType)[keyof typeof ResolutionType];
+export type ResolutionType = typeof ResolutionType[keyof typeof ResolutionType];
 export type ResponsiveImage = {
   __typename: 'ResponsiveImage';
   alt?: Maybe<Scalars['String']['output']>;
@@ -2506,9 +2561,11 @@ export type Site = {
   locales: Array<SiteLocale>;
 };
 
+
 export type SiteFaviconMetaTagsArgs = {
   variants?: InputMaybe<Array<InputMaybe<FaviconType>>>;
 };
+
 
 export type SiteGlobalSeoArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
@@ -2517,10 +2574,10 @@ export type SiteGlobalSeoArgs = {
 
 export const SiteLocale = {
   En: 'en',
-  Fr: 'fr',
+  Fr: 'fr'
 } as const;
 
-export type SiteLocale = (typeof SiteLocale)[keyof typeof SiteLocale];
+export type SiteLocale = typeof SiteLocale[keyof typeof SiteLocale];
 /** Specifies how to filter Slug fields */
 export type SlugFilter = {
   /** Search for records with an exact match */
@@ -2838,17 +2895,17 @@ export const UploadOrderBy = {
   ResolutionAsc: 'resolution_ASC',
   ResolutionDesc: 'resolution_DESC',
   SizeAsc: 'size_ASC',
-  SizeDesc: 'size_DESC',
+  SizeDesc: 'size_DESC'
 } as const;
 
-export type UploadOrderBy = (typeof UploadOrderBy)[keyof typeof UploadOrderBy];
+export type UploadOrderBy = typeof UploadOrderBy[keyof typeof UploadOrderBy];
 export const UploadOrientation = {
   Landscape: 'landscape',
   Portrait: 'portrait',
-  Square: 'square',
+  Square: 'square'
 } as const;
 
-export type UploadOrientation = (typeof UploadOrientation)[keyof typeof UploadOrientation];
+export type UploadOrientation = typeof UploadOrientation[keyof typeof UploadOrientation];
 /** Specifies how to filter by size */
 export type UploadSizeFilter = {
   /** Search assets with the specified size (in bytes) */
@@ -2905,10 +2962,10 @@ export const UploadType = {
   Presentation: 'presentation',
   Richtext: 'richtext',
   Spreadsheet: 'spreadsheet',
-  Video: 'video',
+  Video: 'video'
 } as const;
 
-export type UploadType = (typeof UploadType)[keyof typeof UploadType];
+export type UploadType = typeof UploadType[keyof typeof UploadType];
 /** Specifies how to filter by update datetime */
 export type UploadUpdatedAtFilter = {
   /** Search for uploads with an exact match */
@@ -2936,10 +2993,12 @@ export type UploadVideoField = {
   thumbnailUrl: Scalars['String']['output'];
 };
 
+
 export type UploadVideoFieldMp4UrlArgs = {
   exactRes?: InputMaybe<VideoMp4Res>;
   res?: InputMaybe<VideoMp4Res>;
 };
+
 
 export type UploadVideoFieldThumbnailUrlArgs = {
   format?: InputMaybe<MuxThumbnailFormatType>;
@@ -2964,78 +3023,44 @@ export type UploadWidthFilter = {
 export const VideoMp4Res = {
   High: 'high',
   Low: 'low',
-  Medium: 'medium',
+  Medium: 'medium'
 } as const;
 
-export type VideoMp4Res = (typeof VideoMp4Res)[keyof typeof VideoMp4Res];
+export type VideoMp4Res = typeof VideoMp4Res[keyof typeof VideoMp4Res];
 export type FocalPoint = {
   __typename: 'focalPoint';
   x: Scalars['FloatType']['output'];
   y: Scalars['FloatType']['output'];
 };
 
-export type FrontPageArticleQueryVariables = Exact<{ [key: string]: never }>;
+export type FrontPageArticleQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type FrontPageArticleQuery = {
-  __typename: 'Query';
-  allArticles: Array<{ __typename: 'ArticleRecord'; id: any; title?: string | null; slug?: string | null }>;
-};
 
-export type GetArticlePathsQueryVariables = Exact<{ [key: string]: never }>;
+export type FrontPageArticleQuery = { __typename: 'Query', allArticles: Array<{ __typename: 'ArticleRecord', id: any, title?: string | null, slug?: string | null }> };
 
-export type GetArticlePathsQuery = {
-  __typename: 'Query';
-  allArticles: Array<{
-    __typename: 'ArticleRecord';
-    _allSlugLocales?: Array<{
-      __typename: 'StringMultiLocaleField';
-      value?: string | null;
-      locale?: SiteLocale | null;
-    }> | null;
-  }>;
-};
+export type GetArticlePathsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetArticlePathsQuery = { __typename: 'Query', allArticles: Array<{ __typename: 'ArticleRecord', _allSlugLocales?: Array<{ __typename: 'StringMultiLocaleField', value?: string | null, locale?: SiteLocale | null }> | null }> };
 
 export type GetArticlePathsByLocaleQueryVariables = Exact<{
   locale: SiteLocale;
 }>;
 
-export type GetArticlePathsByLocaleQuery = {
-  __typename: 'Query';
-  allArticles: Array<{ __typename: 'ArticleRecord'; slug?: string | null; title?: string | null }>;
-};
+
+export type GetArticlePathsByLocaleQuery = { __typename: 'Query', allArticles: Array<{ __typename: 'ArticleRecord', slug?: string | null, title?: string | null }> };
 
 export type ArticleContentQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
 
-export type ArticleContentQuery = {
-  __typename: 'Query';
-  article?: {
-    __typename: 'ArticleRecord';
-    _createdAt: string;
-    _updatedAt: string;
-    title?: string | null;
-    content?: string | null;
-    description?: string | null;
-  } | null;
-};
+
+export type ArticleContentQuery = { __typename: 'Query', article?: { __typename: 'ArticleRecord', _createdAt: string, _updatedAt: string, title?: string | null, content?: string | null, description?: string | null } | null };
 
 export type FrontPageQueryVariables = Exact<{
   locale?: InputMaybe<SiteLocale>;
   skip?: InputMaybe<Scalars['IntType']['input']>;
 }>;
 
-export type FrontPageQuery = {
-  __typename: 'Query';
-  allArticles: Array<{
-    __typename: 'ArticleRecord';
-    slug?: string | null;
-    title?: string | null;
-    description?: string | null;
-    _createdAt: string;
-    _updatedAt: string;
-  }>;
-  allQuizzs: Array<{ __typename: 'QuizzRecord'; id: any; content?: string | null }>;
-  allBreves: Array<{ __typename: 'BreveRecord'; id: any; content?: string | null }>;
-  about?: { __typename: 'AboutRecord'; description?: string | null } | null;
-};
+
+export type FrontPageQuery = { __typename: 'Query', allArticles: Array<{ __typename: 'ArticleRecord', slug?: string | null, title?: string | null, description?: string | null, _createdAt: string, _updatedAt: string }>, allQuizzs: Array<{ __typename: 'QuizzRecord', id: any, content?: string | null }>, allBreves: Array<{ __typename: 'BreveRecord', id: any, content?: string | null }>, about?: { __typename: 'AboutRecord', description?: string | null } | null };

@@ -1,6 +1,6 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
-import rehypeHighlight from 'rehype-highlight';
 
 import client from '@/apollo-client';
 import { PatternBackground } from '@/components/molecules/pattern-background';
@@ -8,7 +8,8 @@ import { FrontPageLayout } from '@/components/templates/front-page';
 import PageLayout from '@/components/templates/page-layout';
 import { frontPageQuery } from '@/graphql/cms/frontpage/queries';
 import type { FrontPageQuery, FrontPageQueryVariables, SiteLocale } from '@/graphql/cms/types';
-import { UncertainMDX } from '@/utils/type';
+import { serializeContent } from '@/utils/serialize-content';
+import { MDXContent } from '@/utils/type';
 
 export const getStaticProps: GetStaticProps<HomeProps> = async ({ locale = 'fr' }) => {
   const { data } = await client.query<FrontPageQuery, FrontPageQueryVariables>({
@@ -16,32 +17,18 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({ locale = 'fr' 
     variables: { locale: locale as SiteLocale },
   });
 
-  const { allArticles: articles, about, allQuizzs } = data;
+  const { allArticles: articles, about, allQuizzs, allBreves } = data;
 
   if (!about) return { notFound: true };
   const bio = about.description ? await serialize(about.description) : null;
-  const quizzes = await Promise.all(
-    allQuizzs.map(async (item) => {
-      const content = item.content
-        ? await serialize(item.content, {
-            mdxOptions: {
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              rehypePlugins: [rehypeHighlight],
-            },
-          })
-        : null;
-      return {
-        ...item,
-        content,
-      };
-    }),
-  );
+
+  const [quizzes, breves] = await Promise.all([allQuizzs, allBreves].map(async (item) => await serializeContent(item)));
 
   return {
     props: {
       bio,
-      quizzes,
+      quizzes: quizzes.filter((q): q is MDXContent => !!q.content),
+      breves: breves.filter((breve): breve is MDXContent => !!breve.content),
       articles,
       locale,
     },
@@ -50,8 +37,9 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({ locale = 'fr' 
 
 type HomeProps = {
   articles: FrontPageQuery['allArticles'];
-  bio: UncertainMDX;
-  quizzes: { content: UncertainMDX; id: string }[];
+  bio: MDXRemoteSerializeResult | null;
+  quizzes: MDXContent[];
+  breves: MDXContent[];
   locale: string;
 };
 

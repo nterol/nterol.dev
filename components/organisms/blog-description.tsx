@@ -1,10 +1,9 @@
-import { MDXRemote } from 'next-mdx-remote';
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 import { PresentationSection } from '@/components/molecules/presentation-section';
-import { UncertainMDX } from '@/utils/type';
 
 type FirstScreenProps = {
-  bio: UncertainMDX;
+  bio: MDXRemoteSerializeResult;
 };
 
 export function BlogPresentation({ bio }: FirstScreenProps) {

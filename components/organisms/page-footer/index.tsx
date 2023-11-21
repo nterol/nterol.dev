@@ -14,6 +14,7 @@ export const Footer = () => {
           {yearOfLastPush} - {viewerData?.login ?? ''}
         </p>
       </div>
+      {/* <div></div> */}
     </footer>
   );
 };
