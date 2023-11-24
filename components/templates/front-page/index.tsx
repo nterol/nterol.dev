@@ -1,7 +1,6 @@
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 import { BlogPresentation } from '@/components/organisms/blog-description';
-import { ContactSection } from '@/components/organisms/contact-section';
 import { ContentGrid } from '@/components/organisms/content-grid';
 import s from '@/components/templates/page-layout/page-layout.module.css';
 import type { FrontPageQuery } from '@/graphql/cms/types';
@@ -20,7 +19,6 @@ export function FrontPageLayout({ bio, articles, breves, quizzes, locale }: Fron
     <main className={`${s.main} md:p-2 flex flex-col gap-8`}>
       {bio && <BlogPresentation bio={bio} />}
       <ContentGrid articles={articles} breves={breves} quizzes={quizzes} locale={locale} />
-      <ContactSection />
     </main>
   );
 }

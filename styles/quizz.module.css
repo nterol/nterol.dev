@@ -1,5 +1,9 @@
+.card {
+    background: linear-gradient(0.25turn, #8bd3dd, pink);
+}
+
 .q_button {
-    @apply bg-slate-200 rounded-lg p-0.5 col-span-1 flex items-center gap-2;
+    @apply bg-slate-200 rounded-lg p-0.5 col-span-1 flex items-center gap-2 text-xs;
 }
 
 .letter_case {

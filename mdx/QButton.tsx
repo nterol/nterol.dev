@@ -1,8 +1,8 @@
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { useContext, type ReactNode } from 'react';
 
 import { QuizzContext } from '@/components/organisms/quizz';
-import { QuizzesAtom, SetQuizzAnswer } from '@/store/quizzes';
+import { SetQuizzAnswer } from '@/store/quizzes';
 import s from '@/styles/quizz.module.css';
 
 type QButtonProps = {
@@ -16,7 +16,9 @@ export function QButton({ letter, children }: QButtonProps) {
   const setQuizzAnswer = useSetAtom(SetQuizzAnswer);
 
   const handleAnswer = () => {
-    if (id) setQuizzAnswer({ id, answer: letter });
+    if (id) {
+      setQuizzAnswer({ id, answer: letter });
+    }
   };
 
   return (
@@ -31,10 +33,9 @@ type AnswerSectionProps = {
   propositions: { letter: string; value: string }[];
 };
 export function AnswerSection({ propositions }: AnswerSectionProps) {
-  const { id } = useContext(QuizzContext);
-  const quizzAnswer = useAtomValue(QuizzesAtom(id ?? ''));
+  //const { id } = useContext(QuizzContext);
+  //const quizzAnswer = useAtomValue(QuizzesAtom(id ?? ''));
 
-  console.log(quizzAnswer);
   return (
     <section className={s.section}>
       {propositions.map((proposition) => (
