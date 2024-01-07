@@ -2549,6 +2549,7 @@ export type SeoField = {
   __typename: 'SeoField';
   description?: Maybe<Scalars['String']['output']>;
   image?: Maybe<FileField>;
+  noIndex?: Maybe<Scalars['BooleanType']['output']>;
   title?: Maybe<Scalars['String']['output']>;
   twitterCard?: Maybe<Scalars['String']['output']>;
 };
@@ -2559,6 +2560,7 @@ export type Site = {
   faviconMetaTags: Array<Tag>;
   globalSeo?: Maybe<GlobalSeoField>;
   locales: Array<SiteLocale>;
+  noIndex?: Maybe<Scalars['BooleanType']['output']>;
 };
 
 
@@ -3060,7 +3062,8 @@ export type ArticleContentQuery = { __typename: 'Query', allArticles: Array<{ __
 
 export type FrontPageQueryVariables = Exact<{
   locale?: InputMaybe<SiteLocale>;
+  skip?: InputMaybe<Scalars['IntType']['input']>;
 }>;
 
 
-export type FrontPageQuery = { __typename: 'Query', allArticles: Array<{ __typename: 'ArticleRecord', slug?: string | null, title?: string | null, description?: string | null, _createdAt: string, _updatedAt: string }>, allQuizzs: Array<{ __typename: 'QuizzRecord', id: any, content?: string | null }>, about?: { __typename: 'AboutRecord', description?: string | null } | null };
+export type FrontPageQuery = { __typename: 'Query', allArticles: Array<{ __typename: 'ArticleRecord', slug?: string | null, title?: string | null, description?: string | null, _createdAt: string, _updatedAt: string }>, allQuizzs: Array<{ __typename: 'QuizzRecord', id: any, content?: string | null }>, allBreves: Array<{ __typename: 'BreveRecord', id: any, content?: string | null }>, about?: { __typename: 'AboutRecord', description?: string | null } | null };

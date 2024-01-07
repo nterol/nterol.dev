@@ -3,9 +3,9 @@ import { GetStaticPaths, GetStaticPathsResult, GetStaticProps, InferGetStaticPro
 import { serialize } from 'next-mdx-remote/serialize';
 import rehypeHighlight from 'rehype-highlight';
 
+import { BottomContainer } from '@/components/molecules/aside';
 import { TranslationsBar } from '@/components/molecules/translations-bar';
 import { ArticleBody } from '@/components/organisms/Article';
-import { BottomContainer } from '@/components/organisms/aside';
 import PageLayout from '@/components/templates/page-layout';
 import { articleContent, getArticlePaths } from '@/graphql/cms/articles/queries';
 import {

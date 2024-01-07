@@ -1,10 +1,12 @@
-@keyframes GradientBackground {
+@keyframes gradient-background {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -18,11 +20,14 @@
     var(--start-color, var(--ink-blue)),
     var(--target-color, #1cb5e0)
   );
-  /*linear-gradient(-90deg, #f72585, #b5179e, #7209b7);***/
+
+  /* linear-gradient(-90deg, #f72585, #b5179e, #7209b7); */ 
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  letter-spacing: 0em;
+  letter-spacing: 0;
   background-size: 300% 100%;
-  animation: GradientBackground 6s ease infinite;
+  animation: gradient-background 6s ease infinite;
 }

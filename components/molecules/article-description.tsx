@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { FrontPageQuery } from '@/graphql/cms/types';
 import { longDate } from '@/utils/date';
@@ -7,10 +8,10 @@ import { GlowingText } from '../../mdx/glowing-text';
 
 type P = {
   article: FrontPageQuery['allArticles'][number];
-  locale: string;
 };
 
-export function ArticleDescription({ article, locale }: P) {
+export function ArticleDescription({ article }: P) {
+  const { locale = 'fr' } = useRouter();
   return (
     <article className="flex flex-col gap-1 " key={article.slug}>
       <Link href={`/article/${article.slug}`}>

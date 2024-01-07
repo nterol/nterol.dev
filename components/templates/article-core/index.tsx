@@ -1,9 +1,9 @@
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 
+import { AsideContainer, BottomContainer } from '@/components/molecules/aside';
 import { TranslationsBar } from '@/components/molecules/translations-bar';
 import { ArticleBody } from '@/components/organisms/Article';
-import { AsideContainer, BottomContainer } from '@/components/organisms/aside';
 import useScreen from '@/hooks/useScreen';
 import { ArticlePageProps } from '@/pages/article/[slug]';
 import { IsSideNote } from '@/store/aside-note';
