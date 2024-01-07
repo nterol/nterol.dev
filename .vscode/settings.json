@@ -1,4 +1,5 @@
 {
     // this is so graphql-config loads directly the endpoint schema in the gql tag in the query/mutation files
-    "typescript.tsdk": "node_modules/typescript/lib"
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "mdx-preview.preview.useVscodeMarkdownStyles": false
 }
