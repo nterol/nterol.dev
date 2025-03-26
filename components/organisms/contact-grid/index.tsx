@@ -6,35 +6,35 @@ import { ViewerData, viewerDataAtom } from '@/store/viewer-data';
 
 const contacts = (viewerData: ViewerData | null) => [
   {
-    type: 'mail',
-    content: 'mail',
-    icon: MailIcon,
-    value: 'terolnicolas@gmail.com',
+    type: 'link',
+    content: 'Linkedin',
+    icon: LinkedInIcon,
+    value: 'https://linkedin.com/in/teroln',
   },
   {
     type: 'link',
-    content: 'github',
+    content: 'Github',
     icon: GithubIcon,
     value: viewerData?.url ?? '',
   },
   {
-    type: 'link',
-    content: 'linkedin',
-    icon: LinkedInIcon,
-    value: 'https://linkedin.com/in/teroln',
+    type: 'mail',
+    content: 'mail',
+    icon: MailIcon,
+    value: 'terolnicolas@gmail.com',
   },
 ];
 
 export function ContactGrid() {
   const viewerData = useAtomValue(viewerDataAtom);
   return (
-    <div className="grid grid-cols-3 gap-4 place-self-center py-4 w-fit">
+    <div className="grid grid-cols-[min-content_auto] gap-4 place-self-center py-4 w-full">
       {contacts(viewerData).map(({ content, icon: Icon, value, type }) => (
         <Fragment key={content}>
-          <Icon classname="h-6 w-6" />
-          <a className="col-span-2" href={`${type === 'mail' ? `mailto:` : ''}${value}`}>
-            {content}
-          </a>
+          <span className="block">
+            <Icon classname="h-6 w-6" />
+          </span>
+          <a href={`${type === 'mail' ? `mailto:` : ''}${value}`}>{content}</a>
         </Fragment>
       ))}
     </div>

@@ -12,12 +12,12 @@ export default function Header() {
           <Logo />
         </Link>
         <nav className="grid grid-flow-col justify-between items-center">
-          <a className="font-extrabold" href="#articles">
+          <Link className="font-extrabold" href="/#articles">
             Articles
-          </a>
-          <a className="font-bold" href="#contact">
+          </Link>
+          <Link className="font-bold" href="/#contact">
             Contact
-          </a>
+          </Link>
         </nav>
       </div>
     </header>
